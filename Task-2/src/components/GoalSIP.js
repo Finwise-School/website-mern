@@ -46,7 +46,7 @@ const GoalSIP = () => {
       >
         <div className="mb-4">
           <label htmlFor="goalAmount" className="block text-gray-700">
-            Goal Amount (₹)
+            Goal Amount (&pound;)
           </label>
           <input
             type="number"
@@ -92,9 +92,9 @@ const GoalSIP = () => {
       </form>
       {result && (
         <div id="result" className="mt-6 p-4 bg-green-100 text-green-700 rounded-lg">
-          <p><strong>Monthly SIP Amount Required:</strong> ₹{result.monthlySIP}</p>
-          <p><strong>Total Invested Amount:</strong> ₹{result.totalInvested}</p>
-          <p><strong>Goal Amount:</strong> ₹{result.goalAmount}</p>
+          <p><strong>Monthly SIP Amount Required:</strong> &pound;{result.monthlySIP}</p>
+          <p><strong>Total Invested Amount:</strong> &pound;{result.totalInvested}</p>
+          <p><strong>Goal Amount:</strong> &pound;{result.goalAmount}</p>
         </div>
       )}
     </div>

@@ -50,7 +50,7 @@ const FixedDepo = () => {
       >
         <div className="mb-4">
           <label htmlFor="amountInvested" className="block text-gray-700">
-            Amount Invested (₹)
+            Amount Invested (&pound;)
           </label>
           <input
             type="number"
@@ -113,9 +113,9 @@ const FixedDepo = () => {
       </form>
       {result && (
         <div id="result" className="mt-6 p-4 bg-green-100 text-green-700 rounded-lg">
-          <p><strong>Total Investment:</strong> ₹{result.totalInvestment}</p>
-          <p><strong>Total Interest Earned:</strong> ₹{result.totalInterest}</p>
-          <p><strong>Maturity Value:</strong> ₹{result.maturityValue}</p>
+          <p><strong>Total Investment:</strong> &pound;{result.totalInvestment}</p>
+          <p><strong>Total Interest Earned:</strong> &pound;{result.totalInterest}</p>
+          <p><strong>Maturity Value:</strong> &pound;{result.maturityValue}</p>
         </div>
       )}
     </div>

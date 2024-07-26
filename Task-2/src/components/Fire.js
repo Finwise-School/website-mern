@@ -51,7 +51,7 @@ const Fire = () => {
       >
         <div className="mb-4">
           <label htmlFor="monthlyExpense" className="block text-gray-700">
-            Monthly Expense (₹)
+            Monthly Expense (&pound;)
           </label>
           <input
             type="number"
@@ -110,11 +110,11 @@ const Fire = () => {
       </form>
       {result && (
         <div id="result" className="mt-6 p-4 bg-green-100 text-green-700 rounded-lg">
-          <p><strong>Expense Today:</strong> ₹{result.expenseToday}</p>
-          <p><strong>Expense At Retirement:</strong> ₹{result.expenseAtRetirement}</p>
-          <p><strong>Lean FIRE:</strong> ₹{result.leanFIRE}</p>
-          <p><strong>FIRE:</strong> ₹{result.fire}</p>
-          <p><strong>Fat FIRE:</strong> ₹{result.fatFIRE}</p>
+          <p><strong>Expense Today:</strong> &pound;{result.expenseToday}</p>
+          <p><strong>Expense At Retirement:</strong> &pound;{result.expenseAtRetirement}</p>
+          <p><strong>Lean FIRE:</strong> &pound;{result.leanFIRE}</p>
+          <p><strong>FIRE:</strong> &pound;{result.fire}</p>
+          <p><strong>Fat FIRE:</strong> &pound;{result.fatFIRE}</p>
         </div>
       )}
     </div>

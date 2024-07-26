@@ -79,7 +79,7 @@ const MutualFunds = () => {
         </div>
         {investmentMethod === 'sip' && (
           <div id="sipFields" className="mb-4">
-            <label htmlFor="monthlyInvestment" className="block text-gray-700 text-sm sm:text-base">Monthly Investment (₹)</label>
+            <label htmlFor="monthlyInvestment" className="block text-gray-700 text-sm sm:text-base">Monthly Investment (&pound;)</label>
             <input
               type="number"
               id="monthlyInvestment"
@@ -91,7 +91,7 @@ const MutualFunds = () => {
         )}
         {investmentMethod === 'lumpSum' && (
           <div id="lumpSumField" className="mb-4">
-            <label htmlFor="lumpSumInvestment" className="block text-gray-700 text-sm sm:text-base">Lump Sum Investment (₹)</label>
+            <label htmlFor="lumpSumInvestment" className="block text-gray-700 text-sm sm:text-base">Lump Sum Investment (&pound;)</label>
             <input
               type="number"
               id="lumpSumInvestment"
@@ -132,9 +132,9 @@ const MutualFunds = () => {
       </form>
       {result && (
         <div id="result" className="mt-6 p-4 bg-green-100 text-green-700 rounded-lg text-sm sm:text-base">
-          <p><strong>Invested Amount:</strong> ₹{result.investedAmount}</p>
-          <p><strong>Returns Generated:</strong> ₹{result.returnsGenerated}</p>
-          <p><strong>Total Amount:</strong> ₹{result.totalAmount}</p>
+          <p><strong>Invested Amount:</strong> &pound;{result.investedAmount}</p>
+          <p><strong>Returns Generated:</strong> &pound;{result.returnsGenerated}</p>
+          <p><strong>Total Amount:</strong> &pound;{result.totalAmount}</p>
         </div>
       )}
     </div>
