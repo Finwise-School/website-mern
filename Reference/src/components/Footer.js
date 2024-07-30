@@ -1,5 +1,6 @@
 import React from "react";
 import logo from "../assets/images/logo2.png";
+import { Link } from "react-router-dom";
 import { IonIcon } from "@ionic/react";
 import { logoInstagram, logoFacebook, logoTwitter } from "ionicons/icons";
 
@@ -111,13 +112,17 @@ const Footer = () => {
           <p className="font-semibold">Resources</p>
           <ul className="space-y-2">
             <li>
-              <a href="#" className="text-blue-500 hover:underline">
-                Utilities Calculator
+              <a className="text-blue-500 hover:underline">
+              <Link to="/calculator">
+            Utilities Calculators
+          </Link>
               </a>
             </li>
             <li>
-              <a href="#" className="text-blue-500 hover:underline">
+              <a className="text-blue-500 hover:underline">
+              <Link to="/contact">
                 Help center
+          </Link>
               </a>
             </li>
             <li>

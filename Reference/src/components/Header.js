@@ -1,5 +1,7 @@
 import React from "react";
 import logo from "../assets/images/logo2.png";
+import { Link } from "react-router-dom";
+
 
 const Header = () => {
   return (
@@ -11,8 +13,10 @@ const Header = () => {
       <nav className="hidden md:flex items-center gap-12">
         <ul className="flex gap-12">
           <li>
-            <a className="text-gray-700 hover:text-blue-500" href="#bool">
-              Book a Call
+            <a className="text-gray-700 hover:text-blue-500">
+              <Link to="/book">
+                Book a Call
+              </Link>
             </a>
           </li>
           <li>
@@ -21,8 +25,11 @@ const Header = () => {
             </a>
           </li>
           <li>
-            <a className="text-gray-700 hover:text-blue-500" href="#uticalc">
-              Utilities Calculators
+            <a className="text-gray-700 hover:text-blue-500">
+            <Link to="/calculator">
+            Utilities Calculators
+          </Link>
+              
             </a>
           </li>
           <li>

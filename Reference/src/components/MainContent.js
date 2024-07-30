@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
-import topImg from "../assets/images/top.png";
+// import React from 'react';
 import { Link } from "react-router-dom";
+import topImg from "../assets/images/top.png";
 import customer1 from "../assets/images/customers/customer-1.jpg";
 import customer2 from "../assets/images/customers/customer-2.jpg";
 import customer3 from "../assets/images/customers/customer-3.jpg";
@@ -34,29 +35,30 @@ const MainContent = () => {
       const currentYear = new Date().getFullYear();
       yearEl.textContent = currentYear;
     }
-
+  
     const btnNavEl = document.querySelector(".btn-mobile-nav");
     const headerEl = document.querySelector(".header");
-
+  
     if (btnNavEl && headerEl) {
       btnNavEl.addEventListener("click", () => {
         headerEl.classList.toggle("nav-open");
       });
     }
-
+  
     const allLinks = document.querySelectorAll("a:link");
-
+  
     allLinks.forEach((link) => {
       link.addEventListener("click", function (e) {
-        e.preventDefault();
         const href = link.getAttribute("href");
-        if (href === "#") {
-          window.scrollTo({ top: 0, behavior: "smooth" });
-        }
-        if (href !== "#" && href.startsWith("#")) {
-          const sectionEl = document.querySelector(href);
-          if (sectionEl) {
-            sectionEl.scrollIntoView({ behavior: "smooth" });
+        if (href === "#" || (href && href.startsWith("#"))) {
+          e.preventDefault();
+          if (href === "#") {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          } else if (href.startsWith("#")) {
+            const sectionEl = document.querySelector(href);
+            if (sectionEl) {
+              sectionEl.scrollIntoView({ behavior: "smooth" });
+            }
           }
         }
         if (link.classList.contains("main-nav-link")) {
@@ -64,7 +66,7 @@ const MainContent = () => {
         }
       });
     });
-
+  
     const handleScroll = () => {
       if (window.scrollY >= 720) {
         document.body.classList.add("sticky");
@@ -72,9 +74,9 @@ const MainContent = () => {
         document.body.classList.remove("sticky");
       }
     };
-
+  
     window.addEventListener("scroll", handleScroll);
-
+  
     return () => {
       if (btnNavEl && headerEl) {
         btnNavEl.removeEventListener("click", () => {
@@ -84,7 +86,7 @@ const MainContent = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-
+  
   return (
     <main>
       <section className="section-top bg-white py-12 mt-24">
@@ -98,12 +100,13 @@ const MainContent = () => {
               requirements.
             </p>
             <div className="flex space-x-4">
-              <Link to="/book" className="btn btn-primary">
-                Book a Call
-              </Link>
+            <Link to="/book" className="btn btn-primary">
+        Book a Call
+      </Link>
               <a href="#how" className="btn btn-outline">
                 Learn more &darr;
               </a>
+              
             </div>
             <div className="flex items-center space-x-4 mt-8">
               <div className="flex space-x-4">
@@ -148,7 +151,6 @@ const MainContent = () => {
           </div>
         </div>
       </section>
-
       <section className="section-how py-24 bg-gray-50" id="how">
         <div className="container mx-auto text-center px-6">
           <span className="subheading text-lg uppercase text-gray-500">
@@ -281,6 +283,7 @@ const MainContent = () => {
         </div>
       </section>
 
+
       <section className="section-gallery py-24 bg-gray-50">
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
@@ -371,6 +374,7 @@ const MainContent = () => {
           </div>
         </div>
       </section>
+
     </main>
   );
 };
