@@ -1,9 +1,19 @@
 import React from "react";
 import logo from "../assets/images/logo2.png";
 import { Link } from "react-router-dom";
-
+import { useAuth } from "./Login/AuthContext";
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate('/login'); // Redirect to login page
+  };
+
+  const { isAuthenticated, logout } = useAuth(); // Access auth state and logout function
+
   return (
     <header className="bg-white flex justify-between items-center h-24 px-12 fixed w-full top-0 z-50 shadow-md">
       <a href="#">
@@ -14,37 +24,48 @@ const Header = () => {
         <ul className="flex gap-12">
           <li>
             <a className="text-gray-700 hover:text-blue-500">
-              <Link to="/book">
-                Book a Call
-              </Link>
-            </a>
-          </li>
-          <li>
-            <a className="text-gray-700 hover:text-blue-500" href="#supp">
-              Our Supporters
+              <Link to="/book">Book a Call</Link>
             </a>
           </li>
           <li>
             <a className="text-gray-700 hover:text-blue-500">
-            <Link to="/calculator">
-            Utilities Calculators
-          </Link>
-              
+              <Link to="/clients">
+               Our Supporters
+              </Link>
             </a>
           </li>
           <li>
-            <a className="text-gray-700 hover:text-blue-500" href="#about">
-              About Us
+            <a className="text-gray-700 hover:text-blue-500">
+              <Link to="/calculator">Utilities Calculators</Link>
             </a>
           </li>
           <li>
-            <a
-              className="text-white bg-blue-500 py-2 px-4 rounded hover:bg-white hover:text-blue-500"
-              href="#logsign"
-            >
-              Login / Signup
+            <a className="text-gray-700 hover:text-blue-500">
+              <Link to="/aboutUs">About Us</Link>
             </a>
           </li>
+
+          {/* Conditionally render Login/Signup or Logout based on authentication state */}
+          {isAuthenticated ? (
+            <li>
+              <button
+                onClick={handleLogout}
+                className="text-white bg-blue-500 py-2 px-4 rounded hover:bg-white hover:text-blue-500"
+        
+              >
+                Logout
+              </button>
+              <Link className="text-gray-700 hover:text-blue-500 ml-4" to="/profile">Profile</Link>
+            </li>
+          ) : (
+            <li>
+              <a
+                className="text-white bg-blue-500 py-2 px-4 rounded hover:bg-white hover:text-blue-500"
+              >
+                <Link to="/login">Login/Sign Up</Link>
+              </a>
+            </li>
+          )}
         </ul>
       </nav>
 
