@@ -1,10 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faInfoCircle, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import CalculatorHome from "../../assets/images/calculator_home.png";
+import { Link } from 'react-router-dom';
 
 const FixedDepo = () => {
-  const [amountInvested, setAmountInvested] = useState("");
-  const [annualInterestRate, setAnnualInterestRate] = useState("");
+  const [amountInvested, setAmountInvested] = useState(100000);
+  const [annualInterestRate, setAnnualInterestRate] = useState(6);
   const [fdInterestStructure, setFdInterestStructure] = useState("monthly");
-  const [timePeriod, setTimePeriod] = useState("");
+  const [timePeriod, setTimePeriod] = useState(5);
   const [result, setResult] = useState(null);
 
   const calculateFD = () => {
@@ -30,7 +35,6 @@ const FixedDepo = () => {
     const maturityValue = principal * Math.pow((1 + rate), time);
     const totalInterest = maturityValue - principal;
 
-    // Set the result
     setResult({
       totalInvestment: principal.toFixed(0),
       totalInterest: totalInterest.toFixed(0),
@@ -38,86 +42,130 @@ const FixedDepo = () => {
     });
   };
 
+  useEffect(() => {
+    calculateFD();
+  }, [amountInvested, annualInterestRate, fdInterestStructure, timePeriod]);
+
   return (
-    <div className="bg-white p-4 sm:p-8 rounded-lg w-full max-w-md mx-auto">
-      <h2 className="text-2xl font-bold mb-6 text-center finwise-color">FD Calculator</h2>
-      <form
-        id="fdForm"
-        onSubmit={(e) => {
-          e.preventDefault();
-          calculateFD();
-        }}
-      >
-        <div className="mb-4">
-          <label htmlFor="amountInvested" className="block text-gray-700">
-            Amount Invested (&pound;)
-          </label>
-          <input
-            type="number"
-            id="amountInvested"
-            value={amountInvested}
-            onChange={(e) => setAmountInvested(e.target.value)}
-            className="w-full p-2 border rounded-lg"
-            required
-          />
+    <div style={{ marginTop: "60px" }} className="bg-gray-50 p-2">
+      <div className="max-w-6xl mx-auto bg-white shadow-lg rounded-lg p-8">
+        <div className="mb-6">
+          <h1 className="text-2xl font-semibold text-blue-600">FD Calculator</h1>
+          <p className="text-gray-600">Fixed Deposit Calculator</p>
         </div>
-        <div className="mb-4">
-          <label htmlFor="annualInterestRate" className="block text-gray-700">
-            Annual Interest Rate (%)
-          </label>
-          <input
-            type="number"
-            id="annualInterestRate"
-            value={annualInterestRate}
-            onChange={(e) => setAnnualInterestRate(e.target.value)}
-            className="w-full p-2 border rounded-lg"
-            required
-          />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {/* Input Fields */}
+          <div>
+            <h2 className="text-lg font-semibold text-gray-800 mb-4">Input fields:</h2>
+            <div className="space-y-4">
+              <div className="flex items-center justify-between p-4 border border-gray-300 rounded-lg">
+                <label htmlFor="amount-invested" className="text-gray-700">Amount Invested</label>
+                <div className="flex items-center space-x-2">
+                  <span className="text-gray-500">&#163;</span>
+                  <input
+                    type="number"
+                    id="amount-invested"
+                    value={amountInvested}
+                    onChange={(e) => setAmountInvested(e.target.value)}
+                    className="bg-blue-100 text-gray-800 font-semibold text-right p-2 rounded-lg w-24"
+                  />
+                </div>
+              </div>
+              <div className="flex items-center justify-between p-4 border border-gray-300 rounded-lg">
+                <label htmlFor="annual-interest-rate" className="text-gray-700">Annual Interest Rate (%)</label>
+                <input
+                  type="number"
+                  id="annual-interest-rate"
+                  value={annualInterestRate}
+                  onChange={(e) => setAnnualInterestRate(e.target.value)}
+                  className="bg-blue-100 text-gray-800 font-semibold text-right p-2 rounded-lg w-24"
+                />
+              </div>
+              <div className="flex items-center justify-between p-4 border border-gray-300 rounded-lg">
+                <label htmlFor="fd-interest-structure" className="text-gray-700">FD Interest Structure</label>
+                <select
+                  id="fd-interest-structure"
+                  value={fdInterestStructure}
+                  onChange={(e) => setFdInterestStructure(e.target.value)}
+                  className="bg-blue-100 text-gray-800 font-semibold text-right p-2 rounded-lg w-24"
+                >
+                  <option value="monthly">Monthly</option>
+                  <option value="quarterly">Quarterly</option>
+                  <option value="half-yearly">Half-Yearly</option>
+                  <option value="yearly">Yearly</option>
+                </select>
+              </div>
+              <div className="flex items-center justify-between p-4 border border-gray-300 rounded-lg">
+                <label htmlFor="time-period" className="text-gray-700">Time Period (Years)</label>
+                <input
+                  type="number"
+                  id="time-period"
+                  value={timePeriod}
+                  onChange={(e) => setTimePeriod(e.target.value)}
+                  className="bg-blue-100 text-gray-800 font-semibold text-right p-2 rounded-lg w-24"
+                />
+              </div>
+            </div>
+          </div>
+          {/* Output Fields */}
+          <div>
+            <h2 className="text-lg font-semibold text-gray-800 mb-4">Output:</h2>
+            {result && (
+              <div className="space-y-4">
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="p-4 border border-gray-300 rounded-lg">
+                    <p className="text-gray-600">Total Investment</p>
+                    <p className="text-blue-600 font-semibold text-xl">&#163;{result.totalInvestment}</p>
+                  </div>
+                  <div className="p-4 border border-gray-300 rounded-lg">
+                    <p className="text-gray-600 flex items-center">Total Interest Earned <FontAwesomeIcon icon={faInfoCircle} className="text-gray-400 ml-2" /></p>
+                    <p className="text-blue-600 font-semibold text-xl">&#163;{result.totalInterest}</p>
+                  </div>
+                </div>
+                <div className="p-4 border border-gray-300 rounded-lg" style={{ marginTop: "-130px" }}>
+                  <p className="text-gray-600 flex items-center">Maturity Value <FontAwesomeIcon icon={faInfoCircle} className="text-gray-400 ml-2" /></p>
+                  <p className="text-blue-600 font-semibold text-xl">&#163;{result.maturityValue}</p>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
-        <div className="mb-4">
-          <label htmlFor="fdInterestStructure" className="block text-gray-700">
-            FD Interest Structure
-          </label>
-          <select
-            id="fdInterestStructure"
-            value={fdInterestStructure}
-            onChange={(e) => setFdInterestStructure(e.target.value)}
-            className="w-full p-2 border rounded-lg"
-            required
-          >
-            <option value="monthly">Monthly</option>
-            <option value="quarterly">Quarterly</option>
-            <option value="half-yearly">Half-Yearly</option>
-            <option value="yearly">Yearly</option>
-          </select>
+        <div className="mt-8 p-4 border border-gray-300 rounded-lg flex flex-col md:flex-row justify-between items-center">
+          <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4">
+            <div className="flex-shrink-0">
+              <img src={CalculatorHome} alt="Image description" className="w-24 h-24 object-cover rounded-full md:w-32 md:h-32" />
+            </div>
+            <p className="text-gray-600 text-center md:text-left">
+              Now that you know your FD maturity value, plan your investments wisely!
+            </p>
+          </div>
+          <button className="mt-4 md:mt-0 text-white font-semibold px-4 py-2 rounded-lg finwise-bg">
+            Get started
+          </button>
         </div>
-        <div className="mb-4">
-          <label htmlFor="timePeriod" className="block text-gray-700">
-            Time Period (Years)
-          </label>
-          <input
-            type="number"
-            id="timePeriod"
-            value={timePeriod}
-            onChange={(e) => setTimePeriod(e.target.value)}
-            className="w-full p-2 border rounded-lg"
-            required
-          />
+
+        <div className="mt-16">
+          <h2 className="text-lg font-semibold text-gray-800 mb-4">Try our more Popular Calculators</h2>
+          <div className="space-y-2">
+            <Link to="/calculator/fixed-depo" className="flex justify-between items-center p-4 border border-gray-300 rounded-lg hover:bg-gray-100">
+              <p className="text-blue-600 font-semibold">FD Calculator</p>
+              <FontAwesomeIcon icon={faChevronRight} className="text-gray-500" />
+            </Link>
+            <Link to="/calculator/goal-sip" className="flex justify-between items-center p-4 border border-gray-300 rounded-lg hover:bg-gray-100">
+              <p className="text-gray-800">Goal SIP Calculator</p>
+              <FontAwesomeIcon icon={faChevronRight} className="text-gray-500" />
+            </Link>
+            <Link to="/calculator/mutual-funds" className="flex justify-between items-center p-4 border border-gray-300 rounded-lg hover:bg-gray-100">
+              <p className="text-gray-800">Mutual Funds Calculator</p>
+              <FontAwesomeIcon icon={faChevronRight} className="text-gray-500" />
+            </Link>
+            <Link to="/calculator/fire" className="flex justify-between items-center p-4 border border-gray-300 rounded-lg hover:bg-gray-100">
+              <p className="text-gray-800">FIRE Calculator</p>
+              <FontAwesomeIcon icon={faChevronRight} className="text-gray-500" />
+            </Link>
+          </div>
         </div>
-        <button
-          type="submit"
-          className="w-full bg-blue-500 text-white p-2 rounded-lg"
-        >
-          Calculate
-        </button>
-      </form>
-      {result && (
-        <div id="result" className="mt-6 p-4 bg-green-100 text-green-700 rounded-lg">
-          <p><strong>Total Investment:</strong> &pound;{result.totalInvestment}</p>
-          <p><strong>Total Interest Earned:</strong> &pound;{result.totalInterest}</p>
-          <p><strong>Maturity Value:</strong> &pound;{result.maturityValue}</p>
-        </div>
-      )}
+      </div>
     </div>
   );
 };

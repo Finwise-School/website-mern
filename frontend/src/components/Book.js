@@ -104,7 +104,7 @@ const Book = () => {
       </div>
       <div className="w-full md:w-1/2">
         <h2 className="text-2xl md:text-4xl font-bold text-blue-600 mb-4 flex items-center">
-          <i className="fas fa-phone mr-2"></i> Book a Call !
+          <i className="fas fa-phone mr-2"></i> Request Early Access !
         </h2>
         {successMessage && <p className="success-message">{successMessage}</p>}
         <form onSubmit={handleSubmit} className="space-y-4" noValidate>

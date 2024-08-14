@@ -254,6 +254,10 @@ strong {
   color: #007FFF;
 }
 
+.finwise-bg{
+  background-color: #007FFF;
+}
+
 /* clients-page */
 .slick-slide > div {
   margin: 0 10px;

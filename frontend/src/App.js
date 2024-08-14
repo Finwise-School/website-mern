@@ -14,7 +14,10 @@ import Calculator from "./components/Calculator";
 import AboutUS from "./components/AboutUs";
 import LoginPage from "./components/Login/login";
 import SignupPage from "./components/Login/SignupPage";
-
+import Fire from "./components/calculator/Fire";
+import GoalSIP from "./components/calculator/GoalSIP";
+import MutualFunds from "./components/calculator/MutualFunds";
+import FixedDepo from "./components/calculator/FixedDepo";
 
 const ProtectedRoute = ({ element, ...rest }) => {
   const { isAuthenticated } = useAuth();
@@ -23,28 +26,32 @@ const ProtectedRoute = ({ element, ...rest }) => {
 
 const App = () => {
   return (
-        <AuthProvider>
-    <Router>
-      <div className="app">
-        <Header />
-        <Routes>
-          <Route path="/" element={<MainContent />} />
-          <Route path="/book" element={<Book />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/calculator" element={<Calculator />} />
-          <Route path="/aboutUs" element={<AboutUS/>}/>
-          <Route path="/signup" element={<SignupPage/>} />
-          <Route path="/login" element={<LoginPage/>} />
-          <Route path="/clients" element={<Cards/>} />
-          <Route
+    <AuthProvider>
+      <Router>
+        <div className="app">
+          <Header />
+          <Routes>
+            <Route path="/" element={<MainContent />} />
+            <Route path="/book" element={<Book />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/calculator" element={<Calculator />} />
+            <Route path="/aboutUs" element={<AboutUS />} />
+            <Route path="/signup" element={<SignupPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/clients" element={<Cards />} />
+            <Route path="/calculator/fire" element={<Fire />} />
+            <Route path="/calculator/goal-sip" element={<GoalSIP />} />
+            <Route path="/calculator/mutual-funds" element={<MutualFunds />} />
+            <Route path="/calculator/fixed-depo" element={<FixedDepo />} />
+            <Route
               path="/profile"
               element={<ProtectedRoute element={<Profile />} />}
             />
-        </Routes>
-        <Footer />
-      </div>
-    </Router>
-        </AuthProvider>
+          </Routes>
+          <Footer />
+        </div>
+      </Router>
+    </AuthProvider>
   );
 };
 
