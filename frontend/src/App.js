@@ -19,6 +19,7 @@ import GoalSIP from "./components/calculator/GoalSIP";
 import MutualFunds from "./components/calculator/MutualFunds";
 import FixedDepo from "./components/calculator/FixedDepo";
 
+
 const ProtectedRoute = ({ element, ...rest }) => {
   const { isAuthenticated } = useAuth();
   return isAuthenticated ? element : <Navigate to="/login" />;

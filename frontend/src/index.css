@@ -262,3 +262,39 @@ strong {
 .slick-slide > div {
   margin: 0 10px;
 }
+
+
+/* -------------------------------- */
+.fade-in {
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.bg-wave {
+  background: linear-gradient(to right, #0d47a1 0%, #1976d2 50%, #0d47a1 100%);
+  background-size: 200% 100%;
+  animation: wave 5s infinite linear;
+}
+
+@keyframes wave {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 100% 0;
+  }
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.2), 0 0 60px rgba(29, 78, 216, 0.5);
+}

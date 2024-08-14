@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import axios from 'axios'; // Import axios for making HTTP requests
+import axios from 'axios';
 import contactus from "../assets/images/contact/contact-img.jpg";
+import SuccessModal from './contactSuccess'; // Ensure the correct path to SuccessModal
 
 const Contact = () => {
   const [name, setName] = useState('');
@@ -8,7 +9,7 @@ const Contact = () => {
   const [subject, setSubject] = useState('');
   const [message, setMessage] = useState('');
   const [errors, setErrors] = useState({});
-  const [successMessage, setSuccessMessage] = useState(''); // State to show success message
+  const [showSuccessModal, setShowSuccessModal] = useState(false); // State to control modal visibility
 
   const validateForm = () => {
     let valid = true;
@@ -42,7 +43,6 @@ const Contact = () => {
     e.preventDefault();
     if (validateForm()) {
       try {
-        // Make a POST request to the backend
         const response = await axios.post('http://localhost:5000/api/contact', {
           name,
           email,
@@ -51,18 +51,22 @@ const Contact = () => {
         });
 
         if (response.status === 201) {
-          setSuccessMessage('Form submitted successfully!');
           setName(''); // Reset the form fields
           setEmail('');
           setSubject('');
           setMessage('');
           setErrors({}); // Clear any existing errors
+          setShowSuccessModal(true); // Show the success modal
         }
       } catch (error) {
         console.error('There was an error submitting the form:', error);
         setErrors({ submit: 'There was an issue submitting the form. Please try again.' });
       }
     }
+  };
+
+  const closeModal = () => {
+    setShowSuccessModal(false);
   };
 
   return (
@@ -77,7 +81,6 @@ const Contact = () => {
         </div>
         <div className="md:w-1/2 md:px-8">
           <h2 className="text-4xl font-bold text-blue-600 mb-4">Get in touch!</h2>
-          {successMessage && <p className="success-message">{successMessage}</p>}
           <form onSubmit={handleSubmit} className="space-y-4" noValidate>
             <div>
               <input
@@ -134,16 +137,13 @@ const Contact = () => {
           </form>
         </div>
       </div>
+      <SuccessModal isOpen={showSuccessModal} onClose={closeModal} />
+
       <style>
         {`
           .error-message { 
             color: red; 
             font-size: 0.875rem; /* Tailwind class for text-sm */
-          }
-          .success-message { 
-            color: green; 
-            font-size: 0.875rem; /* Tailwind class for text-sm */
-            margin-bottom: 1rem;
           }
         `}
       </style>
