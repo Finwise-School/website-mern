@@ -11,7 +11,7 @@ import Contact from "./components/Contact";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Calculator from "./components/Calculator";
-import AboutUS from "./components/AboutUs";
+import AboutUs from "./components/Abouts/AboutUs";
 import LoginPage from "./components/Login/login";
 import SignupPage from "./components/Login/SignupPage";
 import Fire from "./components/calculator/Fire";
@@ -36,7 +36,7 @@ const App = () => {
             <Route path="/book" element={<Book />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/calculator" element={<Calculator />} />
-            <Route path="/aboutUs" element={<AboutUS />} />
+            <Route path="/aboutUs" element={<AboutUs />} />
             <Route path="/signup" element={<SignupPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/clients" element={<Cards />} />
