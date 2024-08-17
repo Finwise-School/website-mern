@@ -5,6 +5,7 @@ import { FaAlignJustify } from "react-icons/fa6";
 import logo from "../assets/images/logo2.png";
 import { Link } from "react-router-dom";
 import AboutUSS from "../assets/images/aboutUS/About.png"
+// import Loggs from "../assets/images/logging/login.png"
 
 const AboutUS = () => {
   return (
