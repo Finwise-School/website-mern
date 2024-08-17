@@ -16,31 +16,31 @@ const Header = () => {
 
   return (
     <header className="bg-white flex justify-between items-center h-24 px-12 fixed w-full top-0 z-50 shadow-md">
-      <a href="#">
+      <a href="/">
         <img className="h-16" src={logo} alt="Finwise School" />
       </a>
 
       <nav className="hidden md:flex items-center gap-12">
         <ul className="flex gap-12">
           <li>
-            <a className="text-gray-700 hover:text-blue-500">
+            <a className="text-gray-700 font-medium relative after:absolute after:py-0.5 after:left-0 after:bottom-0 after:w-full after:h-1 after:bg-transparent after:transition-all after:duration-300 after:content-[''] hover:after:bg-blue-500">
               <Link to="/book">Book a Call</Link>
             </a>
           </li>
           <li>
-            <a className="text-gray-700 hover:text-blue-500">
+            <a className="text-gray-700 font-medium relative after:absolute after:py-0.5 after:left-0 after:bottom-0 after:w-full after:h-1 after:bg-transparent after:transition-all after:duration-300 after:content-[''] hover:after:bg-blue-500">
               <Link to="/clients">
                Our Supporters
               </Link>
             </a>
           </li>
           <li>
-            <a className="text-gray-700 hover:text-blue-500">
+            <a className="text-gray-700 font-medium relative after:absolute after:py-0.5 after:left-0 after:bottom-0 after:w-full after:h-1 after:bg-transparent after:transition-all after:duration-300 after:content-[''] hover:after:bg-blue-500">
               <Link to="/calculator">Utilities Calculators</Link>
             </a>
           </li>
           <li>
-            <a className="text-gray-700 hover:text-blue-500">
+            <a className="text-gray-700 font-medium relative after:absolute after:py-0.5 after:left-0 after:bottom-0 after:w-full after:h-1 after:bg-transparent after:transition-all after:duration-300 after:content-[''] hover:after:bg-blue-500">
               <Link to="/aboutUs">About Us</Link>
             </a>
           </li>
