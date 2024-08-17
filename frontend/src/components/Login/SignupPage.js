@@ -6,6 +6,7 @@ import Loggins from '../../assets/images/loginss/logins.jpg';
 const SignupPage = () => {
   const { isAuthenticated } = useAuth();
   const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
@@ -37,8 +38,8 @@ const SignupPage = () => {
   return (
     <div className="h-screen bg-cover bg-center" style={{ backgroundImage: `url(${Loggins})` }}>
       <div className="flex items-center justify-center h-full">
-        <div className="bg-white bg-opacity-10 backdrop-blur-lg rounded-lg border border-white border-opacity-30 shadow-lg p-8 max-w-md w-full">
-          <h2 className="text-3xl font-bold mb-8 text-center text-white">Signup</h2>
+        <div className="bg-white bg-opacity-10 backdrop-blur-lg rounded-lg border border-white border-opacity-30 shadow-lg p-8 max-w-md w-full mt-24">
+          <h2 className="text-5xl font-extrabold mb-8 text-center text-white">Signup</h2>
           <form onSubmit={handleSignup}>
             <div className="formGroup mb-4">
               <label htmlFor="username" className="block text-white font-bold mb-2">Username:</label>
@@ -56,6 +57,24 @@ const SignupPage = () => {
                 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none "
               />
             </div>
+
+            <div className="formGroup mb-4">
+              <label htmlFor="email" className="block text-white font-bold mb-2">Email:</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Enter your email"
+                required
+                autoComplete="off"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="mt-1 w-full px-4 py-2 bg-white border border-slate-300 rounded-md shadow-sm
+                focus:outline-none focus:border-white focus:ring-1 focus:ring-blue-500
+                disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none "
+              />
+            </div>
+
             <div className="formGroup mb-4">
               <label htmlFor="password" className="block text-white font-bold mb-2">Password:</label>
               <input

@@ -7,6 +7,7 @@ const LoginPage = () => {
   const { isAuthenticated, login } = useAuth();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
 
@@ -24,7 +25,7 @@ const LoginPage = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ username, password, email}),
       });
 
       if (response.ok) {
@@ -42,9 +43,9 @@ const LoginPage = () => {
 
   return (
     <div className='h-screen bg-cover' style={{ backgroundImage: `url(${Loggings})` }}>
-      <div className="flex justify-center h-full items-center">
-      <div className="bg-white bg-opacity-10 backdrop-blur-lg rounded-lg border border-white border-opacity-30 shadow-lg p-8 max-w-md w-full">
-      <h2 className="text-3xl font-bold mb-8 text-center text-white">Login</h2>
+      <div className="flex justify-center h-full items-center ">
+      <div className="bg-white bg-opacity-10 backdrop-blur-lg rounded-lg border border-white border-opacity-30 shadow-lg p-8 max-w-md w-full mt-28 mb-10">
+      <h2 className="text-5xl font-extrabold mb-8 text-center text-white">Login</h2>
           <form onSubmit={handleLogin}>
             <div className="formGroup mb-4">
               <label htmlFor="username" className="block text-white font-bold mb-2">Username:</label>
@@ -79,6 +80,8 @@ const LoginPage = () => {
       disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
               />
             </div>
+
+           
             <button className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4" type="submit">
               Login
             </button>

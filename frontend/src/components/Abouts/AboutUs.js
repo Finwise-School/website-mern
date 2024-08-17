@@ -11,7 +11,7 @@ const AboutUs = () => {
         <div className="text-center">
           <h1 className="font-extrabold text-8xl text-blue-900">WELCOME TO</h1>
           <h1 className="font-extrabold text-8xl text-blue-900 mt-4">
-            Finwise
+            FINWISE SCHOOL
           </h1>
         </div>
       </div>
