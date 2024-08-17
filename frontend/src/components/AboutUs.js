@@ -11,7 +11,7 @@ const AboutUS = () => {
     
     <div className=" bg-white ">
       
-      <div className='Navbar flex space-x-96  justify-around container  mb-14 mt-28'>
+      {/* <div className='Navbar flex space-x-96  justify-around container  mb-14 mt-28'>
         
         <div className=' flex space-x-8  pr-44 '>
           
@@ -29,9 +29,9 @@ const AboutUS = () => {
             </ul>
         </div>
         
-    </div>
+    </div> */}
 
-      <div className=" columns-2 container ">
+      <div className=" columns-2 container mt-32 ">
         <div>
           <img
           src={AboutUSS}
