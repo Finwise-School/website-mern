@@ -159,7 +159,7 @@ const FixedDepo = () => {
         </div>
 
         {/* Line Graph */}
-        <div className="mt-8">
+        <div className="mt-8" style={{ marginTop: "-100px" }}>
           <h2 className="text-lg font-semibold text-gray-800 mb-4">Investment Over Time</h2>
           <div className="bg-white p-4 border border-gray-300 rounded-lg">
             <Line
@@ -174,7 +174,7 @@ const FixedDepo = () => {
                     callbacks: {
                       label: function(tooltipItem) {
                         // Format tooltip label
-                        return `${tooltipItem.label} year${tooltipItem.label > 1 ? 's' : ''}: ₹${tooltipItem.raw}`;
+                        return `${tooltipItem.label} year${tooltipItem.label > 1 ? 's' : ''}: £${tooltipItem.raw}`;
                       },
                       title: function() {
                         return '';
@@ -198,11 +198,11 @@ const FixedDepo = () => {
                   y: {
                     title: {
                       display: true,
-                      text: 'Amount (₹)',
+                      text: 'Amount (£)',
                     },
                     ticks: {
                       callback: function(value) {
-                        return '₹' + value;
+                        return '£' + value;
                       },
                     },
                   },
