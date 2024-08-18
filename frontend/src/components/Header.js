@@ -14,7 +14,7 @@ const Header = () => {
 
   const { isAuthenticated, logout } = useAuth(); // Access auth state and logout function
 
-  return (
+  return (  
     <header className="bg-white flex justify-between items-center h-24 px-12 fixed w-full top-0 z-50 shadow-md">
       <a href="#">
         <img className="h-16" src={logo} alt="Finwise School" />
@@ -24,7 +24,7 @@ const Header = () => {
         <ul className="flex gap-12">
           <li>
             <a className="text-gray-700 hover:text-blue-500">
-              <Link to="/book">Book a Call</Link>
+              <Link to="/book">Request Early Access</Link>
             </a>
           </li>
           <li>

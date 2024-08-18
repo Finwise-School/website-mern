@@ -4,6 +4,10 @@ import { faInfoCircle, faChevronRight } from '@fortawesome/free-solid-svg-icons'
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import CalculatorHome from "../../assets/images/calculator_home.png";
 import { Link } from 'react-router-dom';
+import { Line } from 'react-chartjs-2';
+import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
+
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
 const FixedDepo = () => {
   const [amountInvested, setAmountInvested] = useState(100000);
@@ -11,6 +15,7 @@ const FixedDepo = () => {
   const [fdInterestStructure, setFdInterestStructure] = useState("monthly");
   const [timePeriod, setTimePeriod] = useState(5);
   const [result, setResult] = useState(null);
+  const [chartData, setChartData] = useState({ labels: [], datasets: [] });
 
   const calculateFD = () => {
     const principal = parseFloat(amountInvested);
@@ -39,6 +44,28 @@ const FixedDepo = () => {
       totalInvestment: principal.toFixed(0),
       totalInterest: totalInterest.toFixed(0),
       maturityValue: maturityValue.toFixed(0),
+    });
+
+    // Generate data for the chart
+    const labels = [];
+    const data = [];
+    for (let i = 1; i <= years; i++) {
+      const yearlyMaturityValue = principal * Math.pow((1 + rate), i * n);
+      labels.push(i);
+      data.push(yearlyMaturityValue.toFixed(0));
+    }
+
+    setChartData({
+      labels: labels,
+      datasets: [
+        {
+          label: 'FD Maturity Value',
+          data: data,
+          borderColor: '#2563eb',
+          backgroundColor: 'rgba(37, 99, 235, 0.2)',
+          borderWidth: 2,
+        },
+      ],
     });
   };
 
@@ -130,39 +157,58 @@ const FixedDepo = () => {
             )}
           </div>
         </div>
-        <div className="mt-8 p-4 border border-gray-300 rounded-lg flex flex-col md:flex-row justify-between items-center">
-          <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4">
-            <div className="flex-shrink-0">
-              <img src={CalculatorHome} alt="Image description" className="w-24 h-24 object-cover rounded-full md:w-32 md:h-32" />
-            </div>
-            <p className="text-gray-600 text-center md:text-left">
-              Now that you know your FD maturity value, plan your investments wisely!
-            </p>
-          </div>
-          <button className="mt-4 md:mt-0 text-white font-semibold px-4 py-2 rounded-lg finwise-bg">
-            Get started
-          </button>
-        </div>
 
-        <div className="mt-16">
-          <h2 className="text-lg font-semibold text-gray-800 mb-4">Try our more Popular Calculators</h2>
-          <div className="space-y-2">
-            <Link to="/calculator/fixed-depo" className="flex justify-between items-center p-4 border border-gray-300 rounded-lg hover:bg-gray-100">
-              <p className="text-blue-600 font-semibold">FD Calculator</p>
-              <FontAwesomeIcon icon={faChevronRight} className="text-gray-500" />
-            </Link>
-            <Link to="/calculator/goal-sip" className="flex justify-between items-center p-4 border border-gray-300 rounded-lg hover:bg-gray-100">
-              <p className="text-gray-800">Goal SIP Calculator</p>
-              <FontAwesomeIcon icon={faChevronRight} className="text-gray-500" />
-            </Link>
-            <Link to="/calculator/mutual-funds" className="flex justify-between items-center p-4 border border-gray-300 rounded-lg hover:bg-gray-100">
-              <p className="text-gray-800">Mutual Funds Calculator</p>
-              <FontAwesomeIcon icon={faChevronRight} className="text-gray-500" />
-            </Link>
-            <Link to="/calculator/fire" className="flex justify-between items-center p-4 border border-gray-300 rounded-lg hover:bg-gray-100">
-              <p className="text-gray-800">FIRE Calculator</p>
-              <FontAwesomeIcon icon={faChevronRight} className="text-gray-500" />
-            </Link>
+        {/* Line Graph */}
+        <div className="mt-8">
+          <h2 className="text-lg font-semibold text-gray-800 mb-4">Investment Over Time</h2>
+          <div className="bg-white p-4 border border-gray-300 rounded-lg">
+            <Line
+              data={chartData}
+              options={{
+                responsive: true,
+                plugins: {
+                  legend: {
+                    position: 'top',
+                  },
+                  tooltip: {
+                    callbacks: {
+                      label: function(tooltipItem) {
+                        // Format tooltip label
+                        return `${tooltipItem.label} year${tooltipItem.label > 1 ? 's' : ''}: ₹${tooltipItem.raw}`;
+                      },
+                      title: function() {
+                        return '';
+                      },
+                    },
+                    titleFont: {
+                      size: 14,
+                    },
+                    bodyFont: {
+                      size: 16,
+                    },
+                  },
+                },
+                scales: {
+                  x: {
+                    title: {
+                      display: true,
+                      text: 'Years',
+                    },
+                  },
+                  y: {
+                    title: {
+                      display: true,
+                      text: 'Amount (₹)',
+                    },
+                    ticks: {
+                      callback: function(value) {
+                        return '₹' + value;
+                      },
+                    },
+                  },
+                },
+              }}
+            />
           </div>
         </div>
       </div>
