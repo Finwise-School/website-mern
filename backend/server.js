@@ -5,11 +5,11 @@ const bcrypt = require('bcrypt');
 require('dotenv').config(); // Load environment variables from .env file
 
 const contactRoutes = require('./routes/contactRoutes');
-const bookRoutes = require('./routes/bookRoutes'); // Import the book routes
+const bookRoutes = require('./routes/earlyAccessRoutes'); // Import the book routes
 const collectionUsers = require('./config'); // Import the collectionUsers model
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 
 // Middleware
 app.use(cors({ origin: 'http://localhost:3000' })); // Enable CORS to allow requests from the frontend

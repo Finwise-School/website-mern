@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { faInfoCircle, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import '@fortawesome/fontawesome-free/css/all.min.css';
-import { Line } from 'react-chartjs-2';
-import 'chart.js/auto';
 import CalculatorHome from "../../assets/images/calculator_home.png";
 import { Link } from 'react-router-dom';
 
@@ -15,11 +13,6 @@ const GoalSIP = () => {
     monthlySIP: "0",
     totalInvested: "0",
     goalAmount: "0",
-  });
-
-  const [chartData, setChartData] = useState({
-    labels: [],
-    datasets: [],
   });
 
   const calculateSIP = () => {
@@ -46,27 +39,6 @@ const GoalSIP = () => {
       monthlySIP: P.toFixed(0),
       totalInvested: totalInvested.toFixed(0),
       goalAmount: FV.toFixed(0),
-    });
-
-    // Prepare chart data
-    const newLabels = Array.from({ length: years }, (_, i) => i + 1);
-    const investedData = newLabels.map(year => {
-      const currentN = year * 12;
-      const currentInvested = P * currentN;
-      return currentInvested.toFixed(0);
-    });
-
-    setChartData({
-      labels: newLabels,
-      datasets: [
-        {
-          label: 'Total Invested Amount',
-          data: investedData,
-          fill: false,
-          borderColor: 'rgb(75, 192, 192)',
-          tension: 0.1,
-        },
-      ],
     });
   };
 
@@ -140,16 +112,10 @@ const GoalSIP = () => {
             </div>
           </div>
         </div>
-        <div className="mt-8">
-          <h2 className="text-lg font-semibold text-gray-800 mb-4">Investment Growth Over Time</h2>
-          <div className="p-4 border border-gray-300 rounded-lg">
-            <Line data={chartData} />
-          </div>
-        </div>
         <div className="mt-8 p-4 border border-gray-300 rounded-lg flex flex-col md:flex-row justify-between items-center">
           <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4">
             <div className="flex-shrink-0">
-              <img src={CalculatorHome} alt="Calculator Home" className="w-24 h-24 object-cover rounded-full md:w-32 md:h-32" />
+              <img src={CalculatorHome} alt="Image description" className="w-24 h-24 object-cover rounded-full md:w-32 md:h-32" />
             </div>
             <p className="text-gray-600 text-center md:text-left">
               Now that you know your SIP amount, let’s achieve your goal!
@@ -160,25 +126,25 @@ const GoalSIP = () => {
           </button>
         </div>
         <div className="mt-16">
-          <h2 className="text-lg font-semibold text-gray-800 mb-4">Try our more Popular Calculators</h2>
-          <div className="space-y-2">
-            <Link to="/calculator/fixed-depo" className="flex justify-between items-center p-4 border border-gray-300 rounded-lg hover:bg-gray-100">
-              <p className="text-gray-800 font-semibold">FD Calculator</p>
-              <FontAwesomeIcon icon={faChevronRight} className="text-gray-500" />
-            </Link>
-            <Link to="/calculator/goal-sip" className="flex justify-between items-center p-4 border border-gray-300 rounded-lg hover:bg-gray-100">
-              <p className="text-blue-800">Goal SIP Calculator</p>
-              <FontAwesomeIcon icon={faChevronRight} className="text-gray-500" />
-            </Link>
-            <Link to="/calculator/mutual-funds" className="flex justify-between items-center p-4 border border-gray-300 rounded-lg hover:bg-gray-100">
-              <p className="text-gray-800">Mutual Funds Calculator</p>
-              <FontAwesomeIcon icon={faChevronRight} className="text-gray-500" />
-            </Link>
-            <Link to="/calculator/fire" className="flex justify-between items-center p-4 border border-gray-300 rounded-lg hover:bg-gray-100">
-              <p className="text-gray-800">FIRE Calculator</p>
-              <FontAwesomeIcon icon={faChevronRight} className="text-gray-500" />
-            </Link>
-          </div>
+            <h2 className="text-lg font-semibold text-gray-800 mb-4">Try our more Popular Calculators</h2>
+            <div className="space-y-2">
+                <Link to="/calculator/fixed-depo" className="flex justify-between items-center p-4 border border-gray-300 rounded-lg hover:bg-gray-100">
+                    <p className="text-gray-800 font-semibold">FD Calculator</p>
+                    <FontAwesomeIcon icon={faChevronRight} className="text-gray-500" />
+                </Link>
+                <Link to="/calculator/goal-sip" className="flex justify-between items-center p-4 border border-gray-300 rounded-lg hover:bg-gray-100">
+                    <p className="text-blue-800">Goal SIP Calculator</p>
+                    <FontAwesomeIcon icon={faChevronRight} className="text-gray-500" />
+                </Link>
+                <Link to="/calculator/mutual-funds" className="flex justify-between items-center p-4 border border-gray-300 rounded-lg hover:bg-gray-100">
+                    <p className="text-gray-800">Mutual Funds Calculator</p>
+                    <FontAwesomeIcon icon={faChevronRight} className="text-gray-500" />
+                </Link>
+                <Link to="/calculator/fire" className="flex justify-between items-center p-4 border border-gray-300 rounded-lg hover:bg-gray-100">
+                    <p className="text-gray-800">FIRE Calculator</p>
+                    <FontAwesomeIcon icon={faChevronRight} className="text-gray-500" />
+                </Link>
+            </div>
         </div>
       </div>
     </div>
