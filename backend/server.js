@@ -5,8 +5,7 @@ const bcrypt = require('bcrypt');
 require('dotenv').config(); // Load environment variables from .env file
 
 const contactRoutes = require('./routes/contactRoutes');
-const bookRoutes = require('./routes/bookRoutes'); // Import the book routes
-const collectionUsers = require('./models/config'); // Import the collectionUsers model
+const earlyAccessRoutes = require('./routes/earlyAccessRoutes'); // Import the book routes
 const loginRoutes= require('./routes/loginRoutes');// login routes
 const signupRoutes= require('./routes/signupRoutes'); //signup routes
 
@@ -29,9 +28,9 @@ mongoose.connect(process.env.MONGODB_URI, { // Use the MONGODB_URI from the .env
 
 // Routes
 app.use('/api', contactRoutes);
-app.use('/api', bookRoutes); // Use the book routes
+app.use('/api', earlyAccessRoutes); // Use the book routes
 app.use('/api',loginRoutes); // using the signup routes
-app.use('/api',loginRoutes); // using the login routes
+app.use('/api',signupRoutes); // using the login routes
 
 
 // Root Route

@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
-const collectionUsers = require('../models/config'); 
+const collectionUsers = require('../models/Users'); 
 
 // Signup Route
 router.post('/signup', async (req, res) => {
