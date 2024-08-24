@@ -24,6 +24,7 @@ bower_components/
 # Compiled JavaScript
 *.bundle.js
 *.bundle.js.map
+.gitignore
 
 # Optional npm cache directory
 .npm
@@ -52,5 +53,3 @@ public/static/
 # Visual Studio Code
 .vscode/
 .vscode/*
-
-.gitignore
