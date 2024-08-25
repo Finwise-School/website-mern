@@ -54,7 +54,7 @@ const MutualFunds = () => {
     }, [investmentMethod, monthlyInvestment, lumpSumInvestment, annualReturns, timePeriod]);
 
     return (
-        <div style={{ marginTop: "60px" }} className="bg-gray-50 p-2">
+        <div style={{ marginTop: "100px" }} className="bg-gray-50 p-2">
             <div className="max-w-6xl mx-auto bg-white shadow-lg rounded-lg p-8">
                 <div className="mb-6">
                     <h1 className="text-2xl font-semibold text-blue-600">Mutual Funds Calculator</h1>
@@ -130,11 +130,11 @@ const MutualFunds = () => {
                         </div>
                     </div>
                     {/* Output Fields */}
-                    <div>
+                    <div className="output-fields -mt-28 md:mt-0">
                         <h2 className="text-lg font-semibold text-gray-800 mb-4">Output:</h2>
                         {result && (
                             <div className="space-y-4">
-                                <div className="grid grid-cols-2 gap-4">
+                                <div  className="grid grid-cols-1 gap-2" style={{ "row-gap": "0.6rem" }}>
                                     <div className="p-4 border border-gray-300 rounded-lg">
                                         <p className="text-gray-600">Invested Amount</p>
                                         <p className="text-blue-600 font-semibold text-xl">&#163;{result.investedAmount}</p>
@@ -143,16 +143,16 @@ const MutualFunds = () => {
                                         <p className="text-gray-600">Returns Generated</p>
                                         <p className="text-blue-600 font-semibold text-xl">&#163;{result.returnsGenerated}</p>
                                     </div>
-                                </div>
-                                <div className="p-4 border border-gray-300 rounded-lg" style={{marginTop:"-130px"}}>
+                                <div className="p-4 border border-gray-300 rounded-lg">
                                     <p className="text-gray-600">Total Amount</p>
                                     <p className="text-blue-600 font-semibold text-xl">&#163;{result.totalAmount}</p>
+                                </div>
                                 </div>
                             </div>
                         )}
                     </div>
                 </div>
-                <div className="mt-8 p-4 border border-gray-300 rounded-lg flex flex-col md:flex-row justify-between items-center">
+                <div className="mt-8 p-4 border border-gray-300 rounded-lg flex flex-col md:flex-row justify-between items-center" style={{"marginTop":"-124px"}}>
                     <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4">
                         <div className="flex-shrink-0">
                             <img src={CalculatorHome} alt="Image description" className="w-24 h-24 object-cover rounded-full md:w-32 md:h-32" />
@@ -161,16 +161,16 @@ const MutualFunds = () => {
                             Now that you know your mutual funds returns, Let’s maximize your investments!
                         </p>
                     </div>
-                    <button className="mt-4 md:mt-0 text-white font-semibold px-4 py-2 rounded-lg finwise-bg">
-                        Get started
-                    </button>
+                    <button className="mt-4 md:mt-0 text-white font-semibold px-4 py-2 rounded-lg bg-blue-500">
+            Get started
+          </button>
                 </div>
 
                 <div className="mt-16">
             <h2 className="text-lg font-semibold text-gray-800 mb-4">Try our more Popular Calculators</h2>
             <div className="space-y-2">
                 <Link to="/calculator/fixed-depo" className="flex justify-between items-center p-4 border border-gray-300 rounded-lg hover:bg-gray-100">
-                    <p className="text-gray-800 font-semibold">FD Calculator</p>
+                    <p className="text-gray-800">FD Calculator</p>
                     <FontAwesomeIcon icon={faChevronRight} className="text-gray-500" />
                 </Link>
                 <Link to="/calculator/goal-sip" className="flex justify-between items-center p-4 border border-gray-300 rounded-lg hover:bg-gray-100">

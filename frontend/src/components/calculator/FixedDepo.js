@@ -74,7 +74,7 @@ const FixedDepo = () => {
   }, [amountInvested, annualInterestRate, fdInterestStructure, timePeriod]);
 
   return (
-    <div style={{ marginTop: "60px" }} className="bg-gray-50 p-2">
+    <div style={{ marginTop: "100px" }} className="bg-gray-50 p-2">
       <div className="max-w-6xl mx-auto bg-white shadow-lg rounded-lg p-8">
         <div className="mb-6">
           <h1 className="text-2xl font-semibold text-blue-600">FD Calculator</h1>
@@ -135,11 +135,11 @@ const FixedDepo = () => {
             </div>
           </div>
           {/* Output Fields */}
-          <div>
+          <div className="output-fields -mt-28 md:mt-0">
             <h2 className="text-lg font-semibold text-gray-800 mb-4">Output:</h2>
             {result && (
-              <div className="space-y-4">
-                <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <div className="grid grid-cols-1 gap-2" style={{ "row-gap": "0.6rem" }}>
                   <div className="p-4 border border-gray-300 rounded-lg">
                     <p className="text-gray-600">Total Investment</p>
                     <p className="text-blue-600 font-semibold text-xl">&#163;{result.totalInvestment}</p>
@@ -148,10 +148,10 @@ const FixedDepo = () => {
                     <p className="text-gray-600 flex items-center">Total Interest Earned <FontAwesomeIcon icon={faInfoCircle} className="text-gray-400 ml-2" /></p>
                     <p className="text-blue-600 font-semibold text-xl">&#163;{result.totalInterest}</p>
                   </div>
-                </div>
-                <div className="p-4 border border-gray-300 rounded-lg" style={{ marginTop: "-130px" }}>
-                  <p className="text-gray-600 flex items-center">Maturity Value <FontAwesomeIcon icon={faInfoCircle} className="text-gray-400 ml-2" /></p>
-                  <p className="text-blue-600 font-semibold text-xl">&#163;{result.maturityValue}</p>
+                  <div className="p-4 border border-gray-300 rounded-lg" >
+                    <p className="text-gray-600 flex items-center">Maturity Value <FontAwesomeIcon icon={faInfoCircle} className="text-gray-400 ml-2" /></p>
+                    <p className="text-blue-600 font-semibold text-xl">&#163;{result.maturityValue}</p>
+                  </div>
                 </div>
               </div>
             )}
@@ -174,7 +174,13 @@ const FixedDepo = () => {
                     callbacks: {
                       label: function (tooltipItem) {
                         // Format tooltip label
-                        return `${tooltipItem.label} year${tooltipItem.label > 1 ? 's' : ''}: £${tooltipItem.raw}`;
+                        if (tooltipItem.raw >= 1000000) {
+                          return `${tooltipItem.label} year${tooltipItem.label > 1 ? 's' : ''}: £${(tooltipItem.raw / 1000000).toFixed(1)}M`;
+                        } else if (tooltipItem.raw >= 1000) {
+                          return `${tooltipItem.label} year${tooltipItem.label > 1 ? 's' : ''}: £${(tooltipItem.raw / 1000).toFixed(1)}K`;
+                        } else {
+                          return `${tooltipItem.label} year${tooltipItem.label > 1 ? 's' : ''}: £${tooltipItem.raw}`;
+                        }
                       },
                       title: function () {
                         return '';
@@ -200,17 +206,39 @@ const FixedDepo = () => {
                       display: true,
                       text: 'Amount (£)',
                     },
+                    // Inside your Line chart configuration
                     ticks: {
                       callback: function (value) {
-                        return '£' + value;
+                        if (value >= 1000000) {
+                          return '£' + (value / 1000000).toFixed(1) + 'M'; // For millions
+                        } else if (value >= 1000) {
+                          return '£' + (value / 1000).toFixed(1) + 'K'; // For thousands
+                        } else {
+                          return '£' + value; // For values below 1000
+                        }
                       },
                     },
+
                   },
                 },
               }}
             />
           </div>
         </div>
+        <div className="mt-8 p-4 border border-gray-300 rounded-lg flex flex-col md:flex-row justify-between items-center">
+          <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4">
+            <div className="flex-shrink-0">
+              <img src={CalculatorHome} alt="Image description" className="w-24 h-24 object-cover rounded-full md:w-32 md:h-32" />
+            </div>
+            <p className="text-gray-600 text-center md:text-left">
+              Now that you know your FIRE number, Lets achieve it !!
+            </p>
+          </div>
+          <button className="mt-4 md:mt-0 text-white font-semibold px-4 py-2 rounded-lg bg-blue-500">
+            Get started
+          </button>
+        </div>
+
         <div className="mt-16">
           <h2 className="text-lg font-semibold text-gray-800 mb-4">Try our more Popular Calculators</h2>
           <div className="space-y-2">

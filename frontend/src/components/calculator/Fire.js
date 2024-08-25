@@ -40,13 +40,13 @@ const Fire = () => {
     }, [monthlyExpense, currentAge, retirementAge, inflationRate]);
 
     return (
-        <div style={{ marginTop: "60px" }} className="bg-gray-50 p-2">
+        <div style={{ marginTop: "100px" }} className="bg-gray-50 p-2">
             <div className="max-w-6xl mx-auto bg-white shadow-lg rounded-lg p-8">
                 <div className="mb-6">
                     <h1 className="text-2xl font-semibold text-blue-600">FIRE Calculator</h1>
                     <p className="text-gray-600">Financial Independence Retire Early Calculator</p>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {/* Input Fields */}
                     <div>
                         <h2 className="text-lg font-semibold text-gray-800 mb-4">Input fields:</h2>
@@ -97,11 +97,11 @@ const Fire = () => {
                         </div>
                     </div>
                     {/* Output Fields */}
-                    <div>
+                    <div className="output-fields -mt-28 md:mt-0">
                         <h2 className="text-lg font-semibold text-gray-800 mb-4">Output:</h2>
                         {result && (
-                            <div className="space-y-4">
-                                <div className="grid grid-cols-2 gap-4">
+                            <div className="space-y-2">
+                                <div className="grid grid-cols-1 gap-2" style={{ "row-gap": "0.6rem" }}>
                                     <div className="p-4 border border-gray-300 rounded-lg">
                                         <p className="text-gray-600">Expense Today</p>
                                         <p className="text-blue-600 font-semibold text-xl">&#163;{result.expenseToday}</p>
@@ -110,8 +110,6 @@ const Fire = () => {
                                         <p className="text-gray-600 flex items-center">Expense at {retirementAge} <FontAwesomeIcon icon={faInfoCircle} className="text-gray-400 ml-2" /></p>
                                         <p className="text-blue-600 font-semibold text-xl">&#163;{result.expenseAtRetirement}</p>
                                     </div>
-                                </div>
-                                <div className="grid grid-cols-2 gap-4" style={{ marginTop: '-134px' }}>
                                     <div className="p-4 border border-gray-300 rounded-lg">
                                         <p className="text-gray-600 flex items-center">Lean FIRE <FontAwesomeIcon icon={faInfoCircle} className="text-gray-400 ml-2" /></p>
                                         <p className="text-blue-600 font-semibold text-xl">&#163;{result.leanFIRE}</p>
@@ -129,7 +127,7 @@ const Fire = () => {
                         )}
                     </div>
                 </div>
-                <div className="mt-8 p-4 border border-gray-300 rounded-lg flex flex-col md:flex-row justify-between items-center">
+                <div className="mt-8 p-4 border border-gray-300 rounded-lg flex flex-col md:flex-row justify-between items-center" style={{ "marginTop": "-124px" }}>
                     <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4">
                         <div className="flex-shrink-0">
                             <img src={CalculatorHome} alt="Image description" className="w-24 h-24 object-cover rounded-full md:w-32 md:h-32" />
@@ -138,7 +136,7 @@ const Fire = () => {
                             Now that you know your FIRE number, Lets achieve it !!
                         </p>
                     </div>
-                    <button className="mt-4 md:mt-0 text-white font-semibold px-4 py-2 rounded-lg finwise-bg">
+                    <button className="mt-4 md:mt-0 text-white font-semibold px-4 py-2 rounded-lg bg-blue-500">
                         Get started
                     </button>
                 </div>
@@ -147,7 +145,7 @@ const Fire = () => {
                     <h2 className="text-lg font-semibold text-gray-800 mb-4">Try our more Popular Calculators</h2>
                     <div className="space-y-2">
                         <Link to="/calculator/fixed-depo" className="flex justify-between items-center p-4 border border-gray-300 rounded-lg hover:bg-gray-100">
-                            <p className="font-semibold">FD Calculator</p>
+                            <p className="text-gray-800">FD Calculator</p>
                             <FontAwesomeIcon icon={faChevronRight} className="text-gray-500" />
                         </Link>
                         <Link to="/calculator/goal-sip" className="flex justify-between items-center p-4 border border-gray-300 rounded-lg hover:bg-gray-100">
