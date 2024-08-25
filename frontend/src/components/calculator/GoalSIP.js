@@ -75,7 +75,7 @@ const GoalSIP = () => {
   }, [goalAmount, annualReturn, investmentDuration]);
 
   return (
-    <div style={{ marginTop: "60px" }} className="bg-gray-50 p-2">
+    <div style={{ marginTop: "100px" }} className="bg-gray-50 p-2">
       <div className="max-w-6xl mx-auto bg-white shadow-lg rounded-lg p-8">
         <div className="mb-6">
           <h1 className="text-2xl font-semibold text-blue-600">Goal SIP Calculator</h1>
@@ -122,9 +122,9 @@ const GoalSIP = () => {
             </div>
           </div>
           {/* Output Fields */}
-          <div>
+          <div className="output-fields -mt-28 md:mt-0">
             <h2 className="text-lg font-semibold text-gray-800 mb-4">Output:</h2>
-            <div className="space-y-4">
+            <div className="space-y-2">
               <div className="p-4 border border-gray-300 rounded-lg">
                 <p className="text-gray-600">Monthly SIP Amount Required</p>
                 <p className="text-blue-600 font-semibold text-xl">&#163;{result.monthlySIP}</p>
@@ -140,7 +140,7 @@ const GoalSIP = () => {
             </div>
           </div>
         </div>
-        <div className="mt-8">
+        <div className="mt-8" style={{ marginTop: "-100px" }}>
           <h2 className="text-lg font-semibold text-gray-800 mb-4">Investment Growth Over Time</h2>
           <div className="p-4 border border-gray-300 rounded-lg">
             <Line
@@ -158,13 +158,32 @@ const GoalSIP = () => {
                       display: true,
                       text: 'Amount Invested (£)',
                     },
+                    ticks: {
+                      callback: function (value) {
+                        if (value >= 1000000) {
+                          return '£' + (value / 1000000).toFixed(1) + 'M'; // For millions
+                        } else if (value >= 1000) {
+                          return '£' + (value / 1000).toFixed(1) + 'K'; // For thousands
+                        } else {
+                          return '£' + value; // For values below 1000
+                        }
+                      },
+                    },
+
                   },
                 },
                 plugins: {
                   tooltip: {
                     callbacks: {
                       label: function (tooltipItem) {
-                        return `Year ${tooltipItem.label}: £${tooltipItem.formattedValue}`;
+                        // Format tooltip label
+                        if (tooltipItem.raw >= 1000000) {
+                          return `${tooltipItem.label} year${tooltipItem.label > 1 ? 's' : ''}: £${(tooltipItem.raw / 1000000).toFixed(1)}M`;
+                        } else if (tooltipItem.raw >= 1000) {
+                          return `${tooltipItem.label} year${tooltipItem.label > 1 ? 's' : ''}: £${(tooltipItem.raw / 1000).toFixed(1)}K`;
+                        } else {
+                          return `${tooltipItem.label} year${tooltipItem.label > 1 ? 's' : ''}: £${tooltipItem.raw}`;
+                        }
                       },
                     },
                   },
@@ -194,7 +213,7 @@ const GoalSIP = () => {
               <FontAwesomeIcon icon={faChevronRight} className="text-gray-500" />
             </Link>
             <Link to="/calculator/goal-sip" className="flex justify-between items-center p-4 border border-gray-300 rounded-lg hover:bg-gray-100">
-              <p  className="text-blue-600">Goal SIP Calculator</p>
+              <p className="text-blue-600">Goal SIP Calculator</p>
               <FontAwesomeIcon icon={faChevronRight} className="text-gray-500" />
             </Link>
             <Link to="/calculator/mutual-funds" className="flex justify-between items-center p-4 border border-gray-300 rounded-lg hover:bg-gray-100">
