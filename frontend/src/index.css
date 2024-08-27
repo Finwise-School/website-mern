@@ -204,5 +204,18 @@ strong {
   font-weight: 500;
 }
 
+.finwise-green{
+  color: #3CB371;
+}
 
+.finwise-green-bg{
+  background-color: #3CB371;
+}
 
+.finwise-blue{
+  color: #223876;
+}
+
+.finwise-blue-bg{
+  background-color: #223876;
+}
