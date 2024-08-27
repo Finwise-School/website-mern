@@ -136,7 +136,7 @@ const FixedDepo = () => {
           </div>
           {/* Output Fields */}
           <div className="output-fields -mt-28 md:mt-0">
-            <h2 className="text-lg font-semibold text-gray-800 mb-4">Output:</h2>
+            <h2 className="text-lg font-semibold text-gray-800 mb-4">Results:</h2>
             {result && (
               <div className="space-y-2">
                 <div className="grid grid-cols-1 gap-2" style={{ "row-gap": "0.6rem" }}>
