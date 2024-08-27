@@ -20,6 +20,7 @@ import MutualFunds from "./components/calculator/MutualFunds";
 import FixedDepo from "./components/calculator/FixedDepo";
 import Tax from "./components/calculator/Tax";
 import EMICalculator from "./components/calculator/EMI";
+import CAGRCalculator from "./components/calculator/CAGR";
 
 
 const ProtectedRoute = ({ element, ...rest }) => {
@@ -48,6 +49,7 @@ const App = () => {
             <Route path="/calculator/fixed-deposit" element={<FixedDepo />} />
             <Route path="/calculator/tax" element={<Tax />} />
             <Route path="/calculator/emi" element={<EMICalculator />} />
+            <Route path="/calculator/cagr" element={<CAGRCalculator />} />
             <Route
               path="/profile"
               element={<ProtectedRoute element={<Profile />} />}
