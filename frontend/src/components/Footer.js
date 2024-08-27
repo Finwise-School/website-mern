@@ -38,7 +38,7 @@ const Footer = () => {
               </a>
             </li>
           </ul>
-          <p className="text-sm text-gray-600">
+          <p className="text-sm finwise-blue">
             &copy; <span className="year">2024</span> by Finwise School. All
             rights reserved.
           </p>

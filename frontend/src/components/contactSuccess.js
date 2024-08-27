@@ -13,7 +13,7 @@ const SuccessModal = ({ isOpen, onClose }) => {
           <FontAwesomeIcon icon={faCheckCircle} className="text-green-500 text-4xl" />
         </div>
         <h3 className="text-lg font-semibold text-center text-gray-800 mb-4">Sent Successfully!</h3>
-        <p className="text-gray-600 text-center mb-4">We will get into touch soon.</p>
+        <p className="finwise-blue text-center mb-4">We will get into touch soon.</p>
         <div className="flex justify-center">
           <button 
             onClick={onClose}

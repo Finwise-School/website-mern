@@ -108,7 +108,7 @@ const EarlyAccessForm = () => {
           <div className="text-center">
             <img src={startImg} alt="Get Started" className="w-full h-64 object-cover mb-6" />
             <h1 className="text-3xl font-bold text-gray-800 mb-4">Get Early Access</h1>
-            <p className="text-gray-600 mb-6">
+            <p className="finwise-blue mb-6">
               Join our exclusive program and be the first to experience the future of finance.
             </p>
             <button
@@ -219,7 +219,7 @@ const EarlyAccessForm = () => {
           <div className="text-center">
             <img src={readyImg} alt="Ready to Join" className="w-full h-64 object-cover mb-6" />
             <h2 className="text-2xl font-semibold text-gray-800 mb-4">Ready to join?</h2>
-            <p className="text-gray-600 mb-6">
+            <p className="finwise-blue mb-6">
               Click below to submit your information and join our early access program.
             </p>
             <button
@@ -235,7 +235,7 @@ const EarlyAccessForm = () => {
           <div className="text-center">
             <img src={successImg} alt="Success" className="w-full h-64 object-cover mb-6" />
             <h2 className="text-2xl font-semibold text-gray-800 mb-4">Success!</h2>
-            <p className="text-gray-600 mb-6">
+            <p className="finwise-blue mb-6">
               Your information has been submitted successfully. We’ll be in touch soon!
             </p>
           </div>

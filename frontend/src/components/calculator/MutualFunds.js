@@ -57,8 +57,8 @@ const MutualFunds = () => {
         <div style={{ marginTop: "100px" }} className="bg-gray-50 p-2">
             <div className="max-w-6xl mx-auto bg-white shadow-lg rounded-lg p-8">
                 <div className="mb-6">
-                    <h1 className="text-2xl font-semibold text-blue-600">Mutual Funds Calculator</h1>
-                    <p className="text-gray-600">Calculate your mutual funds investment returns</p>
+                    <h1 className="text-2xl font-semibold finwise-green">Mutual Funds Calculator</h1>
+                    <p className="finwise-blue">Calculate your mutual funds investment returns</p>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     {/* Input Fields */}
@@ -71,7 +71,7 @@ const MutualFunds = () => {
                                     id="investment-method"
                                     value={investmentMethod}
                                     onChange={(e) => setInvestmentMethod(e.target.value)}
-                                    className="bg-blue-100 text-gray-800 font-semibold text-right p-2 rounded-lg w-24"
+                                    className="bg-green-100 text-gray-800 font-semibold text-right p-2 rounded-lg w-24"
                                 >
                                     <option value="sip">SIP</option>
                                     <option value="lumpSum">Lump Sum</option>
@@ -87,7 +87,7 @@ const MutualFunds = () => {
                                             id="monthly-investment"
                                             value={monthlyInvestment}
                                             onChange={(e) => setMonthlyInvestment(e.target.value)}
-                                            className="bg-blue-100 text-gray-800 font-semibold text-right p-2 rounded-lg w-24"
+                                            className="bg-green-100 text-gray-800 font-semibold text-right p-2 rounded-lg w-24"
                                         />
                                     </div>
                                 </div>
@@ -102,7 +102,7 @@ const MutualFunds = () => {
                                             id="lump-sum-investment"
                                             value={lumpSumInvestment}
                                             onChange={(e) => setLumpSumInvestment(e.target.value)}
-                                            className="bg-blue-100 text-gray-800 font-semibold text-right p-2 rounded-lg w-24"
+                                            className="bg-green-100 text-gray-800 font-semibold text-right p-2 rounded-lg w-24"
                                         />
                                     </div>
                                 </div>
@@ -114,7 +114,7 @@ const MutualFunds = () => {
                                     id="annual-returns"
                                     value={annualReturns}
                                     onChange={(e) => setAnnualReturns(e.target.value)}
-                                    className="bg-blue-100 text-gray-800 font-semibold text-right p-2 rounded-lg w-24"
+                                    className="bg-green-100 text-gray-800 font-semibold text-right p-2 rounded-lg w-24"
                                 />
                             </div>
                             <div className="flex items-center justify-between p-4 border border-gray-300 rounded-lg">
@@ -124,7 +124,7 @@ const MutualFunds = () => {
                                     id="time-period"
                                     value={timePeriod}
                                     onChange={(e) => setTimePeriod(e.target.value)}
-                                    className="bg-blue-100 text-gray-800 font-semibold text-right p-2 rounded-lg w-24"
+                                    className="bg-green-100 text-gray-800 font-semibold text-right p-2 rounded-lg w-24"
                                 />
                             </div>
                         </div>
@@ -136,16 +136,16 @@ const MutualFunds = () => {
                             <div className="space-y-4">
                                 <div  className="grid grid-cols-1 gap-2" style={{ "row-gap": "0.6rem" }}>
                                     <div className="p-4 border border-gray-300 rounded-lg">
-                                        <p className="text-gray-600">Invested Amount</p>
-                                        <p className="text-blue-600 font-semibold text-xl">&#163;{result.investedAmount}</p>
+                                        <p className="finwise-blue">Invested Amount</p>
+                                        <p className="finwise-green font-semibold text-xl">&#163;{result.investedAmount}</p>
                                     </div>
                                     <div className="p-4 border border-gray-300 rounded-lg">
-                                        <p className="text-gray-600">Returns Generated</p>
-                                        <p className="text-blue-600 font-semibold text-xl">&#163;{result.returnsGenerated}</p>
+                                        <p className="finwise-blue">Returns Generated</p>
+                                        <p className="finwise-green font-semibold text-xl">&#163;{result.returnsGenerated}</p>
                                     </div>
                                 <div className="p-4 border border-gray-300 rounded-lg">
-                                    <p className="text-gray-600">Total Amount</p>
-                                    <p className="text-blue-600 font-semibold text-xl">&#163;{result.totalAmount}</p>
+                                    <p className="finwise-blue">Total Amount</p>
+                                    <p className="finwise-green font-semibold text-xl">&#163;{result.totalAmount}</p>
                                 </div>
                                 </div>
                             </div>
@@ -157,11 +157,11 @@ const MutualFunds = () => {
                         <div className="flex-shrink-0">
                             <img src={CalculatorHome} alt="Image description" className="w-24 h-24 object-cover rounded-full md:w-32 md:h-32" />
                         </div>
-                        <p className="text-gray-600 text-center md:text-left">
+                        <p className="finwise-blue text-center md:text-left">
                             Now that you know your mutual funds returns, Let’s maximize your investments!
                         </p>
                     </div>
-                    <button className="mt-4 md:mt-0 text-white font-semibold px-4 py-2 rounded-lg bg-blue-500">
+                    <button className="mt-4 md:mt-0 text-white font-semibold px-4 py-2 rounded-lg finwise-green-bg">
             Get started
           </button>
                 </div>
@@ -178,7 +178,7 @@ const MutualFunds = () => {
                     <FontAwesomeIcon icon={faChevronRight} className="text-gray-500" />
                 </Link>
                 <Link to="/calculator/mutual-funds" className="flex justify-between items-center p-4 border border-gray-300 rounded-lg hover:bg-gray-100">
-                    <p className="text-blue-600">Mutual Funds Calculator</p>
+                    <p className="finwise-green">Mutual Funds Calculator</p>
                     <FontAwesomeIcon icon={faChevronRight} className="text-gray-500" />
                 </Link>
                 <Link to="/calculator/fire" className="flex justify-between items-center p-4 border border-gray-300 rounded-lg hover:bg-gray-100">

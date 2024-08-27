@@ -77,8 +77,8 @@ const FixedDepo = () => {
     <div style={{ marginTop: "100px" }} className="bg-gray-50 p-2">
       <div className="max-w-6xl mx-auto bg-white shadow-lg rounded-lg p-8">
         <div className="mb-6">
-          <h1 className="text-2xl font-semibold finwise-green">FD Calculator</h1>
-          <p className="text-gray-600">Fixed Deposit Calculator</p>
+          <h1 className="text-2xl font-semibold finwise-green">Fixed Deposit Calculator</h1>
+          <p className="finwise-blue">Fixed Deposit Calculator</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Input Fields */}
@@ -94,7 +94,7 @@ const FixedDepo = () => {
                     id="amount-invested"
                     value={amountInvested}
                     onChange={(e) => setAmountInvested(e.target.value)}
-                    className="bg-blue-100 text-gray-800 font-semibold text-right p-2 rounded-lg w-24"
+                    className="bg-green-100 text-gray-800 font-semibold text-right p-2 rounded-lg w-24"
                   />
                 </div>
               </div>
@@ -105,7 +105,7 @@ const FixedDepo = () => {
                   id="annual-interest-rate"
                   value={annualInterestRate}
                   onChange={(e) => setAnnualInterestRate(e.target.value)}
-                  className="bg-blue-100 text-gray-800 font-semibold text-right p-2 rounded-lg w-24"
+                  className="bg-green-100 text-gray-800 font-semibold text-right p-2 rounded-lg w-24"
                 />
               </div>
               <div className="flex items-center justify-between p-4 border border-gray-300 rounded-lg">
@@ -114,7 +114,7 @@ const FixedDepo = () => {
                   id="fd-interest-structure"
                   value={fdInterestStructure}
                   onChange={(e) => setFdInterestStructure(e.target.value)}
-                  className="bg-blue-100 text-gray-800 font-semibold text-right p-2 rounded-lg w-24"
+                  className="bg-green-100 text-gray-800 font-semibold text-right p-2 rounded-lg w-24"
                 >
                   <option value="monthly">Monthly</option>
                   <option value="quarterly">Quarterly</option>
@@ -129,7 +129,7 @@ const FixedDepo = () => {
                   id="time-period"
                   value={timePeriod}
                   onChange={(e) => setTimePeriod(e.target.value)}
-                  className="bg-blue-100 text-gray-800 font-semibold text-right p-2 rounded-lg w-24"
+                  className="bg-green-100 text-gray-800 font-semibold text-right p-2 rounded-lg w-24"
                 />
               </div>
             </div>
@@ -141,16 +141,16 @@ const FixedDepo = () => {
               <div className="space-y-2">
                 <div className="grid grid-cols-1 gap-2" style={{ "row-gap": "0.6rem" }}>
                   <div className="p-4 border border-gray-300 rounded-lg">
-                    <p className="text-gray-600">Total Investment</p>
-                    <p className="text-blue-600 font-semibold text-xl">&#163;{result.totalInvestment}</p>
+                    <p className="finwise-blue">Total Investment</p>
+                    <p className="finwise-green font-semibold text-xl">&#163;{result.totalInvestment}</p>
                   </div>
                   <div className="p-4 border border-gray-300 rounded-lg">
-                    <p className="text-gray-600 flex items-center">Total Interest Earned <FontAwesomeIcon icon={faInfoCircle} className="text-gray-400 ml-2" /></p>
-                    <p className="text-blue-600 font-semibold text-xl">&#163;{result.totalInterest}</p>
+                    <p className="finwise-blue flex items-center">Total Interest Earned <FontAwesomeIcon icon={faInfoCircle} className="text-gray-400 ml-2" /></p>
+                    <p className="finwise-green font-semibold text-xl">&#163;{result.totalInterest}</p>
                   </div>
                   <div className="p-4 border border-gray-300 rounded-lg" >
-                    <p className="text-gray-600 flex items-center">Maturity Value <FontAwesomeIcon icon={faInfoCircle} className="text-gray-400 ml-2" /></p>
-                    <p className="text-blue-600 font-semibold text-xl">&#163;{result.maturityValue}</p>
+                    <p className="finwise-blue flex items-center">Maturity Value <FontAwesomeIcon icon={faInfoCircle} className="text-gray-400 ml-2" /></p>
+                    <p className="finwise-green font-semibold text-xl">&#163;{result.maturityValue}</p>
                   </div>
                 </div>
               </div>
@@ -159,7 +159,7 @@ const FixedDepo = () => {
         </div>
 
         {/* Line Graph */}
-        <div className="mt-8" style={{ marginTop: "-100px" }}>
+        <div className="mt-8">
           <h2 className="text-lg font-semibold text-gray-800 mb-4">Investment Over Time</h2>
           <div className="bg-white p-4 border border-gray-300 rounded-lg">
             <Line
@@ -230,11 +230,11 @@ const FixedDepo = () => {
             <div className="flex-shrink-0">
               <img src={CalculatorHome} alt="Image description" className="w-24 h-24 object-cover rounded-full md:w-32 md:h-32" />
             </div>
-            <p className="text-gray-600 text-center md:text-left">
+            <p className="finwise-blue text-center md:text-left">
               Now that you know your FIRE number, Lets achieve it !!
             </p>
           </div>
-          <button className="mt-4 md:mt-0 text-white font-semibold px-4 py-2 rounded-lg bg-blue-500">
+          <button className="mt-4 md:mt-0 text-white font-semibold px-4 py-2 rounded-lg finwise-green-bg-bg">
             Get started
           </button>
         </div>
@@ -243,7 +243,7 @@ const FixedDepo = () => {
           <h2 className="text-lg font-semibold text-gray-800 mb-4">Try our more Popular Calculators</h2>
           <div className="space-y-2">
             <Link to="/calculator/fixed-depo" className="flex justify-between items-center p-4 border border-gray-300 rounded-lg hover:bg-gray-100">
-              <p className="text-blue-600">FD Calculator</p>
+              <p className="finwise-green">FD Calculator</p>
               <FontAwesomeIcon icon={faChevronRight} className="text-gray-500" />
             </Link>
             <Link to="/calculator/goal-sip" className="flex justify-between items-center p-4 border border-gray-300 rounded-lg hover:bg-gray-100">
