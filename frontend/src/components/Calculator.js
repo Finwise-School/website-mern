@@ -28,7 +28,7 @@ const FinancialPlanningTools = () => {
           </p>
         </div>
       </div>
-      <hr className="mt-10" />
+      <hr className="mt-0 h-1 my-8 bg-gray-100 border-0 dark:bg-gray-700" />
 
       {/* Tool Cards Section */}
       <div className="grid-for-calci grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-4 py-5">
@@ -45,8 +45,8 @@ const FinancialPlanningTools = () => {
         <ToolCard title="CAGR" image={CAGRImg} path="/calculator/cagr" />
         <ToolCard title="Rental Yield" image={RentalImg} path="/calculator/rental" />
       </div>
+      <hr className="mt-0 h-1 my-8 bg-gray-100 border-0 dark:bg-gray-700" />
 
-      {/* Replacing Footer Section with EarlyAccessTemplate */}
       <EarlyAccessTemplate />
     </div>
   );
@@ -55,7 +55,7 @@ const FinancialPlanningTools = () => {
 // ToolCard Component with Links
 const ToolCard = ({ title, image, path }) => {
   return (
-    <Link to={path} className="bg-black text-white font-bold p-4 flex flex-col items-center rounded-lg mb-2">
+    <Link to={path} className="bg-black text-white font-bold p-4 flex flex-col items-center h-40 rounded-lg mb-2">
       <img src={image} alt={`${title} Icon`} className="mb-2 h-20 w-20 object-contain" />
       <p className="mt-2">{title}</p>
     </Link>
