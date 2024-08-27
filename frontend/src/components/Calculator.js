@@ -122,7 +122,7 @@ const Calculator = () => {
         {/* Calculator 4: FIRE Calculator */}
         <div
           className="card bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer"
-          onClick={() => handleNavigation("fire")}
+          onClick={() => handleNavigation("emi")}
         >
           <img
             src={FireImg}
@@ -131,14 +131,14 @@ const Calculator = () => {
           />
           <div className="p-4 md:p-6">
             <h2 className="text-lg md:text-xl font-semibold text-gray-800 mb-2 md:mb-3">
-              FIRE Calculator
+              EMI Calculator
             </h2>
             <p className="text-gray-600 text-sm md:text-base">
-              Plan your Financial Independence Retire Early goals.
+              Calculate your EMI
             </p>
             <button
               className="mt-3 md:mt-4 px-4 py-2 bg-blue-600 text-white rounded"
-              onClick={() => handleNavigation("fire")}
+              onClick={() => handleNavigation("emi")}
             >
               Try Calculator
             </button>

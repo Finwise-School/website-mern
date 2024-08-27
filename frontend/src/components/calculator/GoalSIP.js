@@ -123,7 +123,7 @@ const GoalSIP = () => {
           </div>
           {/* Output Fields */}
           <div className="output-fields -mt-28 md:mt-0">
-            <h2 className="text-lg font-semibold text-gray-800 mb-4">Output:</h2>
+            <h2 className="text-lg font-semibold text-gray-800 mb-4">Results:</h2>
             <div className="space-y-2">
               <div className="p-4 border border-gray-300 rounded-lg">
                 <p className="text-gray-600">Monthly SIP Amount Required</p>

@@ -19,6 +19,7 @@ import GoalSIP from "./components/calculator/GoalSIP";
 import MutualFunds from "./components/calculator/MutualFunds";
 import FixedDepo from "./components/calculator/FixedDepo";
 import Tax from "./components/calculator/Tax";
+import EMICalculator from "./components/calculator/EMI";
 
 
 const ProtectedRoute = ({ element, ...rest }) => {
@@ -46,6 +47,7 @@ const App = () => {
             <Route path="/calculator/mutual-funds" element={<MutualFunds />} />
             <Route path="/calculator/fixed-depo" element={<FixedDepo />} />
             <Route path="/calculator/tax" element={<Tax />} />
+            <Route path="/calculator/emi" element={<EMICalculator />} />
             <Route
               path="/profile"
               element={<ProtectedRoute element={<Profile />} />}
