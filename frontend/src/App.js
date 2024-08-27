@@ -45,7 +45,7 @@ const App = () => {
             <Route path="/calculator/fire" element={<Fire />} />
             <Route path="/calculator/goal-sip" element={<GoalSIP />} />
             <Route path="/calculator/mutual-funds" element={<MutualFunds />} />
-            <Route path="/calculator/fixed-depo" element={<FixedDepo />} />
+            <Route path="/calculator/fixed-deposit" element={<FixedDepo />} />
             <Route path="/calculator/tax" element={<Tax />} />
             <Route path="/calculator/emi" element={<EMICalculator />} />
             <Route
