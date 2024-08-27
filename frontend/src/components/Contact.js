@@ -73,14 +73,14 @@ const Contact = () => {
     <div style={{ marginTop: "60px" }} className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
       <div className="flex flex-col md:flex-row">
         <div className="md:w-1/2 md:px-8 mb-8 md:mb-0">
-          <h1 className="text-4xl font-bold text-blue-600 mb-4">Need Help ?</h1>
+          <h1 className="text-4xl font-bold finwise-green mb-4">Need Help ?</h1>
           <p className="text-gray-700 mb-8">
             Connect with us for personalized financial guidance. Our experts are here to help you achieve your financial goals and secure your future.
           </p>
           <img src={contactus} alt="Support Illustration" className="w-full h-auto" />
         </div>
         <div className="md:w-1/2 md:px-8">
-          <h2 className="text-4xl font-bold text-blue-600 mb-4">Get in touch!</h2>
+          <h2 className="text-4xl font-bold finwise-green mb-4">Get in touch!</h2>
           <form onSubmit={handleSubmit} className="space-y-4" noValidate>
             <div>
               <input

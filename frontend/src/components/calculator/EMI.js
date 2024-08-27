@@ -78,8 +78,8 @@ const EMICalculator = () => {
         <div style={{ marginTop: "100px" }} className="bg-gray-50 p-2">
             <div className="max-w-6xl mx-auto bg-white shadow-lg rounded-lg p-8">
                 <div className="mb-6">
-                    <h1 className="text-2xl font-semibold text-blue-600">EMI Calculator</h1>
-                    <p className="text-gray-600">Calculate your dynamic EMI based on frequency</p>
+                    <h1 className="text-2xl font-semibold finwise-green">EMI Calculator</h1>
+                    <p className="finwise-blue">Calculate your dynamic EMI based on frequency</p>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     {/* Input Fields */}
@@ -96,7 +96,7 @@ const EMICalculator = () => {
                                         id="loanAmount"
                                         value={loanAmount}
                                         onChange={(e) => setLoanAmount(e.target.value)}
-                                        className="bg-blue-100 text-gray-800 font-semibold text-right p-2 rounded-lg w-24"
+                                        className="bg-green-100 text-gray-800 font-semibold text-right p-2 rounded-lg w-24"
                                     />
                                 </div>
                             </div>
@@ -108,7 +108,7 @@ const EMICalculator = () => {
                                     id="interestRate"
                                     value={interestRate}
                                     onChange={(e) => setInterestRate(e.target.value)}
-                                    className="bg-blue-100 text-gray-800 font-semibold text-right p-2 rounded-lg w-24"
+                                    className="bg-green-100 text-gray-800 font-semibold text-right p-2 rounded-lg w-24"
                                 />
                             </div>
                             {/* Term Length */}
@@ -119,7 +119,7 @@ const EMICalculator = () => {
                                     id="termLength"
                                     value={termLength}
                                     onChange={(e) => setTermLength(e.target.value)}
-                                    className="bg-blue-100 text-gray-800 font-semibold text-right p-2 rounded-lg w-24"
+                                    className="bg-green-100 text-gray-800 font-semibold text-right p-2 rounded-lg w-24"
                                 />
                             </div>
                             {/* First Payment Date */}
@@ -130,7 +130,7 @@ const EMICalculator = () => {
                                     id="firstPaymentDate"
                                     value={firstPaymentDate}
                                     onChange={(e) => setFirstPaymentDate(e.target.value)}
-                                    className="bg-blue-100 text-gray-800 font-semibold text-right p-2 rounded-lg w-40"
+                                    className="bg-green-100 text-gray-800 font-semibold text-right p-2 rounded-lg w-40"
                                 />
                             </div>
                             {/* Compound Period */}
@@ -140,7 +140,7 @@ const EMICalculator = () => {
                                     id="compoundPeriod"
                                     value={compoundPeriod}
                                     onChange={(e) => setCompoundPeriod(e.target.value)}
-                                    className="bg-blue-100 text-gray-800 font-semibold p-2 rounded-lg w-40"
+                                    className="bg-green-100 text-gray-800 font-semibold p-2 rounded-lg w-40"
                                 >
                                     <option value="Monthly">Monthly</option>
                                     <option value="Semi-Annually">Semi-Annually</option>
@@ -153,7 +153,7 @@ const EMICalculator = () => {
                                     id="paymentFrequency"
                                     value={paymentFrequency}
                                     onChange={(e) => setPaymentFrequency(e.target.value)}
-                                    className="bg-blue-100 text-gray-800 font-semibold p-2 rounded-lg w-40"
+                                    className="bg-green-100 text-gray-800 font-semibold p-2 rounded-lg w-40"
                                 >
                                     <option value="Monthly">Monthly</option>
                                     <option value="Semi-Monthly">Semi-Monthly</option>
@@ -169,8 +169,8 @@ const EMICalculator = () => {
                         <h2 className="text-lg font-semibold text-gray-800 mb-4">Results:</h2>
                         <div className="space-y-2">
                             <div className="p-4 border border-gray-300 rounded-lg">
-                                <p className="text-gray-600">{paymentFrequency} Payment</p>
-                                <p className="text-blue-600 font-semibold text-xl">&#163;{result.payment}</p>
+                                <p className="finwise-blue">{paymentFrequency} Payment</p>
+                                <p className="finwise-green font-semibold text-xl">&#163;{result.payment}</p>
                             </div>
                         </div>
                     </div>
@@ -180,11 +180,11 @@ const EMICalculator = () => {
                         <div className="flex-shrink-0">
                             <img src={CalculatorHome} alt="Image description" className="w-24 h-24 object-cover rounded-full md:w-32 md:h-32" />
                         </div>
-                        <p className="text-gray-600 text-center md:text-left">
+                        <p className="finwise-blue text-center md:text-left">
                             Now that you know your FIRE number, Lets achieve it !!
                         </p>
                     </div>
-                    <button className="mt-4 md:mt-0 text-white font-semibold px-4 py-2 rounded-lg bg-blue-500">
+                    <button className="mt-4 md:mt-0 text-white font-semibold px-4 py-2 rounded-lg finwise-green-bg">
                         Get started
                     </button>
                 </div>
@@ -205,7 +205,7 @@ const EMICalculator = () => {
                             <FontAwesomeIcon icon={faChevronRight} className="text-gray-500" />
                         </Link>
                         <Link to="/calculator/fire" className="flex justify-between items-center p-4 border border-gray-300 rounded-lg hover:bg-gray-100">
-                            <p className="text-blue-600">FIRE Calculator</p>
+                            <p className="finwise-green">FIRE Calculator</p>
                             <FontAwesomeIcon icon={faChevronRight} className="text-gray-500" />
                         </Link>
                     </div>

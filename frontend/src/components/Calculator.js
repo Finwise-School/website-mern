@@ -12,6 +12,7 @@ import LoanImg from "../assets/images/calci_images/loan.png";
 import EMIImg from "../assets/images/calci_images/emi.png";
 import CAGRImg from "../assets/images/calci_images/cagr.png";
 import RentalImg from "../assets/images/calci_images/rental.png";
+import EarlyAccessTemplate from './EarlyAccessTemplate'; 
 
 const FinancialPlanningTools = () => {
   return (
@@ -22,7 +23,7 @@ const FinancialPlanningTools = () => {
           className="w-full px-4 py-10 lg:py-20 bg-gradient-to-r from-gray-500 via-gray-300 to-white text-center"
         >
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold text-black">Financial Planning Tools</h1>
-          <p className="text-gray-600 mt-4 text-sm sm:text-base lg:text-lg">
+          <p className="finwise-blue mt-4 text-sm sm:text-base lg:text-lg">
             Financial tools to help you manage finances ranging from Budget calculator to Investment.
           </p>
         </div>
@@ -30,7 +31,7 @@ const FinancialPlanningTools = () => {
       <hr className="mt-10" />
 
       {/* Tool Cards Section */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-4 py-5">
+      <div className="grid-for-calci grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-4 py-5">
         <ToolCard title="Fixed Deposit Calculator" image={FDImg} path="/calculator/fixed-deposit" />
         <ToolCard title="SIP Calculator" image={MutualImg} path="/calculator/mutual-funds" />
         <ToolCard title="Goal SIP Calculator" image={GoalImg} path="/calculator/goal-sip" />
@@ -45,19 +46,8 @@ const FinancialPlanningTools = () => {
         <ToolCard title="Rental Yield" image={RentalImg} path="/calculator/rental" />
       </div>
 
-      {/* Footer Section */}
-      <div className="bg-white py-8 mt-6 text-center border-t border-gray-300">
-        <h2 className="text-2xl font-semibold text-blue-700">Start Your Financial Journey Today</h2>
-        <p className="text-gray-600 mt-4 px-4 sm:px-20 text-sm sm:text-base lg:text-lg">
-          Your path to financial freedom is just a click away. Whether you're aiming
-          to optimize your investments, create a solid savings plan, or receive expert financial advice. FinWise is here to
-          guide you every step of the way. Take the first step towards achieving your financial goals—explore our
-          innovative planning tools or connect with our team for personalized support tailored to your needs.
-        </p>
-        <button className="mt-6 px-6 py-2 border border-gray-400 text-black rounded-full hover:bg-gray-100 transition">
-          Request Early Access
-        </button>
-      </div>
+      {/* Replacing Footer Section with EarlyAccessTemplate */}
+      <EarlyAccessTemplate />
     </div>
   );
 };

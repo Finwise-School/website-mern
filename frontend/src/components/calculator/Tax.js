@@ -130,8 +130,8 @@ const TaxCalculator = () => {
     <div style={{ marginTop: "60px" }} className="bg-gray-50 p-2">
       <div className="max-w-6xl mx-auto bg-white shadow-lg rounded-lg p-8">
         <div className="mb-6">
-          <h1 className="text-2xl font-semibold text-blue-600">Tax Calculator</h1>
-          <p className="text-gray-600">Estimate your tax and take-home pay</p>
+          <h1 className="text-2xl font-semibold finwise-green">Tax Calculator</h1>
+          <p className="finwise-blue">Estimate your tax and take-home pay</p>
         </div>
         
         {/* Input Fields */}
@@ -146,7 +146,7 @@ const TaxCalculator = () => {
                   id="grossSalary"
                   value={grossSalary}
                   onChange={(e) => setGrossSalary(e.target.value)}
-                  className="bg-blue-100 text-gray-800 font-semibold text-right p-2 rounded-lg w-24"
+                  className="bg-green-100 text-gray-800 font-semibold text-right p-2 rounded-lg w-24"
                 />
               </div>
 
@@ -156,7 +156,7 @@ const TaxCalculator = () => {
                   id="period"
                   value={period}
                   onChange={(e) => setPeriod(e.target.value)}
-                  className="bg-blue-100 text-gray-800 font-semibold p-2 rounded-lg w-36"
+                  className="bg-green-100 text-gray-800 font-semibold p-2 rounded-lg w-36"
                 >
                   <option>Per Annum</option>
                   <option>Per Month</option>
@@ -173,20 +173,20 @@ const TaxCalculator = () => {
             <h2 className="text-lg font-semibold text-gray-800 mb-4">Estimation:</h2>
             <div className="space-y-4">
               <div className="p-4 border border-gray-300 rounded-lg">
-                <p className="text-gray-600">Gross Salary (Yearly)</p>
-                <p className="text-blue-600 font-semibold text-xl">&#163;{result.yearlyIncome}</p>
+                <p className="finwise-blue">Gross Salary (Yearly)</p>
+                <p className="finwise-green font-semibold text-xl">&#163;{result.yearlyIncome}</p>
               </div>
               <div className="p-4 border border-gray-300 rounded-lg">
-                <p className="text-gray-600">Income Tax</p>
-                <p className="text-blue-600 font-semibold text-xl">&#163;{result.incomeTax}</p>
+                <p className="finwise-blue">Income Tax</p>
+                <p className="finwise-green font-semibold text-xl">&#163;{result.incomeTax}</p>
               </div>
               <div className="p-4 border border-gray-300 rounded-lg">
-                <p className="text-gray-600">National Insurance</p>
-                <p className="text-blue-600 font-semibold text-xl">&#163;{result.nationalInsurance}</p>
+                <p className="finwise-blue">National Insurance</p>
+                <p className="finwise-green font-semibold text-xl">&#163;{result.nationalInsurance}</p>
               </div>
               <div className="p-4 border border-gray-300 rounded-lg">
-                <p className="text-gray-600">Take Home Pay</p>
-                <p className="text-blue-600 font-semibold text-xl">&#163;{result.takeHomePay}</p>
+                <p className="finwise-blue">Take Home Pay</p>
+                <p className="finwise-green font-semibold text-xl">&#163;{result.takeHomePay}</p>
               </div>
             </div>
           </div>

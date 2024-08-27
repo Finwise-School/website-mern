@@ -10,7 +10,7 @@ const Profile = () => {
   
               <div className="flex flex-col justify-center items-center gap-4 p-4">
                 <h3 className="text-2xl font-bold">John Doe</h3>
-                <p className="text-gray-600 leading-3 text-xs">@username</p>
+                <p className="finwise-blue leading-3 text-xs">@username</p>
               </div>
 
               <div className="grid grid-rows-2 grid-flow-col gap-4 justify-center text-left">
