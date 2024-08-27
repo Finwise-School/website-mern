@@ -77,7 +77,7 @@ const FixedDepo = () => {
     <div style={{ marginTop: "100px" }} className="bg-gray-50 p-2">
       <div className="max-w-6xl mx-auto bg-white shadow-lg rounded-lg p-8">
         <div className="mb-6">
-          <h1 className="text-2xl font-semibold text-blue-600">FD Calculator</h1>
+          <h1 className="text-2xl font-semibold finwise-green">FD Calculator</h1>
           <p className="text-gray-600">Fixed Deposit Calculator</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
