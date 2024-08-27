@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
 
 /* Additional custom styles from general.css */
 * {
@@ -15,7 +16,7 @@ html {
 }
 
 body {
-  font-family: "Rubik", sans-serif;
+  font-family: "Urbanist", sans-serif;
   line-height: 1;
   font-weight: 400;
   color: #555;
@@ -28,11 +29,12 @@ body {
   padding: 0 3.2rem;
 }
 
-.grid {
+/* commented coz causing conflict in calculator section by abhisheksingh on 27/8/2024*/
+/* .grid {
   display: grid;
   column-gap: 6.4rem;
   row-gap: 9.6rem;
-}
+} */ 
 
 .grid:not(:last-child) {
   margin-bottom: 9.6rem;
