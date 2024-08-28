@@ -21,6 +21,8 @@ import FixedDepo from "./components/calculator/FixedDepo";
 import Tax from "./components/calculator/Tax";
 import EMICalculator from "./components/calculator/EMI";
 import CAGRCalculator from "./components/calculator/CAGR";
+import MortgageCalculator from "./components/calculator/Mortgage";
+import ScrollToTop from "./components/ScrolltoTop";
 
 
 const ProtectedRoute = ({ element, ...rest }) => {
@@ -32,6 +34,7 @@ const App = () => {
   return (
     <AuthProvider>
       <Router>
+      <ScrollToTop />
         <div className="app">
           <Header/>
           <Routes>
@@ -50,6 +53,7 @@ const App = () => {
             <Route path="/calculator/tax" element={<Tax />} />
             <Route path="/calculator/emi" element={<EMICalculator />} />
             <Route path="/calculator/cagr" element={<CAGRCalculator />} />
+            <Route path="/calculator/mortgage" element={<MortgageCalculator />} />
             <Route
               path="/profile"
               element={<ProtectedRoute element={<Profile />} />}

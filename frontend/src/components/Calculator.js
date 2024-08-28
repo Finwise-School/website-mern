@@ -23,7 +23,7 @@ const FinancialPlanningTools = () => {
           className="w-full px-4 py-10 lg:py-20 finwise-gradient text-center"
         >
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold text-black">Financial Planning Tools</h1>
-          <p className="finwise-blue mt-4 text-sm sm:text-base lg:text-lg">
+          <p className="finwise-blue mt-4 txt-sm sm:text-base lg:text-lg">
             Financial tools to help you manage finances ranging from Budget calculator to Investment.
           </p>
         </div>
