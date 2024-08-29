@@ -27,6 +27,12 @@ mongoose.connect(process.env.MONGODB_URI, { // Use the MONGODB_URI from the .env
 // Routes
 app.use('/api', contactRoutes);
 app.use('/api', bookRoutes); // Use the book routes
+<<<<<<< Updated upstream
+=======
+app.use('/api',loginRoutes); // using the signup routes
+app.use('/api',signupRoutes); // using the login routes
+
+>>>>>>> Stashed changes
 
 // Root Route
 app.get('/', (req, res) => {
