@@ -1,247 +1,257 @@
 import React, { useState } from 'react';
-import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'; // Import arrow icons
-import startImg from "../assets/images/book/start.png";
-import nameImg from "../assets/images/book/name.png";
-import emailImg from "../assets/images/book/email.png";
-import phoneImg from "../assets/images/book/phone.png";
-import readyImg from "../assets/images/book/phone.png"; // New image for the ready-to-join page
-import successImg from "../assets/images/book/success.png";
-import bgImg from "../assets/images/book/bg_cover.png";
-import 'react-phone-number-input/style.css'; // Import react-phone-number-input CSS
-import PhoneInput from 'react-phone-number-input';
-import { ToastContainer, toast } from 'react-toastify'; // Import ToastContainer and toast
-import 'react-toastify/dist/ReactToastify.css'; // Import toast CSS
-import { Tooltip } from 'react-tooltip';
+import { FaEnvelope, FaPhone, FaUser } from 'react-icons/fa';
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
+import successImg from "../assets/images/book/success.gif";
 
 const EarlyAccessForm = () => {
-  const [step, setStep] = useState(1);
+  const [started, setStarted] = useState(false);
+  const [formStep, setFormStep] = useState(1);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
   });
+  const [submitted, setSubmitted] = useState(false);
+  const [errors, setErrors] = useState({});
 
-  const nextStep = async () => {
-    if (step === 2) {
-      // Validate name
-      if (!formData.name.trim()) {
-        toast.error('Name is required');
-        return;
-      }
-    }
-    if (step === 3) {
-      // Validate email
-      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailPattern.test(formData.email)) {
-        toast.error('Invalid email address');
-        return;
-      }
-    }
-    if (step === 4) {
-      // Validate phone number
-      if (!formData.phone) {
-        toast.error('Phone number is required');
-        return;
-      }
-    }
-    if (step === 5) {
-      // Submit form data to the backend
-      try {
-        const response = await fetch('http://localhost:5001/api/request-early-access', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(formData),
-        });
-
-        if (response.ok) {
-          setStep(6); // Show success message
-        } else {
-          toast.error('Failed to submit form');
-        }
-      } catch (error) {
-        console.error('Error:', error);
-        toast.error('An error occurred');
-      }
-      return;
-    }
-    setStep((prev) => prev + 1);
-  };
-
-  const prevStep = () => {
-    setStep((prev) => prev - 1);
+  const handleStart = () => {
+    setStarted(true);
   };
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  return (
-    <div
-      className="bg-gray-100 flex items-center justify-center min-h-screen"
-      style={{
-        backgroundImage: `url(${bgImg})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundAttachment: 'fixed',
-      }}
-    >
-      <div
-        className="max-w-lg w-full bg-white rounded-lg shadow-lg overflow-hidden p-8 relative"
-        style={{ width: '500px', height: '520px' }} // Set fixed width and height
-      >
-        {/* Progress Bar */}
-        {step > 1 && step < 6 && (
-          <div id="progressContainer" className="w-full bg-gray-200 rounded-full mb-6">
-            <div
-              id="progressBar"
-              className="progress-bar h-1 bg-blue-600 transition-all duration-300"
-              style={{ width: `${(step - 1) * 25}%` }}
-            />
-          </div>
-        )}
+  const handlePhoneChange = (value) => {
+    setFormData({
+      ...formData,
+      phone: value,
+    });
+  };
 
-        {/* Step Components */}
-        {step === 1 && (
-          <div className="text-center">
-            <img src={startImg} alt="Get Started" className="w-full h-64 object-cover mb-6" />
-            <h1 className="text-3xl font-bold text-gray-800 mb-4">Get Early Access</h1>
-            <p className="finwise-blue mb-6">
-              Join our exclusive program and be the first to experience the future of finance.
-            </p>
-            <button
-              onClick={nextStep}
-              className="bg-blue-600 text-white font-semibold py-2 px-6 rounded-lg hover:bg-blue-700 transition-colors duration-300"
-            >
-              Get Started
-            </button>
-          </div>
-        )}
+  const validateStep = () => {
+    const newErrors = {};
+    if (formStep === 1 && !formData.name) newErrors.name = 'Name is required';
+    if (formStep === 2 && (!formData.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)))
+      newErrors.email = 'Valid email is required';
+    if (formStep === 3 && (!formData.phone || formData.phone.length < 10))
+      newErrors.phone = 'Valid phone number is required';
+    if (formStep === 4 && Object.keys(newErrors).length === 0) {
+      // No specific validation for the final step
+    }
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
-        {step === 2 && (
-          <div className="text-center">
-            <img src={nameImg} alt="Enter Name" className="w-full h-64 object-cover mb-6" />
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">What's your name?</h2>
-            <input
-              type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleInputChange}
-              placeholder="Enter your name"
-              className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-600 mb-4"
-              data-tip="Name is required"
-              data-for="nameTooltip"
-            />
-            <Tooltip id="nameTooltip" place="top" type="error" effect="solid" />
-            <div className="flex justify-between">
-              <button
-                onClick={prevStep}
-                className="flex items-center text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-400 transition-colors duration-300"
-              >
-                <FaArrowLeft className="mr-2" /> Prev
-              </button>
-              <button
-                onClick={nextStep}
-                className="flex items-center bg-blue-600 text-white py-2 px-6 rounded-lg hover:bg-blue-700 transition-colors duration-300"
-              >
-                Next <FaArrowRight className="ml-2" />
-              </button>
-            </div>
-          </div>
-        )}
+  const handleNextStep = () => {
+    if (validateStep()) {
+      setFormStep((prev) => prev + 1);
+    }
+  };
 
-        {step === 3 && (
-          <div className="text-center">
-            <img src={emailImg} alt="Enter Email" className="w-full h-64 object-cover mb-6" />
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">What's your email?</h2>
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleInputChange}
-              placeholder="Enter your email"
-              className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-600 mb-4"
-              data-tip="Invalid email address"
-              data-for="emailTooltip"
-            />
-            <Tooltip id="emailTooltip" place="top" type="error" effect="solid" />
-            <div className="flex justify-between">
-              <button
-                onClick={prevStep}
-                className="flex items-center text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-400 transition-colors duration-300"
-              >
-                <FaArrowLeft className="mr-2" /> Prev
-              </button>
-              <button
-                onClick={nextStep}
-                className="flex items-center bg-blue-600 text-white py-2 px-6 rounded-lg hover:bg-blue-700 transition-colors duration-300"
-              >
-                Next <FaArrowRight className="ml-2" />
-              </button>
-            </div>
-          </div>
-        )}
+  const handlePrevStep = () => {
+    setFormStep((prev) => prev - 1);
+  };
 
-        {step === 4 && (
-          <div className="text-center">
-            <img src={phoneImg} alt="Enter Phone" className="w-full h-64 object-cover mb-6" />
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">What's your phone number?</h2>
-            <PhoneInput
-              defaultCountry="US"
-              value={formData.phone}
-              onChange={(value) => setFormData({ ...formData, phone: value })}
-              placeholder="Enter your phone number"
-              className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-600 mb-4"
-              data-tip="Phone number is required"
-              data-for="phoneTooltip"
-            />
-            <Tooltip id="phoneTooltip" place="top" type="error" effect="solid" />
-            <div className="flex justify-between">
-              <button
-                onClick={prevStep}
-                className="flex items-center text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-400 transition-colors duration-300"
-              >
-                <FaArrowLeft className="mr-2" /> Prev
-              </button>
-              <button
-                onClick={nextStep}
-                className="flex items-center bg-blue-600 text-white py-2 px-6 rounded-lg hover:bg-blue-700 transition-colors duration-300"
-              >
-                Next <FaArrowRight className="ml-2" />
-              </button>
-            </div>
-          </div>
-        )}
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (validateStep()) {
+      setSubmitted(true); // Show success page
+    }
+  };
 
-        {step === 5 && (
-          <div className="text-center">
-            <img src={readyImg} alt="Ready to Join" className="w-full h-64 object-cover mb-6" />
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">Ready to join?</h2>
-            <p className="finwise-blue mb-6">
-              Click below to submit your information and join our early access program.
-            </p>
-            <button
-              onClick={nextStep}
-              className="bg-blue-600 text-white font-semibold py-2 px-6 rounded-lg hover:bg-blue-700 transition-colors duration-300"
-            >
-              Submit
-            </button>
-          </div>
-        )}
-
-        {step === 6 && (
-          <div className="text-center">
-            <img src={successImg} alt="Success" className="w-full h-64 object-cover mb-6" />
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">Success!</h2>
-            <p className="finwise-blue mb-6">
-              Your information has been submitted successfully. We’ll be in touch soon!
-            </p>
-          </div>
-        )}
+  if (submitted) {
+    return (
+      <div className="bg-white text-[#223876] font-inter min-h-screen flex justify-center items-center">
+        <div className="text-center">
+          <img
+            src={successImg}
+            alt="Success"
+            className="mx-auto mb-4 w-32 md:w-48"
+          />
+          <h1 className="text-2xl md:text-4xl font-semibold mb-4">Success!</h1>
+          <p className="text-lg md:text-xl">Thank you for submitting the form.</p>
+          <p className="text-lg md:text-xl mt-4">Check your email for further details.</p>
+        </div>
       </div>
-      <ToastContainer />
+    );
+  }
+
+  return (
+    <div className="bg-white text-[#223876] font-inter min-h-screen flex justify-center items-center">
+      {!started ? (
+        <div className="w-full h-full flex flex-col md:flex-row">
+          <div className="flex-1 p-10 flex flex-col justify-center items-start">
+            <p className="text-xl md:text-2xl font-medium mb-6">
+              We currently have a waitlist. Please fill this form to apply for the Finwise School early access.
+            </p>
+            <p className="text-sm md:text-base mb-10">
+              Click on start, Lets get started
+            </p>
+            <div className="flex items-center mb-4">
+              <button
+                onClick={handleStart}
+                className="bg-[#3CB371] text-white text-lg md:text-xl font-semibold py-2 px-6 rounded-lg"
+              >
+                Start
+              </button>
+            </div>
+            <div className="flex items-center text-sm md:text-base">
+              <span className="text-[#3CB371]">&#x25CF;</span>
+              <span className="ml-2 text-[#223876]">Takes less than a minute</span>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div className="w-full max-w-lg px-4 mx-auto mt-20">
+          <form onSubmit={handleSubmit} className="w-full">
+            {formStep === 1 && (
+              <div className="flex flex-col items-start pb-2 mb-8 w-full">
+                <label htmlFor="name" className="flex items-center space-x-2 text-lg md:text-xl font-normal">
+                  <span className="text-[#3CB371] text-xl md:text-2xl">
+                    <FaUser />
+                  </span>
+                  <span className="text-[#223876] text-lg md:text-xl">Name*</span>
+                </label>
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  placeholder="Type your answer here..."
+                  value={formData.name}
+                  onChange={handleInputChange}
+                  className="w-full bg-transparent border-b-2 border-[#223876] text-[#223876] placeholder-[#223876] mt-4 focus:outline-none focus:ring-0 text-lg md:text-xl"
+                />
+                {errors.name && <p className="text-red-500 mt-2">{errors.name}</p>}
+                <div className="flex justify-end w-full mt-4">
+                  <button
+                    type="button"
+                    onClick={handleNextStep}
+                    className="bg-[#3CB371] text-white font-semibold py-2 px-6 rounded-full"
+                  >
+                     Next <i className="fas fa-chevron-right"></i>
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {formStep === 2 && (
+              <div className="flex flex-col items-start pb-2 mb-8 w-full">
+                <label htmlFor="email" className="flex items-center space-x-2 text-lg md:text-xl font-normal">
+                  <span className="text-[#3CB371] text-xl md:text-2xl">
+                    <FaEnvelope />
+                  </span>
+                  <span className="text-[#223876] text-lg md:text-xl">Email*</span>
+                </label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  placeholder="Type your answer here..."
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  className="w-full bg-transparent border-b-2 border-[#223876] text-[#223876] placeholder-[#223876] mt-4 focus:outline-none focus:ring-0 text-lg md:text-xl"
+                />
+                {errors.email && <p className="text-red-500 mt-2">{errors.email}</p>}
+                <div className="flex justify-between items-center mt-8 w-full">
+                  <button
+                    type="button"
+                    onClick={handlePrevStep}
+                    className="bg-[#3CB371] text-white font-semibold py-2 px-4 rounded-full flex items-center"
+                  >
+                    <i className="fas fa-chevron-left"></i>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleNextStep}
+                    className="bg-[#3CB371] text-white font-semibold py-2 px-6 rounded-full"
+                  >
+                     Next <i className="fas fa-chevron-right"></i>
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {formStep === 3 && (
+              <div className="flex flex-col items-start pb-2 mb-8 w-full">
+                 <label htmlFor="phone" className="flex items-center space-x-2 text-lg md:text-xl font-normal">
+                  <span className="text-[#3CB371] text-xl md:text-2xl" style={{ transform: 'rotateY(180deg)' }}>
+                    <FaPhone />
+                  </span>
+                  <span className="text-[#223876] text-lg md:text-xl">Phone*</span>
+                </label>
+                <div className="w-full mt-4">
+                  <PhoneInput
+                    country={'us'}
+                    value={formData.phone}
+                    onChange={handlePhoneChange}
+                    inputStyle={{
+                      background: 'transparent',
+                      borderBottom: '2px solid #223876',
+                      color: '#223876',
+                      fontSize: '1.25rem',
+                      width: '100%',
+                    }}
+                    buttonStyle={{
+                      background: 'transparent',
+                      borderBottom: '2px solid #223876',
+                    }}
+                    dropdownStyle={{
+                      border: '1px solid #223876',
+                    }}
+                    countryCodeEditable={false}
+                  />
+                </div>
+                {errors.phone && <p className="text-red-500 mt-2">{errors.phone}</p>}
+                <div className="flex justify-between items-center mt-8 w-full">
+                  <button
+                    type="button"
+                    onClick={handlePrevStep}
+                    className="bg-[#3CB371] text-white font-semibold py-2 px-4 rounded-full flex items-center"
+                  >
+                    <i className="fas fa-chevron-left"></i>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleNextStep}
+                    className="bg-[#3CB371] text-white font-semibold py-2 px-6 rounded-full"
+                  >
+                     Next <i className="fas fa-chevron-right"></i>
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {formStep === 4 && (
+              <div className="flex flex-col items-start pb-2 mb-8 w-full">
+                <div className="text-lg md:text-xl font-medium mb-4">
+                  Almost there! Just review and submit.
+                </div>
+                <div className="text-lg md:text-xl font-medium mb-4">
+                  You are just a click away!.
+                </div>
+
+                <div className="flex justify-between items-center mt-8 w-full">
+                  <button
+                    type="button"
+                    onClick={handlePrevStep}
+                    className="bg-[#3CB371] text-white font-semibold py-2 px-4 rounded-full flex items-center"
+                  >
+                    <i className="fas fa-chevron-left"></i>
+                  </button>
+                  <button
+                    type="submit"
+                    className="bg-[#3CB371] text-white font-semibold py-2 px-6 rounded-full"
+                  >
+                    Submit
+                  </button>
+                </div>
+              </div>
+            )}
+          </form>
+        </div>
+      )}
     </div>
   );
 };
