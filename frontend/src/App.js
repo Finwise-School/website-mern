@@ -6,7 +6,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Cards from "./components/carouselCards";
 import Profile from "./components/Profile";
 import MainContent from "./components/MainContent";
-import Book from "./components/Book";
+import EarlyAccess from "./components/requestEarlyAccess";
 import Contact from "./components/Contact";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -18,6 +18,11 @@ import Fire from "./components/calculator/Fire";
 import GoalSIP from "./components/calculator/GoalSIP";
 import MutualFunds from "./components/calculator/MutualFunds";
 import FixedDepo from "./components/calculator/FixedDepo";
+import Tax from "./components/calculator/Tax";
+import EMICalculator from "./components/calculator/EMI";
+import CAGRCalculator from "./components/calculator/CAGR";
+import MortgageCalculator from "./components/calculator/Mortgage";
+import ScrollToTop from "./components/ScrolltoTop";
 
 
 const ProtectedRoute = ({ element, ...rest }) => {
@@ -29,11 +34,12 @@ const App = () => {
   return (
     <AuthProvider>
       <Router>
+      <ScrollToTop />
         <div className="app">
           <Header/>
           <Routes>
+            <Route path="/early-access" element={<EarlyAccess />} />
             <Route path="/" element={<MainContent />} />
-            <Route path="/book" element={<Book />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/calculator" element={<Calculator />} />
             <Route path="/aboutUs" element={<AboutUs />} />
@@ -43,7 +49,11 @@ const App = () => {
             <Route path="/calculator/fire" element={<Fire />} />
             <Route path="/calculator/goal-sip" element={<GoalSIP />} />
             <Route path="/calculator/mutual-funds" element={<MutualFunds />} />
-            <Route path="/calculator/fixed-depo" element={<FixedDepo />} />
+            <Route path="/calculator/fixed-deposit" element={<FixedDepo />} />
+            <Route path="/calculator/tax" element={<Tax />} />
+            <Route path="/calculator/emi" element={<EMICalculator />} />
+            <Route path="/calculator/cagr" element={<CAGRCalculator />} />
+            <Route path="/calculator/mortgage" element={<MortgageCalculator />} />
             <Route
               path="/profile"
               element={<ProtectedRoute element={<Profile />} />}

@@ -24,7 +24,7 @@ const Header = () => {
         <ul className="flex gap-12">
           <li>
             <a className="text-gray-700 font-medium relative after:absolute after:py-0.5 after:left-0 after:bottom-0 after:w-full after:h-1 after:bg-transparent after:transition-all after:duration-300 after:content-[''] hover:after:bg-blue-500">
-              <Link to="/book">Book a Call</Link>
+              <Link to="/book">Request Early Access</Link>
             </a>
           </li>
           <li>

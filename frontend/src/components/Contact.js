@@ -1,154 +1,238 @@
 import React, { useState } from 'react';
-import axios from 'axios';
-import contactus from "../assets/images/contact/contact-img.jpg";
-import SuccessModal from './contactSuccess'; // Ensure the correct path to SuccessModal
+import ContactImg from "../assets/images/contact/contact-finwise.png";
+import MailImg from "../assets/images/contact/mail.png";
+import CallImg from "../assets/images/contact/call.png";
+import LocationImg from "../assets/images/contact/location.png";
+import SocialImg from "../assets/images/contact/social.png";
+import EarlyAccessTemplate from './EarlyAccessTemplate'; 
 
-const Contact = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [subject, setSubject] = useState('');
-  const [message, setMessage] = useState('');
+const ContactUs = () => {
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    inquiryType: '',
+    hearAboutUs: '',
+    message: '',
+    terms: false,
+  });
+
   const [errors, setErrors] = useState({});
-  const [showSuccessModal, setShowSuccessModal] = useState(false); // State to control modal visibility
 
   const validateForm = () => {
-    let valid = true;
-    let errors = {};
-
-    if (!name.trim()) {
-      errors.name = 'Name is required';
-      valid = false;
-    }
-
-    if (!email.trim() || !/\S+@\S+\.\S+/.test(email)) {
-      errors.email = 'Valid email is required';
-      valid = false;
-    }
-
-    if (!subject.trim()) {
-      errors.subject = 'Subject is required';
-      valid = false;
-    }
-
-    if (!message.trim()) {
-      errors.message = 'Message is required';
-      valid = false;
-    }
-
-    setErrors(errors);
-    return valid;
+    const newErrors = {};
+    if (!formData.firstName) newErrors.firstName = 'First Name is required';
+    if (!formData.lastName) newErrors.lastName = 'Last Name is required';
+    if (!formData.email || !/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = 'Valid Email is required';
+    if (!formData.phone || !/^\d{10}$/.test(formData.phone)) newErrors.phone = 'Valid Phone Number is required';
+    if (!formData.inquiryType) newErrors.inquiryType = 'Inquiry Type is required';
+    if (!formData.hearAboutUs) newErrors.hearAboutUs = 'Please select how you heard about us';
+    if (!formData.message) newErrors.message = 'Message is required';
+    if (!formData.terms) newErrors.terms = 'You must agree to the Terms of Use and Privacy Policy';
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = async (e) => {
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFormData({
+      ...formData,
+      [name]: type === 'checkbox' ? checked : value,
+    });
+  };
+
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (validateForm()) {
-      try {
-        const response = await axios.post('http://localhost:5000/api/contact', {
-          name,
-          email,
-          subject,
-          message,
-        });
-
-        if (response.status === 201) {
-          setName(''); // Reset the form fields
-          setEmail('');
-          setSubject('');
-          setMessage('');
-          setErrors({}); // Clear any existing errors
-          setShowSuccessModal(true); // Show the success modal
-        }
-      } catch (error) {
-        console.error('There was an error submitting the form:', error);
-        setErrors({ submit: 'There was an issue submitting the form. Please try again.' });
-      }
+      // Handle form submission
+      console.log('Form submitted:', formData);
     }
-  };
-
-  const closeModal = () => {
-    setShowSuccessModal(false);
   };
 
   return (
-    <div style={{ marginTop: "60px" }} className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
-      <div className="flex flex-col md:flex-row">
-        <div className="md:w-1/2 md:px-8 mb-8 md:mb-0">
-          <h1 className="text-4xl font-bold text-blue-600 mb-4">Need Help ?</h1>
-          <p className="text-gray-700 mb-8">
-            Connect with us for personalized financial guidance. Our experts are here to help you achieve your financial goals and secure your future.
-          </p>
-          <img src={contactus} alt="Support Illustration" className="w-full h-auto" />
+    <div style={{ marginTop: "100px" }} className="font-nunito bg-gray-50">
+      <div className="max-w-7xl mx-auto p-6">
+        {/* Header Section */}
+        <div className="flex flex-col md:flex-row items-center justify-between py-12">
+          {/* Text Content */}
+          <div className="w-full md:w-1/2 mb-6 md:mb-0">
+            <h1 className="text-3xl font-bold text-blue-900">Get in Touch with Us</h1>
+            <p className="mt-4 text-gray-600 leading-relaxed">
+              Welcome to Finwise School Contact Us page. We're here to help you with any questions, feedback, or
+              support you may need. Whether you're looking to improve your financial literacy, need guidance on
+              using our tools, or want to learn more about our rewards program, we're just a message away. Reach out to
+              us, and let's start building your financial future together.
+            </p>
+          </div>
+          {/* Image */}
+          <img src={ContactImg} alt="Contact Finwise Img" className="w-full md:w-1/2 max-w-xs rounded-lg md:ml-6" />
         </div>
-        <div className="md:w-1/2 md:px-8">
-          <h2 className="text-4xl font-bold text-blue-600 mb-4">Get in touch!</h2>
-          <form onSubmit={handleSubmit} className="space-y-4" noValidate>
-            <div>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                placeholder="Your name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                className="w-full p-4 bg-gray-100 rounded-md border border-gray-300"
-              />
-              {errors.name && <p className="error-message">{errors.name}</p>}
+
+        {/* Form Section */}
+        <div className="bg-white shadow-md rounded-lg p-8 mb-12 border-solid border-2 border-gray-400">
+          <h2 className="text-2xl font-bold text-blue-900 text-center mb-6">
+            Fill out the below form and we will get back to you.
+          </h2>
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="grid-for-calci grid-cols-1 md:grid-cols-3 gap-6">
+              <div>
+                <label className="block text-sm font-medium text-gray-700">First Name</label>
+                <input
+                  type="text"
+                  name="firstName"
+                  value={formData.firstName}
+                  onChange={handleChange}
+                  placeholder="Enter First Name"
+                  className={`mt-1 block w-full px-4 py-2 border ${errors.firstName ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
+                />
+                {errors.firstName && <p className="text-red-500 text-sm">{errors.firstName}</p>}
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700">Last Name</label>
+                <input
+                  type="text"
+                  name="lastName"
+                  value={formData.lastName}
+                  onChange={handleChange}
+                  placeholder="Enter Last Name"
+                  className={`mt-1 block w-full px-4 py-2 border ${errors.lastName ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
+                />
+                {errors.lastName && <p className="text-red-500 text-sm">{errors.lastName}</p>}
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700">Email</label>
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  placeholder="Enter your Email"
+                  className={`mt-1 block w-full px-4 py-2 border ${errors.email ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
+                />
+                {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700">Phone</label>
+                <input
+                  type="tel"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  placeholder="Enter Phone Number"
+                  className={`mt-1 block w-full px-4 py-2 border ${errors.phone ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
+                />
+                {errors.phone && <p className="text-red-500 text-sm">{errors.phone}</p>}
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700">Inquiry Type</label>
+                <select
+                  name="inquiryType"
+                  value={formData.inquiryType}
+                  onChange={handleChange}
+                  className={`mt-1 block w-full px-4 py-2 border ${errors.inquiryType ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
+                >
+                  <option value="">Select Inquiry Type</option>
+                  <option value="general">General</option>
+                  <option value="feedback">Feedback</option>
+                  <option value="support">Support</option>
+                </select>
+                {errors.inquiryType && <p className="text-red-500 text-sm">{errors.inquiryType}</p>}
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700">How Did You Hear About Us?</label>
+                <select
+                  name="hearAboutUs"
+                  value={formData.hearAboutUs}
+                  onChange={handleChange}
+                  className={`mt-1 block w-full px-4 py-2 border ${errors.hearAboutUs ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
+                >
+                  <option value="">Select</option>
+                  <option value="social_media">Social Media</option>
+                  <option value="referral">Referral</option>
+                  <option value="web_search">Web Search</option>
+                </select>
+                {errors.hearAboutUs && <p className="text-red-500 text-sm">{errors.hearAboutUs}</p>}
+              </div>
             </div>
+
             <div>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full p-4 bg-gray-100 rounded-md border border-gray-300"
-              />
-              {errors.email && <p className="error-message">{errors.email}</p>}
-            </div>
-            <div>
-              <input
-                type="text"
-                id="subject"
-                name="subject"
-                placeholder="Subject"
-                value={subject}
-                onChange={(e) => setSubject(e.target.value)}
-                className="w-full p-4 bg-gray-100 rounded-md border border-gray-300"
-              />
-              {errors.subject && <p className="error-message">{errors.subject}</p>}
-            </div>
-            <div>
+              <label className="block text-sm font-medium text-gray-700">Message</label>
               <textarea
-                id="message"
                 name="message"
-                placeholder="Write your message"
+                value={formData.message}
+                onChange={handleChange}
                 rows="4"
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                className="w-full p-4 bg-gray-100 rounded-md border border-gray-300"
-              />
-              {errors.message && <p className="error-message">{errors.message}</p>}
+                placeholder="Enter your Message here."
+                className={`mt-1 block w-full px-4 py-2 border ${errors.message ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
+              ></textarea>
+              {errors.message && <p className="text-red-500 text-sm">{errors.message}</p>}
             </div>
-            <button type="submit" className="bg-black text-white px-6 py-4 rounded-md flex items-center">
-              <i className="fas fa-paper-plane mr-2"></i> Send
-            </button>
-            {errors.submit && <p className="error-message">{errors.submit}</p>}
+
+            {/* Checkbox and Button Section */}
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between">
+              {/* Checkbox */}
+              <div className="flex items-center mb-4 md:mb-0">
+                <input
+                  id="terms"
+                  name="terms"
+                  type="checkbox"
+                  checked={formData.terms}
+                  onChange={handleChange}
+                  className={`focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded ${errors.terms ? 'border-red-500' : 'border-gray-300'}`}
+                />
+                <label htmlFor="terms" className="ml-2 text-sm font-medium text-gray-700">
+                  I agree with <a href="#" className="text-indigo-600 hover:text-indigo-500">Terms of Use and Privacy Policy</a>
+                </label>
+                {errors.terms && <p className="text-red-500 text-sm">{errors.terms}</p>}
+              </div>
+
+              {/* Submit Button */}
+              <div className="text-right">
+  <button
+    type="submit"
+    className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 w-full sm:w-auto"
+  >
+    Send Your Message
+  </button>
+</div>
+
+
+            </div>
           </form>
         </div>
       </div>
-      <SuccessModal isOpen={showSuccessModal} onClose={closeModal} />
 
-      <style>
-        {`
-          .error-message { 
-            color: red; 
-            font-size: 0.875rem; /* Tailwind class for text-sm */
-          }
-        `}
-      </style>
+      {/* Footer Section */}
+      <footer className="bg-gray-900 text-white py-8">
+        <div className="max-w-7xl mx-auto grid-for-calci grid-cols-1 sm:grid-cols-4 gap-8 text-center">
+          <div className="flex flex-col items-center">
+            <img src={MailImg} alt="Email Icon" className="w-10 h-10" />
+            <p className="mt-2"><a href="mailto:contact@finwiseschool.com" className="hover:underline">contact@finwiseschool.com</a></p>
+          </div>
+          <div className="flex flex-col items-center">
+            <img src={CallImg} alt="Phone Icon" className="w-10 h-10" />
+            <p className="mt-2"><a href="tel:+447741819337" className="hover:underline">+44 7741-819-337</a></p>
+          </div>
+          <div className="flex flex-col items-center">
+            <img src={LocationImg} alt="Location Icon" className="w-10 h-10" />
+            <p className="mt-2">Glasgow, UK</p>
+          </div>
+          <div className="flex flex-col items-center">
+            <img src={SocialImg} alt="Social Icon" className="w-10 h-10" />
+            <p className="mt-2">
+              <a href="https://instagram.com/finwiseschool" className="text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">Instagram</a> 
+              <br />
+              <a href="https://linkedin.com/company/finwiseschool" className="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+              <br />
+              <a href="https://facebook.com/#" className="text-blue-800 hover:underline" target="_blank" rel="noopener noreferrer">Facebook</a>
+            </p>
+          </div>
+        </div>
+      </footer>
+      <EarlyAccessTemplate />
     </div>
   );
 };
 
-export default Contact;
+export default ContactUs;
