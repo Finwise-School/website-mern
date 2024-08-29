@@ -1,17 +1,19 @@
-import React,{useState} from 'react'
+import React from 'react';
 
-export default function Mortgage_Extrapayments() {
-
-    // Extra Payments State Variables
-    const [startPaymentNo, setStartPaymentNo] = useState('');
-    const [extraPayment, setExtraPayment] = useState('');
-    const [paymentInterval, setPaymentInterval] = useState('');
-    const [extraAnnualPayment, setExtraAnnualPayment] = useState('');
-    const [paymentNumber, setPaymentNumber] = useState('');
-
-    const [totalExtraPayments, setTotalExtraPayments] = useState('');
-    const [interestSavings, setInterestSavings] = useState('');
-
+export default function ExtraPayments({
+    startPaymentNo,
+    extraPayment,
+    extraPaymentInterval,
+    extraAnnualPayment,
+    extraPaymentMonth,
+    totalExtraPayments,
+    interestSavings,
+    setStartPaymentNo,
+    setExtraPayment,
+    setExtraPaymentInterval,
+    setExtraAnnualPayment,
+    setExtraPaymentMonth
+}) {
     return (
         <div>
             <div>
@@ -24,7 +26,7 @@ export default function Mortgage_Extrapayments() {
                             type="number"
                             id="startPaymentNo"
                             value={startPaymentNo}
-                            onChange={(e) => setStartPaymentNo(e.target.value)}
+                            onChange={(e) => setStartPaymentNo(parseFloat(e.target.value) || 0)}
                             className="bg-green-100 text-gray-800 font-semibold text-right p-2 rounded-lg w-24"
                         />
                     </div>
@@ -38,7 +40,7 @@ export default function Mortgage_Extrapayments() {
                                 type="number"
                                 id="extraPayment"
                                 value={extraPayment}
-                                onChange={(e) => setExtraPayment(e.target.value)}
+                                onChange={(e) => setExtraPayment(parseFloat(e.target.value) || 0)}
                                 className="bg-green-100 text-gray-800 font-semibold text-right p-2 rounded-lg w-24"
                             />
                         </div>
@@ -50,8 +52,8 @@ export default function Mortgage_Extrapayments() {
                         <input
                             type="number"
                             id="paymentInterval"
-                            value={paymentInterval}
-                            onChange={(e) => setPaymentInterval(e.target.value)}
+                            value={extraPaymentInterval}
+                            onChange={(e) => setExtraPaymentInterval(parseFloat(e.target.value) || 0)}
                             className="bg-green-100 text-gray-800 font-semibold text-right p-2 rounded-lg w-24"
                         />
                     </div>
@@ -65,31 +67,37 @@ export default function Mortgage_Extrapayments() {
                                 type="number"
                                 id="extraAnnualPayment"
                                 value={extraAnnualPayment}
-                                onChange={(e) => setExtraAnnualPayment(e.target.value)}
+                                onChange={(e) => setExtraAnnualPayment(parseFloat(e.target.value) || 0)}
                                 className="bg-green-100 text-gray-800 font-semibold text-right p-2 rounded-lg w-24"
                             />
                         </div>
                     </div>
 
-                    {/* Payment # (1-12) */}
+                    {/* Extra Payment Month */}
                     <div className="flex items-center justify-between p-4 border border-gray-300 rounded-lg">
-                        <label htmlFor="paymentNumber" className="text-gray-700">Payment # (1-12)</label>
+                        <label htmlFor="extraPaymentMonth" className="text-gray-700">Extra Payment Month</label>
                         <input
                             type="number"
-                            id="paymentNumber"
-                            value={paymentNumber}
-                            onChange={(e) => setPaymentNumber(e.target.value)}
+                            id="extraPaymentMonth"
+                            value={extraPaymentMonth}
+                            onChange={(e) => setExtraPaymentMonth(parseFloat(e.target.value) || 0)}
                             className="bg-green-100 text-gray-800 font-semibold text-right p-2 rounded-lg w-24"
                         />
                     </div>
 
-                    {/* Outputs */}
-                    <div className="p-4 border border-gray-300 rounded-lg">
-                        <p className="text-gray-700 font-semibold">Total Extra Payments: <span className="finwise-green"> $8,900.00 </span></p>
-                        <p className="text-gray-700 font-semibold">Interest Savings: <span className="finwise-green"> $6,828.54 </span></p>
+                    {/* Output: Total Extra Payments */}
+                    <div className="p-4 border border-gray-300 rounded-lg bg-gray-50">
+                        <h3 className="text-gray-800 font-semibold mb-2">Total Extra Payments</h3>
+                        <div className="text-2xl font-bold text-green-600">${totalExtraPayments}</div>
+                    </div>
+
+                    {/* Output: Interest Savings */}
+                    <div className="p-4 border border-gray-300 rounded-lg bg-gray-50">
+                        <h3 className="text-gray-800 font-semibold mb-2">Interest Savings</h3>
+                        <div className="text-2xl font-bold text-green-600">${interestSavings}</div>
                     </div>
                 </div>
             </div>
         </div>
-    )
+    );
 }

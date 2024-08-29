@@ -21,7 +21,13 @@ const MortgageCalculator = () => {
     const [result, setResult] = useState({ payment: "0" });
     const [schedule, setSchedule] = useState([]);
     const [showMore, setShowMore] = useState(0); // Track current form index
+    const [startPaymentNo, setStartPaymentNo] = useState(2); // Starting from Payment No. 5
+    const [extraPayment, setExtraPayment] = useState(100.0);
+    const [extraPaymentInterval, setExtraPaymentInterval] = useState(3);
+    const [extraAnnualPayment, setExtraAnnualPayment] = useState(50.0);
+    const [extraPaymentMonth, setExtraPaymentMonth] = useState(4);
 
+    console.log(startPaymentNo);
     const compoundPeriodMapping = {
         'Monthly': 12,
         'Semi-Annually': 2,
@@ -64,20 +70,39 @@ const MortgageCalculator = () => {
         let balance = P;
         let paymentDate = new Date(firstPaymentDate);
 
+        const annualExtraPayment = parseFloat(extraAnnualPayment) || 0;
+
         for (let i = 1; i <= totalPayments; i++) {
+            if (balance <= 0) {
+                break; // Stop if the balance is zero or less
+            }
+
             const interestDue = balance * periodicInterestRate;
             const principalPaid = EMI - interestDue;
-            balance = Math.max(balance - principalPaid, 0);
+
+            // Apply extra payments based on the specified interval and start payment number
+            let extraPaymentAmount = 0;
+            if (i >= startPaymentNo && i % extraPaymentInterval === 0) {
+                extraPaymentAmount = parseFloat(extraPayment);
+            }
+
+            // Add annual extra payment if it's March and after the start payment number
+            if (i >= startPaymentNo && paymentDate.getMonth() + 1 === extraPaymentMonth) {
+                extraPaymentAmount += annualExtraPayment;
+            }
+
+            const totalPaymentDue = EMI + extraPaymentAmount;
+            balance = Math.max(balance - (principalPaid + extraPaymentAmount), 0);
 
             scheduleData.push({
                 paymentNo: i,
                 paymentDate: paymentDate.toISOString().split('T')[0],
                 interestRate: annualInterestRate.toFixed(2) + '%',
                 interestDue: interestDue.toFixed(2),
-                paymentDue: EMI.toFixed(2),
-                extraPayments: "0",
+                paymentDue: totalPaymentDue.toFixed(2),
+                extraPayments: extraPaymentAmount.toFixed(2),
                 additionalPayment: "0",
-                principalPaid: principalPaid.toFixed(2),
+                principalPaid: (principalPaid + extraPaymentAmount).toFixed(2),
                 balance: balance.toFixed(2),
                 taxReturned: "0",
                 cumulativeTaxReturned: "0"
@@ -89,6 +114,7 @@ const MortgageCalculator = () => {
         setResult({ payment: EMI.toFixed(2) });
         setSchedule(scheduleData);
     };
+
 
     useEffect(() => {
         calculatePayment();
@@ -259,16 +285,28 @@ const MortgageCalculator = () => {
                             </div>
                         </div>
                     )}
-                    {showMore === 1 && <ExtraPayments />}
+                    {showMore === 1 && <ExtraPayments
+                        startPaymentNo={startPaymentNo}
+                        extraPayment={extraPayment}
+                        extraPaymentInterval={extraPaymentInterval}
+                        extraAnnualPayment={extraAnnualPayment}
+                        extraPaymentMonth={extraPaymentMonth}
+                        setStartPaymentNo={setStartPaymentNo}
+                        setExtraPayment={setExtraPayment}
+                        setExtraPaymentInterval={setExtraPaymentInterval}
+                        setExtraAnnualPayment={setExtraAnnualPayment}
+                        setExtraPaymentMonth={setExtraPaymentMonth}
+
+                    />}
                     {showMore === 2 && <PITIPayments
-                            loanAmount={loanAmount}
-                            interestRate={interestRate}
-                            termLength={termLength}
-                            firstPaymentDate={firstPaymentDate}
-                            compoundPeriod={compoundPeriod}
-                            paymentFrequency={paymentFrequency}
-                            result={result.payment}
-                        />}
+                        loanAmount={loanAmount}
+                        interestRate={interestRate}
+                        termLength={termLength}
+                        firstPaymentDate={firstPaymentDate}
+                        compoundPeriod={compoundPeriod}
+                        paymentFrequency={paymentFrequency}
+                        result={result.payment}
+                    />}
                     {/* Results Display
                     <div className="output-fields -mt-28 md:mt-0">
                         <h2 className="text-lg font-semibold text-gray-800 mb-4">Results:</h2>
