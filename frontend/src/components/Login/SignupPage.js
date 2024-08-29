@@ -19,15 +19,6 @@ const SignupPage = () => {
 
   const handleSignup = async (e) => {
     e.preventDefault();
-<<<<<<< Updated upstream
-    const response = await fetch('http://localhost:5000/signup', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ username, password }),
-    });
-=======
     try {
       const response = await fetch('http://localhost:5000/api/signup', {
         method: 'POST',
@@ -36,7 +27,6 @@ const SignupPage = () => {
         },
         body: JSON.stringify({ username, email, password }),
       });
->>>>>>> Stashed changes
 
       const data = await response.text();
       if (response.ok) {
