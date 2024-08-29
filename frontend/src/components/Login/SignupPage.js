@@ -19,14 +19,15 @@ const SignupPage = () => {
 
   const handleSignup = async (e) => {
     e.preventDefault();
-    const response = await fetch('http://localhost:5000/api/signup', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ username, password, email }),
-    });
-
+    try {
+      const response = await fetch('http://localhost:5000/api/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password, email }),
+      });
+  
       const data = await response.text();
       if (response.ok) {
         navigate('/login'); // Redirect to login after successful signup
@@ -38,6 +39,7 @@ const SignupPage = () => {
       setMessage('An error occurred during signup.');
     }
   };
+  
 
   return (
     <div className="h-screen bg-cover bg-center" style={{ backgroundImage: `url(${Loggins})` }}>
