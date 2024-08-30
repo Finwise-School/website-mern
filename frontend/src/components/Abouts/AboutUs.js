@@ -5,13 +5,15 @@ import inspire from "../../assets/images/aboutUS/inspire.png";
 import univ from "../../assets/images/aboutUS/university.png";
 import left from "../../assets/images/aboutUS/left.png";
 import right from "../../assets/images/aboutUS/right.png";
+import { FaStar } from "react-icons/fa6";
+import { FaGraduationCap } from "react-icons/fa6";
+import { IoIosPeople } from "react-icons/io";
 const AboutUs = () => {
   return (
     <div>
-     
       <div className="flex items-center justify-between p-10">
         <div className="w-full md:w-1/2">
-          <h2 className="finwise-blue text-6xl mb-4  ">About US</h2>
+        <h1 className="finwise-blue text-4xl font-bold mb-4  ">About US</h1>
           <p className="text-lg">
             At FinwiseSchool, we understand that everyone learns differently, so
             we offer personalized learning paths tailored to each user's unique
@@ -24,19 +26,19 @@ const AboutUs = () => {
           </p>
 
           <div className="mt-6 lg:mt-0 lg:ml-10">
-  <a
-    href="#"
-    className="inline-block text-[#263871] hover:text-green-500 rounded-lg py-2 text-sm lg:text-base min-w-[150px] lg:min-w-[200px] text-center transition-all duration-300 mt-10"
-    style={{
-      border: '5px solid',
-      borderRadius: '12px',
-      borderImage: 'linear-gradient(90deg, #223876 0%, #3CB371 100%) 1',
-    }}
-  >
-    Request Early Access
-  </a>
-</div>
-
+            <a
+              href="#"
+              className="inline-block text-[#263871] hover:text-green-500 rounded-lg py-2 text-sm lg:text-base min-w-[150px] lg:min-w-[200px] text-center transition-all duration-300 mt-10"
+              style={{
+                border: "5px solid",
+                borderRadius: "12px",
+                borderImage:
+                  "linear-gradient(90deg, #223876 0%, #3CB371 100%) 1",
+              }}
+            >
+              Request Early Access
+            </a>
+          </div>
         </div>
         <img
           src={phone}
@@ -47,12 +49,13 @@ const AboutUs = () => {
         />
       </div>
 
-      
-      <div className="p-8 bg-gray-100">
+      <div className="p-8 b">
         <div className="flex flex-col md:flex-row">
           <div className="w-full md:w-1/2 mb-8 md:mb-0">
-            <h2 className="finwise-blue text-6xl mb-4">Our Values</h2>
-            <p className="text-lg">
+            <div className=" flex">
+            <h1 className="finwise-blue text-4xl font-bold mb-4  ">Our Values</h1>
+            </div>
+            <p className="text-lg pr-20">
               Our journey is one of relentless progress and transformation. We
               began as a passionate group with a vision, dedicated to building
               an educational platform that redefines the boundaries of
@@ -61,44 +64,60 @@ const AboutUs = () => {
           </div>
 
           <div className="grid grid-cols-2 gap-0 w-full md:w-1/2">
-            <div className="p-4 bg-white shadow-md">
-              <h1 className="finwise-blue text-lg font-bold">Trust</h1>
-              <p>
-                We build lasting relationships through integrity, transparency,
-                and trust.
-              </p>
-            </div>
+  <div className="p-4 bg-white shadow-md border-t border-l border-gray-200">
+    <div className="flex items-center mb-5">
+      <div className="flex items-center justify-center w-10 h-10 rounded-full border-2 border-green-500 mr-4">
+        <FaStar className="finwise-blue text-xl" />
+      </div>
+      <h1 className="finwise-blue text-lg font-bold">Trust</h1>
+    </div>
+    <p>
+      We build lasting relationships through integrity, transparency, and trust.
+    </p>
+  </div>
 
-            <div className="p-4 bg-white shadow-md">
-              <h1 className="finwise-blue text-lg font-bold">Excellence</h1>
-              <p>
-                We strive for excellence in everything we do, ensuring high
-                standards and quality.
-              </p>
-            </div>
+  <div className="p-4 bg-white shadow-md border-t border-l border-gray-200">
+    <div className="flex items-center mb-5">
+      <div className="flex items-center justify-center w-10 h-10 rounded-full border-2 border-green-500 mr-4">
+        <FaGraduationCap className="finwise-blue text-xl" />
+      </div>
+      <h1 className="finwise-blue text-lg font-bold">Excellence</h1>
+    </div>
+    <p>
+      We strive for excellence in everything we do, ensuring high standards and quality.
+    </p>
+  </div>
 
-            <div className="p-4 bg-white shadow-md">
-              <h1 className="finwise-blue text-lg font-bold">Community Focus</h1>
-              <p>
-                We are committed to fostering a sense of community and support
-                among our users.
-              </p>
-            </div>
+  <div className="p-4 bg-white shadow-md border-t border-l border-gray-200">
+    <div className="flex items-center mb-5">
+      <div className="flex items-center justify-center w-10 h-10 rounded-full border-2 border-green-500 mr-4">
+        <IoIosPeople className="finwise-blue text-xl" />
+      </div>
+      <h1 className="finwise-blue text-lg font-bold">Community Focus</h1>
+    </div>
+    <p>
+      We are committed to fostering a sense of community and support among our users.
+    </p>
+  </div>
 
-            <div className="p-4 bg-white shadow-md">
-              <h1 className="finwise-blue text-lg font-bold">Our Commitment</h1>
-              <p>
-                We are dedicated to our mission and to helping our users achieve
-                their financial goals.
-              </p>
-            </div>
-          </div>
+  <div className="p-4 bg-white shadow-md border-t border-l border-gray-200">
+    <div className="flex items-center mb-5">
+      <div className="flex items-center justify-center w-10 h-10 rounded-full border-2 border-green-500 mr-4">
+        <FaStar className="finwise-blue text-xl" />
+      </div>
+      <h1 className="finwise-blue text-lg font-bold">Our Commitment</h1>
+    </div>
+    <p>
+      We are dedicated to our mission and to helping our users achieve their financial goals.
+    </p>
+  </div>
+</div>
+
         </div>
       </div>
 
-    
-      <div className="bg-black text-white py-16">
-        <div className="container mx-auto px-8">
+      <div className="bg-black text-white p-20">
+        <div className="container mx-auto px-8  ">
           <div className="pb-12">
             <h1 className="text-4xl font-bold mb-4">
               Navigating the Finwise School Experience
@@ -197,39 +216,34 @@ const AboutUs = () => {
               <div className="absolute top-0 left-0 h-full w-1 bg-blue-300 shadow-lg"></div>
             </div>
           </div>
-
-          
-
         </div>
       </div>
       <div>
-            <div className=" text-center justify-center p-20">
-              <h2 className="finwise-blue text-3xl pb-5">Meet our Supporters</h2>
-              <p>
-                At Finwise School, our success is fueled by the support and
-                expertise of our valued partners.
-              </p>
-            </div>
-
-           
-          </div>
+        <div className=" text-center justify-center p-20">
+        <h1 className="finwise-blue text-4xl font-bold mb-4  ">Meet our Supporters</h1>
+          <p>
+            At Finwise School, our success is fueled by the support and
+            expertise of our valued partners.
+          </p>
+        </div>
+      </div>
 
       <div className="flex justify-center items-center">
-              <div className="border-2 p-5 border-black mr-10 animate-spin-slow">
-                <img src={inspire} height={200} width={200} alt="Inspire" />
-              </div>
+        <div className="border-2 p-5 border-black mr-10 animate-spin-slow">
+          <img src={inspire} height={200} width={200} alt="Inspire" />
+        </div>
 
-              <div className="border-2 p-5 border-black mr-10 animate-spin-slow">
-                <img src={barclays} height={200} width={200} alt="Barclays" />
-              </div>
+        <div className="border-2 p-5 border-black mr-10 animate-spin-slow">
+          <img src={barclays} height={200} width={200} alt="Barclays" />
+        </div>
 
-              <div className="border-2 p-5 border-black mr-10 animate-spin-slow">
-                <img src={univ} height={200} width={200} alt="University" />
-              </div>
-            </div>
+        <div className="border-2 p-5 border-black mr-10 animate-spin-slow">
+          <img src={univ} height={200} width={200} alt="University" />
+        </div>
+      </div>
 
       <div className=" justify-center text-center p-20">
-        <h1 className="finwise-blue text-3xl pb-5">Partner Portal</h1>
+      <h1 className="finwise-blue text-4xl font-bold mb-4  ">Partner Portal</h1>
         <p>
           Our Partner Portal offers customized financial planning solutions
           tailored specifically for corporate clients. Collaborate with Finwise
@@ -257,15 +271,12 @@ const AboutUs = () => {
         <div className="border-t border-gray-300"></div>
       </div>
 
-     
-
-
       <div className=" flex p-10">
         <div className="">
-          <h1 className="finwise-blue text-3xl pb-5 r">
+        <h1 className="finwise-blue text-4xl font-bold mb-4  ">
             Start Your Financial Journey Today
           </h1>
-          <p className=" justify-center  text-left">
+          <p className=" justify-center  text-left pr-10">
             Your path to financial freedom is just a click away. Whether you’re
             aiming to optimize your investments, create a solid savings plan, or
             receive expert financial advice, FinWise is here to guide you every
@@ -275,19 +286,18 @@ const AboutUs = () => {
           </p>
         </div>
         <div className="mt-6 lg:mt-0 lg:ml-10">
-  <a
-    href="#"
-    className="inline-block text-[#263871] hover:text-green-500 rounded-lg py-2 text-sm lg:text-base min-w-[150px] lg:min-w-[200px] text-center transition-all duration-300"
-    style={{
-      border: '5px solid',
-      borderRadius: '12px',
-      borderImage: 'linear-gradient(90deg, #223876 0%, #3CB371 100%) 1',
-    }}
-  >
-    Request Early Access
-  </a>
-</div>
-
+          <a
+            href="#"
+            className="inline-block text-[#263871] hover:text-green-500 rounded-lg py-2 text-sm lg:text-base min-w-[150px] lg:min-w-[200px] text-center transition-all duration-300"
+            style={{
+              border: "5px solid",
+              borderRadius: "12px",
+              borderImage: "linear-gradient(90deg, #223876 0%, #3CB371 100%) 1",
+            }}
+          >
+            Request Early Access
+          </a>
+        </div>
       </div>
     </div>
   );

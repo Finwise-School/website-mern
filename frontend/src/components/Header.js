@@ -1,80 +1,29 @@
-import React from "react";
-import logo from "../assets/images/logo2.png";
-import { Link } from "react-router-dom";
-import { useAuth } from "./Login/AuthContext";
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
+import Logo from './Homepage/Header Files/Logo.js';
+import Navigation from './Homepage/Header Files/Navigation.js';
+import RequestAccessButton from './Homepage/Header Files/RequestEarlyAccess.js';
 
-const Header = () => {
-  const navigate = useNavigate();
-
-  const handleLogout = () => {
-    logout();
-    navigate('/login'); // Redirect to login page
-  };
-
-  const { isAuthenticated, logout } = useAuth(); // Access auth state and logout function
-
+function Header() {
   return (
-    <header className="bg-white flex justify-between items-center h-24 px-12 fixed w-full top-0 z-50 shadow-md">
-      <a href="/">
-        <img className="h-16" src={logo} alt="Finwise School" />
-      </a>
-
-      <nav className="hidden md:flex items-center gap-12">
-        <ul className="flex gap-12">
-          <li>
-            <a className="text-gray-700 font-medium relative after:absolute after:py-0.5 after:left-0 after:bottom-0 after:w-full after:h-1 after:bg-transparent after:transition-all after:duration-300 after:content-[''] hover:after:bg-blue-500">
-              <Link to="/book">Request Early Access</Link>
-            </a>
-          </li>
-          <li>
-            <a className="text-gray-700 font-medium relative after:absolute after:py-0.5 after:left-0 after:bottom-0 after:w-full after:h-1 after:bg-transparent after:transition-all after:duration-300 after:content-[''] hover:after:bg-blue-500">
-              <Link to="/clients">
-               Our Supporters
-              </Link>
-            </a>
-          </li>
-          <li>
-            <a className="text-gray-700 font-medium relative after:absolute after:py-0.5 after:left-0 after:bottom-0 after:w-full after:h-1 after:bg-transparent after:transition-all after:duration-300 after:content-[''] hover:after:bg-blue-500">
-              <Link to="/calculator">Utilities Calculators</Link>
-            </a>
-          </li>
-          <li>
-            <a className="text-gray-700 font-medium relative after:absolute after:py-0.5 after:left-0 after:bottom-0 after:w-full after:h-1 after:bg-transparent after:transition-all after:duration-300 after:content-[''] hover:after:bg-blue-500">
-              <Link to="/aboutUs">About Us</Link>
-            </a>
-          </li>
-
-          {/* Conditionally render Login/Signup or Logout based on authentication state */}
-          {isAuthenticated ? (
-            <li>
-              <button
-                onClick={handleLogout}
-                className="text-white bg-blue-500 py-2 px-4 rounded hover:bg-white hover:text-blue-500"
-        
-              >
-                Logout
-              </button>
-              <Link className="text-gray-700 hover:text-blue-500 ml-4" to="/profile">Profile</Link>
-            </li>
-          ) : (
-            <li>
-              <a
-                className="text-white bg-blue-500 py-2 px-4 rounded hover:bg-white hover:text-blue-500"
-              >
-                <Link to="/login">Login/Sign Up</Link>
-              </a>
-            </li>
-          )}
-        </ul>
-      </nav>
-
-      <button className="btn-mobile-nav md:hidden flex items-center">
-        <ion-icon className="text-4xl" name="menu-outline"></ion-icon>
-        <ion-icon className="text-4xl hidden" name="close-outline"></ion-icon>
-      </button>
+    <header className="flex relative justify-between items-center px-40 py-5 w-full bg-white max-md:px-5 max-md:max-w-full">
+      <Logo />
+      <h1 className="z-0 self-stretch my-auto w-[1325px] max-md:max-w-full">
+        Finwise School
+      </h1>
+      <a
+    href="#"
+    className="inline-block text-[#263871] hover:text-green-500 rounded-lg py-2 text-sm lg:text-base min-w-[150px] lg:min-w-[200px] text-center transition-all duration-300 "
+    style={{
+      border: '5px solid',
+      borderRadius: '12px',
+      borderImage: 'linear-gradient(90deg, #223876 0%, #3CB371 100%) 1',
+    }}
+  >
+    Request Early Access
+  </a>
+      <Navigation />
     </header>
   );
-};
+}
 
 export default Header;

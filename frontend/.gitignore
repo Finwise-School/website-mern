@@ -18,6 +18,9 @@ pids/
 jspm_packages/
 client/node_modules/
 dist/
+react-icons
+react-responsive
+node-irr   
 
 # Bower
 bower_components/
