@@ -213,6 +213,10 @@ strong {
   color: #3CB371;
 }
 
+.finwise-para{
+  color: #999999;
+}
+
 .finwise-green-bg{
   background-color: #3CB371;
 }
@@ -227,4 +231,8 @@ strong {
 
 .finwise-gradient{
   background: linear-gradient(95.93deg, #262626 -26.82%, rgba(38, 38, 38, 0) 40.46%);
+}
+
+.faqButton {
+  background-color: #1A1A1A;
 }
