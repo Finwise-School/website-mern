@@ -5,6 +5,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Cards from "./components/carouselCards";
 import Profile from "./components/Profile";
+import FAQ from "./components/FAQ";
 import MainContent from "./components/MainContent";
 import Book from "./components/requestEarlyAccess";
 import Contact from "./components/Contact";
@@ -21,6 +22,7 @@ import FixedDepo from "./components/calculator/FixedDepo";
 import Tax from "./components/calculator/Tax";
 import EMICalculator from "./components/calculator/EMI";
 import CAGRCalculator from "./components/calculator/CAGR";
+import Chatbot from "./components/Chatbot";
 
 
 const ProtectedRoute = ({ element, ...rest }) => {
@@ -54,7 +56,9 @@ const App = () => {
               path="/profile"
               element={<ProtectedRoute element={<Profile />} />}
             />
+            <Route path="/faq" element={<FAQ />} />
           </Routes>
+          <Chatbot />
           <Footer />
         </div>
       </Router>
