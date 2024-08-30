@@ -8,10 +8,10 @@ import right from "../../assets/images/aboutUS/right.png";
 const AboutUs = () => {
   return (
     <div>
-      {/* Top Container */}
-      <div className="flex items-center justify-between p-8">
+     
+      <div className="flex items-center justify-between p-10">
         <div className="w-full md:w-1/2">
-          <h2 className="text-6xl mb-4">About Us</h2>
+          <h2 className="finwise-blue text-6xl mb-4  ">About US</h2>
           <p className="text-lg">
             At FinwiseSchool, we understand that everyone learns differently, so
             we offer personalized learning paths tailored to each user's unique
@@ -24,18 +24,19 @@ const AboutUs = () => {
           </p>
 
           <div className="mt-6 lg:mt-0 lg:ml-10">
-          <a
-            href="#"
-            className="inline-block rounded-lg text-[#263871] hover:text-green-500 rounded-lg py-3 px-6 lg:px-8 text-base lg:text-lg min-w-[200px] lg:min-w-[250px] text-center transition-all duration-300"
-            style={{
-              border: '5px solid',
-              borderRadius: '12px',
-              borderImage: 'linear-gradient(90deg, #223876 0%, #3CB371 100%) 1',
-            }}
-          >
-            Request Early Access
-          </a>
-        </div>
+  <a
+    href="#"
+    className="inline-block text-[#263871] hover:text-green-500 rounded-lg py-2 text-sm lg:text-base min-w-[150px] lg:min-w-[200px] text-center transition-all duration-300 mt-10"
+    style={{
+      border: '5px solid',
+      borderRadius: '12px',
+      borderImage: 'linear-gradient(90deg, #223876 0%, #3CB371 100%) 1',
+    }}
+  >
+    Request Early Access
+  </a>
+</div>
+
         </div>
         <img
           src={phone}
@@ -46,11 +47,11 @@ const AboutUs = () => {
         />
       </div>
 
-      {/* Our Values */}
+      
       <div className="p-8 bg-gray-100">
         <div className="flex flex-col md:flex-row">
           <div className="w-full md:w-1/2 mb-8 md:mb-0">
-            <h2 className="text-6xl mb-4">Our Values</h2>
+            <h2 className="finwise-blue text-6xl mb-4">Our Values</h2>
             <p className="text-lg">
               Our journey is one of relentless progress and transformation. We
               began as a passionate group with a vision, dedicated to building
@@ -59,9 +60,9 @@ const AboutUs = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-4 w-full md:w-1/2">
+          <div className="grid grid-cols-2 gap-0 w-full md:w-1/2">
             <div className="p-4 bg-white shadow-md">
-              <h1 className="text-lg font-bold">Trust</h1>
+              <h1 className="finwise-blue text-lg font-bold">Trust</h1>
               <p>
                 We build lasting relationships through integrity, transparency,
                 and trust.
@@ -69,7 +70,7 @@ const AboutUs = () => {
             </div>
 
             <div className="p-4 bg-white shadow-md">
-              <h1 className="text-lg font-bold">Excellence</h1>
+              <h1 className="finwise-blue text-lg font-bold">Excellence</h1>
               <p>
                 We strive for excellence in everything we do, ensuring high
                 standards and quality.
@@ -77,7 +78,7 @@ const AboutUs = () => {
             </div>
 
             <div className="p-4 bg-white shadow-md">
-              <h1 className="text-lg font-bold">Community Focus</h1>
+              <h1 className="finwise-blue text-lg font-bold">Community Focus</h1>
               <p>
                 We are committed to fostering a sense of community and support
                 among our users.
@@ -85,7 +86,7 @@ const AboutUs = () => {
             </div>
 
             <div className="p-4 bg-white shadow-md">
-              <h1 className="text-lg font-bold">Our Commitment</h1>
+              <h1 className="finwise-blue text-lg font-bold">Our Commitment</h1>
               <p>
                 We are dedicated to our mission and to helping our users achieve
                 their financial goals.
@@ -95,7 +96,7 @@ const AboutUs = () => {
         </div>
       </div>
 
-      {/* Steps Section */}
+    
       <div className="bg-black text-white py-16">
         <div className="container mx-auto px-8">
           <div className="pb-12">
@@ -110,7 +111,7 @@ const AboutUs = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="border border-blue-300 p-5 relative">
+            <div className="border border-x-blue-700 p-5 relative">
               <h2 className="text-xl font-semibold mb-4">Step 01</h2>
               <div className="text-center">
                 <h2 className="text-lg font-bold mb-2">
@@ -124,7 +125,7 @@ const AboutUs = () => {
               <div className="absolute top-0 left-0 h-full w-1 bg-blue-300 shadow-lg"></div>
             </div>
 
-            <div className="border border-blue-300 p-5 relative">
+            <div className="border border-x-blue-700 p-5 relative">
               <h2 className="text-xl font-semibold mb-4">Step 02</h2>
               <div className="text-center">
                 <h2 className="text-lg font-bold mb-2">
@@ -203,7 +204,7 @@ const AboutUs = () => {
       </div>
       <div>
             <div className=" text-center justify-center p-20">
-              <h2 className=" text-3xl pb-5">Meet our Supporters</h2>
+              <h2 className="finwise-blue text-3xl pb-5">Meet our Supporters</h2>
               <p>
                 At Finwise School, our success is fueled by the support and
                 expertise of our valued partners.
@@ -228,7 +229,7 @@ const AboutUs = () => {
             </div>
 
       <div className=" justify-center text-center p-20">
-        <h1 className=" text-3xl pb-5">Partner Portal</h1>
+        <h1 className="finwise-blue text-3xl pb-5">Partner Portal</h1>
         <p>
           Our Partner Portal offers customized financial planning solutions
           tailored specifically for corporate clients. Collaborate with Finwise
@@ -259,12 +260,12 @@ const AboutUs = () => {
      
 
 
-      <div className=" grid grid-cols-2">
+      <div className=" flex p-10">
         <div className="">
-          <h1 className=" text-3xl pb-5 justify-center text-center">
+          <h1 className="finwise-blue text-3xl pb-5 r">
             Start Your Financial Journey Today
           </h1>
-          <p>
+          <p className=" justify-center  text-left">
             Your path to financial freedom is just a click away. Whether you’re
             aiming to optimize your investments, create a solid savings plan, or
             receive expert financial advice, FinWise is here to guide you every
@@ -274,18 +275,19 @@ const AboutUs = () => {
           </p>
         </div>
         <div className="mt-6 lg:mt-0 lg:ml-10">
-          <a
-            href="#"
-            className="inline-block rounded-lg text-[#263871] hover:text-green-500 rounded-lg py-3  text-base lg:text-lg min-w-[200px] lg:min-w-[250px] text-center transition-all duration-300"
-            style={{
-              border: '5px solid',
-              borderRadius: '12px',
-              borderImage: 'linear-gradient(90deg, #223876 0%, #3CB371 100%) 1',
-            }}
-          >
-            Request Early Access
-          </a>
-        </div>
+  <a
+    href="#"
+    className="inline-block text-[#263871] hover:text-green-500 rounded-lg py-2 text-sm lg:text-base min-w-[150px] lg:min-w-[200px] text-center transition-all duration-300"
+    style={{
+      border: '5px solid',
+      borderRadius: '12px',
+      borderImage: 'linear-gradient(90deg, #223876 0%, #3CB371 100%) 1',
+    }}
+  >
+    Request Early Access
+  </a>
+</div>
+
       </div>
     </div>
   );
