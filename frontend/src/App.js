@@ -7,7 +7,7 @@ import Cards from "./components/carouselCards";
 import Profile from "./components/Profile";
 import FAQ from "./components/FAQ";
 import MainContent from "./components/MainContent";
-import Book from "./components/requestEarlyAccess";
+import EarlyAccess from "./components/requestEarlyAccess";
 import Contact from "./components/Contact";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -23,6 +23,8 @@ import Tax from "./components/calculator/Tax";
 import EMICalculator from "./components/calculator/EMI";
 import CAGRCalculator from "./components/calculator/CAGR";
 import Chatbot from "./components/Chatbot";
+import MortgageCalculator from "./components/calculator/Mortgage";
+import ScrollToTop from "./components/ScrolltoTop";
 
 
 const ProtectedRoute = ({ element, ...rest }) => {
@@ -34,11 +36,12 @@ const App = () => {
   return (
     <AuthProvider>
       <Router>
+      <ScrollToTop />
         <div className="app">
           <Header/>
           <Routes>
+            <Route path="/early-access" element={<EarlyAccess />} />
             <Route path="/" element={<MainContent />} />
-            <Route path="/book" element={<Book />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/calculator" element={<Calculator />} />
             <Route path="/aboutUs" element={<AboutUs />} />
@@ -52,6 +55,7 @@ const App = () => {
             <Route path="/calculator/tax" element={<Tax />} />
             <Route path="/calculator/emi" element={<EMICalculator />} />
             <Route path="/calculator/cagr" element={<CAGRCalculator />} />
+            <Route path="/calculator/mortgage" element={<MortgageCalculator />} />
             <Route
               path="/profile"
               element={<ProtectedRoute element={<Profile />} />}
