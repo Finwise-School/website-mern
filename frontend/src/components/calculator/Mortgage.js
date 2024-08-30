@@ -21,13 +21,34 @@ const MortgageCalculator = () => {
     const [result, setResult] = useState({ payment: "0" });
     const [schedule, setSchedule] = useState([]);
     const [showMore, setShowMore] = useState(0); // Track current form index
-    const [startPaymentNo, setStartPaymentNo] = useState(2); // Starting from Payment No. 5
+    const [startPaymentNo, setStartPaymentNo] = useState(1); // Starting from Payment No. 5
     const [extraPayment, setExtraPayment] = useState(100.0);
+    const [totalExtraPayment, setTotalExtraPayment] = useState('');
     const [extraPaymentInterval, setExtraPaymentInterval] = useState(3);
     const [extraAnnualPayment, setExtraAnnualPayment] = useState(50.0);
     const [extraPaymentMonth, setExtraPaymentMonth] = useState(4);
-
+    const [interestSavings, setInterestSavings] = useState(0);
+    const [totalSumInterest_NoExtraPayments, setTotalSumInterest_NEP] = useState(0);
+    const [totalSumInterest_WithExtraPayments, setTotalSumInterest_WEP] = useState(0);
     console.log(startPaymentNo);
+    let totalInterest = 0;
+    let finalInterestSavings = 0;
+    useEffect(() => {
+        calculatePayment();
+    }, [
+        loanAmount,
+        interestRate,
+        termLength,
+        paymentFrequency,
+        firstPaymentDate,
+        compoundPeriod,
+        startPaymentNo,
+        extraPayment,
+        extraPaymentInterval,
+        extraAnnualPayment,
+        extraPaymentMonth
+    ]);
+
     const compoundPeriodMapping = {
         'Monthly': 12,
         'Semi-Annually': 2,
@@ -52,54 +73,83 @@ const MortgageCalculator = () => {
         const P = parseFloat(loanAmount);
         const annualInterestRate = parseFloat(interestRate);
         const years = parseInt(termLength);
-
+    
         if (isNaN(P) || isNaN(annualInterestRate) || isNaN(years) || P <= 0 || annualInterestRate <= 0 || years <= 0) {
             setResult({ payment: "Invalid Input" });
             setSchedule([]);
             return;
         }
-
+    
         const periodsPerYear = paymentFrequencyMapping[paymentFrequency] || 12;
         const compoundingPeriodsPerYear = compoundPeriodMapping[compoundPeriod] || 12;
         const totalPayments = years * periodsPerYear;
         const periodicInterestRate = (Math.pow(1 + (annualInterestRate / 100) / compoundingPeriodsPerYear, compoundingPeriodsPerYear / periodsPerYear) - 1);
-
+    
         const EMI = calculateEMI(P, periodicInterestRate, periodsPerYear, totalPayments);
-
+    
         let scheduleData = [];
         let balance = P;
-        let paymentDate = new Date(firstPaymentDate);
-
+        let paymentDate = new Date(firstPaymentDate); // Start from the exact first payment date
+        let tempTotalExtraPayments = 0;
+        let totalInterestPaidWithExtra = 0;
+        let totalInterestPaidWithoutExtra = 0;
+        let totalSumInterest = 0;
+    
         const annualExtraPayment = parseFloat(extraAnnualPayment) || 0;
-
+        let balanceWithoutExtra = P;
+    
+        let totalPaymentsMade = 0;
+        let paymentNumber = 0;
+    
         for (let i = 1; i <= totalPayments; i++) {
-            if (balance <= 0) {
-                break; // Stop if the balance is zero or less
-            }
-
+            if (balance <= 0) break;
+    
+            // Interest and Principal Calculation
             const interestDue = balance * periodicInterestRate;
             const principalPaid = EMI - interestDue;
-
-            // Apply extra payments based on the specified interval and start payment number
+            totalSumInterest += interestDue;
+    
+            // Calculate interest without extra payments
+            const interestDueWithoutExtra = balanceWithoutExtra * periodicInterestRate;
+            const principalPaidWithoutExtra = EMI - interestDueWithoutExtra;
+            totalInterestPaidWithoutExtra += interestDueWithoutExtra;
+            balanceWithoutExtra = Math.max(balanceWithoutExtra - principalPaidWithoutExtra, 0);
+    
+            // Apply extra payments
             let extraPaymentAmount = 0;
-            if (i >= startPaymentNo && i % extraPaymentInterval === 0) {
-                extraPaymentAmount = parseFloat(extraPayment);
+    
+            if (balance > EMI) {
+                if (i >= startPaymentNo && (i - startPaymentNo) % extraPaymentInterval === 0) {
+                    extraPaymentAmount = parseFloat(extraPayment);
+                }
+    
+                if (i >= startPaymentNo && paymentDate.getMonth() + 1 === extraPaymentMonth) {
+                    extraPaymentAmount += annualExtraPayment;
+                }
+            } else {
+                // Logic for the last payment:
+                const remainingBalance = balance - principalPaid;
+    
+                if (remainingBalance <= EMI) {
+                    extraPaymentAmount = 0;  // No extra payment needed
+                } else {
+                    // Calculate how much extra payment is needed to close the loan
+                    extraPaymentAmount = remainingBalance - EMI;
+                }
             }
-
-            // Add annual extra payment if it's March and after the start payment number
-            if (i >= startPaymentNo && paymentDate.getMonth() + 1 === extraPaymentMonth) {
-                extraPaymentAmount += annualExtraPayment;
-            }
-
-            const totalPaymentDue = EMI + extraPaymentAmount;
+    
+            // Balance update with principal and extra payment
             balance = Math.max(balance - (principalPaid + extraPaymentAmount), 0);
-
+            totalInterestPaidWithExtra += interestDue;
+            tempTotalExtraPayments += extraPaymentAmount;
+    
+            // Add to the schedule
             scheduleData.push({
                 paymentNo: i,
                 paymentDate: paymentDate.toISOString().split('T')[0],
                 interestRate: annualInterestRate.toFixed(2) + '%',
                 interestDue: interestDue.toFixed(2),
-                paymentDue: totalPaymentDue.toFixed(2),
+                paymentDue: EMI.toFixed(2),
                 extraPayments: extraPaymentAmount.toFixed(2),
                 additionalPayment: "0",
                 principalPaid: (principalPaid + extraPaymentAmount).toFixed(2),
@@ -107,15 +157,87 @@ const MortgageCalculator = () => {
                 taxReturned: "0",
                 cumulativeTaxReturned: "0"
             });
-
-            paymentDate.setMonth(paymentDate.getMonth() + (12 / periodsPerYear));
+    
+            totalPaymentsMade += EMI;
+            paymentNumber++;
+    
+            // Update paymentDate based on the frequency
+            if (paymentFrequency === "Weekly") {
+                paymentDate.setDate(paymentDate.getDate() + 7);
+            } else if (paymentFrequency === "Semi-Monthly") {
+                if (paymentDate.getDate() === 1) {
+                    paymentDate.setDate(15);
+                } else {
+                    paymentDate.setMonth(paymentDate.getMonth() + 1);
+                    paymentDate.setDate(1);
+                }
+            } else if (paymentFrequency === "Monthly") {
+                paymentDate.setMonth(paymentDate.getMonth() + 1); // Move to the next month
+            }
         }
-
-        setResult({ payment: EMI.toFixed(2) });
+    
+        // Final calculations for results
+        setTotalExtraPayment(tempTotalExtraPayments);
+        setResult({ payment: EMI.toFixed(2), totalPayments: totalPaymentsMade.toFixed(2) });
         setSchedule(scheduleData);
+    
+        // Calculate interest savings
+        const interestSavings = totalInterestPaidWithoutExtra - totalInterestPaidWithExtra;
+        setInterestSavings(interestSavings.toFixed(2));
+        setTotalSumInterest_WEP(totalSumInterest);
     };
+            
+    
+// ------------------------------------newone----------------------------------
+
+const calculateRegularPaymentSchedule = () => {
+    const P = parseFloat(loanAmount);
+    const annualInterestRate = parseFloat(interestRate);
+    const years = parseInt(termLength);
+
+    if (isNaN(P) || isNaN(annualInterestRate) || isNaN(years) || P <= 0 || annualInterestRate <= 0 || years <= 0) {
+        setResult({ payment: "Invalid Input" });
+        setSchedule([]);
+        return;
+    }
+
+    const periodsPerYear = paymentFrequencyMapping[paymentFrequency] || 12;
+    const compoundingPeriodsPerYear = compoundPeriodMapping[compoundPeriod] || 12;
+    const totalPayments = years * periodsPerYear;
+    const periodicInterestRate = (Math.pow(1 + (annualInterestRate / 100) / compoundingPeriodsPerYear, compoundingPeriodsPerYear / periodsPerYear) - 1);
+
+    const EMI = calculateEMI(P, periodicInterestRate, periodsPerYear, totalPayments);
+
+    let balance = P;
+    let paymentDate = new Date(firstPaymentDate);
+    let totalPaymentsMade = 0; // To track the total of all payments made
+
+    for (let i = 1; i <= totalPayments; i++) {
+        const interestDue = balance * periodicInterestRate;
+        const principalPaid = EMI - interestDue;
+        balance = Math.max(balance - principalPaid, 0);
+
+        // Sum the total payments made
+        totalPaymentsMade += (interestDue + principalPaid);
+
+        paymentDate.setMonth(paymentDate.getMonth() + (12 / periodsPerYear));
+    }
+
+    console.log("Total Payments Made (Regular Schedule): " + totalPaymentsMade.toFixed(2));
+
+    // Return or set the result if needed
+    return totalPaymentsMade;
+};
 
 
+    let totalPaymentsDoneExtraPaymentsExcluded = calculateRegularPaymentSchedule();
+    totalInterest = totalPaymentsDoneExtraPaymentsExcluded - loanAmount;
+    // setTotalSumInterest_NEP(totalInterest);
+    // console.log("Total Interest : "+totalInterest);
+    // console.log("No extra : "+totalInterest);
+    console.log("with extra : "+totalSumInterest_WithExtraPayments);
+    finalInterestSavings = totalInterest - totalSumInterest_WithExtraPayments;
+    console.log("Final : "+finalInterestSavings);
     useEffect(() => {
         calculatePayment();
     }, [loanAmount, interestRate, termLength, paymentFrequency, firstPaymentDate, compoundPeriod]);
@@ -166,7 +288,7 @@ const MortgageCalculator = () => {
 
         doc.save('EMI_Schedule.pdf');
     };
-
+    
     const exportToExcel = () => {
         const worksheet = XLSX.utils.json_to_sheet(schedule);
         const workbook = XLSX.utils.book_new();
@@ -296,6 +418,9 @@ const MortgageCalculator = () => {
                         setExtraPaymentInterval={setExtraPaymentInterval}
                         setExtraAnnualPayment={setExtraAnnualPayment}
                         setExtraPaymentMonth={setExtraPaymentMonth}
+                        totalExtraPayment={totalExtraPayment}
+                        setTotalExtraPayment={setTotalExtraPayment}
+                        finalInterestSavings={finalInterestSavings}
 
                     />}
                     {showMore === 2 && <PITIPayments
@@ -432,3 +557,5 @@ const MortgageCalculator = () => {
 };
 
 export default MortgageCalculator;
+
+
