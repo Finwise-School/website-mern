@@ -22,6 +22,7 @@ import Tax from "./components/calculator/Tax";
 import EMICalculator from "./components/calculator/EMI";
 import CAGRCalculator from "./components/calculator/CAGR";
 import MortgageCalculator from "./components/calculator/Mortgage";
+import IRRCalculator from "./components/calculator/IRR";
 import ScrollToTop from "./components/ScrolltoTop";
 
 
@@ -54,6 +55,7 @@ const App = () => {
             <Route path="/calculator/emi" element={<EMICalculator />} />
             <Route path="/calculator/cagr" element={<CAGRCalculator />} />
             <Route path="/calculator/mortgage" element={<MortgageCalculator />} />
+            <Route path="/calculator/irr" element={<IRRCalculator />} />
             <Route
               path="/profile"
               element={<ProtectedRoute element={<Profile />} />}

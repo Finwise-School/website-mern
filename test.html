@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IRR Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+        }
+        input, button {
+            margin: 10px;
+            padding: 10px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>IRR Calculator</h1>
+        <form id="irr-form">
+            <input type="number" id="initial" placeholder="Initial Investment" required>
+            <input type="number" id="year1" placeholder="Year 1 Cash Flow" required>
+            <div id="additional-years"></div>
+            <button type="button" onclick="addYear()">Add Year</button>
+            <button type="button" onclick="removeYear()">Remove Year</button>
+            <button type="submit">Calculate IRR</button>
+        </form>
+        <h2 id="result">IRR: N/A</h2>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/node-irr"></script>
+    <script>
+        const irr = require('node-irr').irr;
+
+        let yearCount = 2;
+
+        function addYear() {
+            yearCount++;
+            const additionalYearsDiv = document.getElementById('additional-years');
+            const input = document.createElement('input');
+            input.type = 'number';
+            input.id = `year${yearCount}`;
+            input.placeholder = `Year ${yearCount} Cash Flow`;
+            additionalYearsDiv.appendChild(input);
+        }
+
+        function removeYear() {
+            if (yearCount > 2) {
+                const additionalYearsDiv = document.getElementById('additional-years');
+                additionalYearsDiv.removeChild(additionalYearsDiv.lastChild);
+                yearCount--;
+            }
+        }
+
+        function calculateIRR(event) {
+            event.preventDefault();
+
+            const initialInvestment = parseFloat(document.getElementById('initial').value);
+            const year1 = parseFloat(document.getElementById('year1').value);
+            const cashFlows = [-initialInvestment, year1];
+
+            for (let i = 2; i <= yearCount; i++) {
+                const yearCashFlow = parseFloat(document.getElementById(`year${i}`).value);
+                cashFlows.push(yearCashFlow);
+            }
+
+            const irrResult = irr(cashFlows);
+            document.getElementById('result').textContent = `IRR: ${isNaN(irrResult) ? 'N/A' : (irrResult * 100).toFixed(2)}%`;
+        }
+
+        document.getElementById('irr-form').addEventListener('submit', calculateIRR);
+    </script>
+</body>
+</html>
