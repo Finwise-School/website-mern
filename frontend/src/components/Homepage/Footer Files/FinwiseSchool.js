@@ -4,7 +4,7 @@ import Footer from "./Footer";
 
 function FinwiseSchool() {
   return (
-    <main className="flex flex-col items-center w-full">
+    <main className="flex items-center w-full">
       <FinancialJourney />
       <Footer />
     </main>
