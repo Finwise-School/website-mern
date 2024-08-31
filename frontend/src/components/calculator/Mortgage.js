@@ -7,19 +7,47 @@ import 'jspdf-autotable';
 import * as XLSX from 'xlsx';
 import CalculatorHome from "../../assets/images/calculator_home.png";
 import { Link } from 'react-router-dom';
+import ExtraPayments from "./Mortgage_Extrapayments";
+import PITIPayments from "./Mortgage_PITI_Payments";
 import logo from '../../assets/images/logo.png'; // Adjust the path as needed
 
-const EMICalculator = () => {
+const MortgageCalculator = () => {
     const [loanAmount, setLoanAmount] = useState(10000.00);
     const [interestRate, setInterestRate] = useState(12.75);
     const [termLength, setTermLength] = useState(9);
     const [firstPaymentDate, setFirstPaymentDate] = useState('2024-01-01');
     const [compoundPeriod, setCompoundPeriod] = useState('Monthly');
-    const [paymentFrequency, setPaymentFrequency] = useState('Bi-Weekly');
+    const [paymentFrequency, setPaymentFrequency] = useState('Monthly');
     const [result, setResult] = useState({ payment: "0" });
     const [schedule, setSchedule] = useState([]);
-    const [showMore, setShowMore] = useState(false);
-    const [currentIndex, setCurrentIndex] = useState(0); // Track current index for navigation
+    const [showMore, setShowMore] = useState(0); // Track current form index
+    const [startPaymentNo, setStartPaymentNo] = useState(1); // Starting from Payment No. 5
+    const [extraPayment, setExtraPayment] = useState(100.0);
+    const [totalExtraPayment, setTotalExtraPayment] = useState('');
+    const [extraPaymentInterval, setExtraPaymentInterval] = useState(3);
+    const [extraAnnualPayment, setExtraAnnualPayment] = useState(50.0);
+    const [extraPaymentMonth, setExtraPaymentMonth] = useState(4);
+    const [interestSavings, setInterestSavings] = useState(0);
+    const [totalSumInterest_NoExtraPayments, setTotalSumInterest_NEP] = useState(0);
+    const [totalSumInterest_WithExtraPayments, setTotalSumInterest_WEP] = useState(0);
+    console.log(startPaymentNo);
+    let totalInterest = 0;
+    let finalInterestSavings = 0;
+    useEffect(() => {
+        calculatePayment();
+    }, [
+        loanAmount,
+        interestRate,
+        termLength,
+        paymentFrequency,
+        firstPaymentDate,
+        compoundPeriod,
+        startPaymentNo,
+        extraPayment,
+        extraPaymentInterval,
+        extraAnnualPayment,
+        extraPaymentMonth
+    ]);
 
     const compoundPeriodMapping = {
         'Monthly': 12,
@@ -45,50 +73,171 @@ const EMICalculator = () => {
         const P = parseFloat(loanAmount);
         const annualInterestRate = parseFloat(interestRate);
         const years = parseInt(termLength);
-
+    
         if (isNaN(P) || isNaN(annualInterestRate) || isNaN(years) || P <= 0 || annualInterestRate <= 0 || years <= 0) {
             setResult({ payment: "Invalid Input" });
             setSchedule([]);
             return;
         }
-
+    
         const periodsPerYear = paymentFrequencyMapping[paymentFrequency] || 12;
         const compoundingPeriodsPerYear = compoundPeriodMapping[compoundPeriod] || 12;
         const totalPayments = years * periodsPerYear;
         const periodicInterestRate = (Math.pow(1 + (annualInterestRate / 100) / compoundingPeriodsPerYear, compoundingPeriodsPerYear / periodsPerYear) - 1);
-
+    
         const EMI = calculateEMI(P, periodicInterestRate, periodsPerYear, totalPayments);
-
+    
         let scheduleData = [];
         let balance = P;
-        let paymentDate = new Date(firstPaymentDate);
-
+        let paymentDate = new Date(firstPaymentDate); // Start from the exact first payment date
+        let tempTotalExtraPayments = 0;
+        let totalInterestPaidWithExtra = 0;
+        let totalInterestPaidWithoutExtra = 0;
+        let totalSumInterest = 0;
+    
+        const annualExtraPayment = parseFloat(extraAnnualPayment) || 0;
+        let balanceWithoutExtra = P;
+    
+        let totalPaymentsMade = 0;
+        let paymentNumber = 0;
+    
         for (let i = 1; i <= totalPayments; i++) {
+            if (balance <= 0) break;
+    
+            // Interest and Principal Calculation
             const interestDue = balance * periodicInterestRate;
             const principalPaid = EMI - interestDue;
-            balance = Math.max(balance - principalPaid, 0);
-
+            totalSumInterest += interestDue;
+    
+            // Calculate interest without extra payments
+            const interestDueWithoutExtra = balanceWithoutExtra * periodicInterestRate;
+            const principalPaidWithoutExtra = EMI - interestDueWithoutExtra;
+            totalInterestPaidWithoutExtra += interestDueWithoutExtra;
+            balanceWithoutExtra = Math.max(balanceWithoutExtra - principalPaidWithoutExtra, 0);
+    
+            // Apply extra payments
+            let extraPaymentAmount = 0;
+    
+            if (balance > EMI) {
+                if (i >= startPaymentNo && (i - startPaymentNo) % extraPaymentInterval === 0) {
+                    extraPaymentAmount = parseFloat(extraPayment);
+                }
+    
+                if (i >= startPaymentNo && paymentDate.getMonth() + 1 === extraPaymentMonth) {
+                    extraPaymentAmount += annualExtraPayment;
+                }
+            } else {
+                // Logic for the last payment:
+                const remainingBalance = balance - principalPaid;
+    
+                if (remainingBalance <= EMI) {
+                    extraPaymentAmount = 0;  // No extra payment needed
+                } else {
+                    // Calculate how much extra payment is needed to close the loan
+                    extraPaymentAmount = remainingBalance - EMI;
+                }
+            }
+    
+            // Balance update with principal and extra payment
+            balance = Math.max(balance - (principalPaid + extraPaymentAmount), 0);
+            totalInterestPaidWithExtra += interestDue;
+            tempTotalExtraPayments += extraPaymentAmount;
+    
+            // Add to the schedule
             scheduleData.push({
                 paymentNo: i,
                 paymentDate: paymentDate.toISOString().split('T')[0],
                 interestRate: annualInterestRate.toFixed(2) + '%',
                 interestDue: interestDue.toFixed(2),
                 paymentDue: EMI.toFixed(2),
-                extraPayments: "0",
+                extraPayments: extraPaymentAmount.toFixed(2),
                 additionalPayment: "0",
-                principalPaid: principalPaid.toFixed(2),
+                principalPaid: (principalPaid + extraPaymentAmount).toFixed(2),
                 balance: balance.toFixed(2),
                 taxReturned: "0",
                 cumulativeTaxReturned: "0"
             });
-
-            paymentDate.setMonth(paymentDate.getMonth() + (12 / periodsPerYear));
+    
+            totalPaymentsMade += EMI;
+            paymentNumber++;
+    
+            // Update paymentDate based on the frequency
+            if (paymentFrequency === "Weekly") {
+                paymentDate.setDate(paymentDate.getDate() + 7);
+            } else if (paymentFrequency === "Semi-Monthly") {
+                if (paymentDate.getDate() === 1) {
+                    paymentDate.setDate(15);
+                } else {
+                    paymentDate.setMonth(paymentDate.getMonth() + 1);
+                    paymentDate.setDate(1);
+                }
+            } else if (paymentFrequency === "Monthly") {
+                paymentDate.setMonth(paymentDate.getMonth() + 1); // Move to the next month
+            }
         }
-
-        setResult({ payment: EMI.toFixed(2) });
+    
+        // Final calculations for results
+        setTotalExtraPayment(tempTotalExtraPayments);
+        setResult({ payment: EMI.toFixed(2), totalPayments: totalPaymentsMade.toFixed(2) });
         setSchedule(scheduleData);
+    
+        // Calculate interest savings
+        const interestSavings = totalInterestPaidWithoutExtra - totalInterestPaidWithExtra;
+        setInterestSavings(interestSavings.toFixed(2));
+        setTotalSumInterest_WEP(totalSumInterest);
     };
+            
+    
+// ------------------------------------newone----------------------------------
 
+const calculateRegularPaymentSchedule = () => {
+    const P = parseFloat(loanAmount);
+    const annualInterestRate = parseFloat(interestRate);
+    const years = parseInt(termLength);
+
+    if (isNaN(P) || isNaN(annualInterestRate) || isNaN(years) || P <= 0 || annualInterestRate <= 0 || years <= 0) {
+        setResult({ payment: "Invalid Input" });
+        setSchedule([]);
+        return;
+    }
+
+    const periodsPerYear = paymentFrequencyMapping[paymentFrequency] || 12;
+    const compoundingPeriodsPerYear = compoundPeriodMapping[compoundPeriod] || 12;
+    const totalPayments = years * periodsPerYear;
+    const periodicInterestRate = (Math.pow(1 + (annualInterestRate / 100) / compoundingPeriodsPerYear, compoundingPeriodsPerYear / periodsPerYear) - 1);
+
+    const EMI = calculateEMI(P, periodicInterestRate, periodsPerYear, totalPayments);
+
+    let balance = P;
+    let paymentDate = new Date(firstPaymentDate);
+    let totalPaymentsMade = 0; // To track the total of all payments made
+
+    for (let i = 1; i <= totalPayments; i++) {
+        const interestDue = balance * periodicInterestRate;
+        const principalPaid = EMI - interestDue;
+        balance = Math.max(balance - principalPaid, 0);
+
+        // Sum the total payments made
+        totalPaymentsMade += (interestDue + principalPaid);
+
+        paymentDate.setMonth(paymentDate.getMonth() + (12 / periodsPerYear));
+    }
+
+    console.log("Total Payments Made (Regular Schedule): " + totalPaymentsMade.toFixed(2));
+
+    // Return or set the result if needed
+    return totalPaymentsMade;
+};
+
+
+    let totalPaymentsDoneExtraPaymentsExcluded = calculateRegularPaymentSchedule();
+    totalInterest = totalPaymentsDoneExtraPaymentsExcluded - loanAmount;
+    // setTotalSumInterest_NEP(totalInterest);
+    // console.log("Total Interest : "+totalInterest);
+    // console.log("No extra : "+totalInterest);
+    console.log("with extra : "+totalSumInterest_WithExtraPayments);
+    finalInterestSavings = totalInterest - totalSumInterest_WithExtraPayments;
+    console.log("Final : "+finalInterestSavings);
     useEffect(() => {
         calculatePayment();
     }, [loanAmount, interestRate, termLength, paymentFrequency, firstPaymentDate, compoundPeriod]);
@@ -139,7 +288,7 @@ const EMICalculator = () => {
 
         doc.save('EMI_Schedule.pdf');
     };
-
+    
     const exportToExcel = () => {
         const worksheet = XLSX.utils.json_to_sheet(schedule);
         const workbook = XLSX.utils.book_new();
@@ -147,19 +296,11 @@ const EMICalculator = () => {
         XLSX.writeFile(workbook, 'EMI_Schedule.xlsx');
     };
 
-    const handleNext = () => {
-        if (currentIndex + 10 < schedule.length) {
-            setCurrentIndex(currentIndex + 10);
-        } else {
-            setCurrentIndex(schedule.length);
-        }
-    };
-
-    const handlePrevious = () => {
-        if (currentIndex - 10 >= 0) {
-            setCurrentIndex(currentIndex - 10);
-        } else {
-            setCurrentIndex(0);
+    const handleNavigation = (direction) => {
+        if (direction === 'next') {
+            setShowMore(prev => (prev + 1) % 3);
+        } else if (direction === 'prev') {
+            setShowMore(prev => (prev - 1 + 3) % 3);
         }
     };
 
@@ -167,92 +308,131 @@ const EMICalculator = () => {
         <div style={{ marginTop: "100px" }} className="bg-gray-50 p-2">
             <div className="max-w-6xl mx-auto bg-white shadow-lg rounded-lg p-8">
                 <div className="mb-6">
-                    <h1 className="text-2xl font-semibold finwise-green">EMI Calculator</h1>
+                    <h1 className="text-2xl font-semibold finwise-green">Home Mortgage Calculator</h1>
                     <p className="finwise-blue">Calculate your dynamic EMI based on frequency</p>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    {/* Input Fields */}
-                    <div>
-                        <h2 className="text-lg font-semibold text-gray-800 mb-4">Input fields:</h2>
-                        <div className="space-y-4">
-                            {/* Loan Amount */}
-                            <div className="flex items-center justify-between p-4 border border-gray-300 rounded-lg">
-                                <label htmlFor="loanAmount" className="text-gray-700">Loan Amount</label>
-                                <div className="flex items-center space-x-2">
-                                    <span className="text-gray-500">&#163;</span>
+                <div className="grid grid-cols-1 gap-8">
+                    {/* Conditional Rendering of Forms */}
+                    {showMore === 0 && (
+                        <div>
+                            <h2 className="text-lg font-semibold text-gray-800 mb-4">Input fields:</h2>
+                            <div className="space-y-4">
+                                {/* Loan Amount */}
+                                <div className="flex items-center justify-between p-4 border border-gray-300 rounded-lg">
+                                    <label htmlFor="loanAmount" className="text-gray-700">Loan Amount</label>
+                                    <div className="flex items-center space-x-2">
+                                        <span className="text-gray-500">&#163;</span>
+                                        <input
+                                            type="number"
+                                            id="loanAmount"
+                                            value={loanAmount}
+                                            onChange={(e) => setLoanAmount(e.target.value)}
+                                            className="bg-green-100 text-gray-800 font-semibold text-right p-2 rounded-lg w-24"
+                                        />
+                                    </div>
+                                </div>
+                                {/* Annual Interest Rate */}
+                                <div className="flex items-center justify-between p-4 border border-gray-300 rounded-lg">
+                                    <label htmlFor="interestRate" className="text-gray-700">Annual Interest Rate (%)</label>
                                     <input
                                         type="number"
-                                        id="loanAmount"
-                                        value={loanAmount}
-                                        onChange={(e) => setLoanAmount(e.target.value)}
+                                        id="interestRate"
+                                        value={interestRate}
+                                        onChange={(e) => setInterestRate(e.target.value)}
                                         className="bg-green-100 text-gray-800 font-semibold text-right p-2 rounded-lg w-24"
                                     />
                                 </div>
-                            </div>
-                            {/* Annual Interest Rate */}
-                            <div className="flex items-center justify-between p-4 border border-gray-300 rounded-lg">
-                                <label htmlFor="interestRate" className="text-gray-700">Annual Interest Rate (%)</label>
-                                <input
-                                    type="number"
-                                    id="interestRate"
-                                    value={interestRate}
-                                    onChange={(e) => setInterestRate(e.target.value)}
-                                    className="bg-green-100 text-gray-800 font-semibold text-right p-2 rounded-lg w-24"
-                                />
-                            </div>
-                            {/* Term Length */}
-                            <div className="flex items-center justify-between p-4 border border-gray-300 rounded-lg">
-                                <label htmlFor="termLength" className="text-gray-700">Term Length (in Years)</label>
-                                <input
-                                    type="number"
-                                    id="termLength"
-                                    value={termLength}
-                                    onChange={(e) => setTermLength(e.target.value)}
-                                    className="bg-green-100 text-gray-800 font-semibold text-right p-2 rounded-lg w-24"
-                                />
-                            </div>
-                            {/* First Payment Date */}
-                            <div className="flex items-center justify-between p-4 border border-gray-300 rounded-lg">
-                                <label htmlFor="firstPaymentDate" className="text-gray-700">First Payment Date</label>
-                                <input
-                                    type="date"
-                                    id="firstPaymentDate"
-                                    value={firstPaymentDate}
-                                    onChange={(e) => setFirstPaymentDate(e.target.value)}
-                                    className="bg-green-100 text-gray-800 font-semibold text-right p-2 rounded-lg w-40"
-                                />
-                            </div>
-                            {/* Compound Period */}
-                            <div className="flex items-center justify-between p-4 border border-gray-300 rounded-lg">
-                                <label htmlFor="compoundPeriod" className="text-gray-700">Compound Period</label>
-                                <select
-                                    id="compoundPeriod"
-                                    value={compoundPeriod}
-                                    onChange={(e) => setCompoundPeriod(e.target.value)}
-                                    className="bg-green-100 text-gray-800 font-semibold p-2 rounded-lg w-40"
-                                >
-                                    <option value="Monthly">Monthly</option>
-                                    <option value="Semi-Annually">Semi-Annually</option>
-                                </select>
-                            </div>
-                            {/* Payment Frequency Dropdown */}
-                            <div className="flex items-center justify-between p-4 border border-gray-300 rounded-lg">
-                                <label htmlFor="paymentFrequency" className="text-gray-700">Payment Frequency</label>
-                                <select
-                                    id="paymentFrequency"
-                                    value={paymentFrequency}
-                                    onChange={(e) => setPaymentFrequency(e.target.value)}
-                                    className="bg-green-100 text-gray-800 font-semibold p-2 rounded-lg w-40"
-                                >
-                                    <option value="Monthly">Monthly</option>
-                                    <option value="Semi-Monthly">Semi-Monthly</option>
-                                    <option value="Bi-Weekly">Bi-Weekly</option>
-                                    <option value="Weekly">Weekly</option>
-                                </select>
+                                {/* Term Length */}
+                                <div className="flex items-center justify-between p-4 border border-gray-300 rounded-lg">
+                                    <label htmlFor="termLength" className="text-gray-700">Term Length (in Years)</label>
+                                    <input
+                                        type="number"
+                                        id="termLength"
+                                        value={termLength}
+                                        onChange={(e) => setTermLength(e.target.value)}
+                                        className="bg-green-100 text-gray-800 font-semibold text-right p-2 rounded-lg w-24"
+                                    />
+                                </div>
+                                {/* First Payment Date */}
+                                <div className="flex items-center justify-between p-4 border border-gray-300 rounded-lg">
+                                    <label htmlFor="firstPaymentDate" className="text-gray-700">First Payment Date</label>
+                                    <input
+                                        type="date"
+                                        id="firstPaymentDate"
+                                        value={firstPaymentDate}
+                                        onChange={(e) => setFirstPaymentDate(e.target.value)}
+                                        className="bg-green-100 text-gray-800 font-semibold text-right p-2 rounded-lg w-40"
+                                    />
+                                </div>
+                                {/* Compound Period */}
+                                <div className="flex items-center justify-between p-4 border border-gray-300 rounded-lg">
+                                    <label htmlFor="compoundPeriod" className="text-gray-700">Compound Period</label>
+                                    <select
+                                        id="compoundPeriod"
+                                        value={compoundPeriod}
+                                        onChange={(e) => setCompoundPeriod(e.target.value)}
+                                        className="bg-green-100 text-gray-800 font-semibold p-2 rounded-lg w-40"
+                                    >
+                                        <option value="Monthly">Monthly</option>
+                                        <option value="Semi-Annually">Semi-Annually</option>
+                                    </select>
+                                </div>
+                                {/* Payment Frequency Dropdown */}
+                                <div className="flex items-center justify-between p-4 border border-gray-300 rounded-lg">
+                                    <label htmlFor="paymentFrequency" className="text-gray-700">Payment Frequency</label>
+                                    <select
+                                        id="paymentFrequency"
+                                        value={paymentFrequency}
+                                        onChange={(e) => setPaymentFrequency(e.target.value)}
+                                        className="bg-green-100 text-gray-800 font-semibold p-2 rounded-lg w-40"
+                                    >
+                                        <option value="Monthly">Monthly</option>
+                                        <option value="Semi-Monthly">Semi-Monthly</option>
+                                        {/* <option value="Bi-Weekly">Bi-Weekly</option> */}
+                                        <option value="Weekly">Weekly</option>
+                                    </select>
+                                </div>
+
+                                {/* Payment Frequency Dropdown */}
+                                <div className="flex items-center justify-between p-4 border border-gray-300 rounded-lg">
+                                    <label htmlFor="paymentFrequency" className="text-gray-700">Results:</label>
+                                    <div className="space-y-2">
+                                        <div className="p-4 border border-gray-300 rounded-lg">
+                                            <p className="finwise-blue">{paymentFrequency} Payment</p>
+                                            <p className="finwise-green font-semibold text-xl">&#163;{result.payment}</p>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
-                    </div>
-                    {/* Results Display */}
+                    )}
+                    {showMore === 1 && <ExtraPayments
+                        startPaymentNo={startPaymentNo}
+                        extraPayment={extraPayment}
+                        extraPaymentInterval={extraPaymentInterval}
+                        extraAnnualPayment={extraAnnualPayment}
+                        extraPaymentMonth={extraPaymentMonth}
+                        setStartPaymentNo={setStartPaymentNo}
+                        setExtraPayment={setExtraPayment}
+                        setExtraPaymentInterval={setExtraPaymentInterval}
+                        setExtraAnnualPayment={setExtraAnnualPayment}
+                        setExtraPaymentMonth={setExtraPaymentMonth}
+                        totalExtraPayment={totalExtraPayment}
+                        setTotalExtraPayment={setTotalExtraPayment}
+                        finalInterestSavings={finalInterestSavings}
+
+                    />}
+                    {showMore === 2 && <PITIPayments
+                        loanAmount={loanAmount}
+                        interestRate={interestRate}
+                        termLength={termLength}
+                        firstPaymentDate={firstPaymentDate}
+                        compoundPeriod={compoundPeriod}
+                        paymentFrequency={paymentFrequency}
+                        result={result.payment}
+                    />}
+                    {/* Results Display
                     <div className="output-fields -mt-28 md:mt-0">
                         <h2 className="text-lg font-semibold text-gray-800 mb-4">Results:</h2>
                         <div className="space-y-2">
@@ -261,11 +441,24 @@ const EMICalculator = () => {
                                 <p className="finwise-green font-semibold text-xl">&#163;{result.payment}</p>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
-
+                <div className="flex justify-between mt-4 p-4" style={{ marginTop: "-115px" }}>
+                    <button
+                        onClick={() => handleNavigation('prev')}
+                        className="bg-blue-500 text-white font-bold py-2 px-4 rounded-lg shadow-lg hover:bg-blue-600 transition duration-200"
+                    >
+                        Previous
+                    </button>
+                    <button
+                        onClick={() => handleNavigation('next')}
+                        className="bg-blue-500 text-white font-bold py-2 px-4 rounded-lg shadow-lg hover:bg-blue-600 transition duration-200"
+                    >
+                        Next
+                    </button>
+                </div>
                 {/* Table Display */}
-                <div style={{ marginTop: "-105px" }}>
+                <div>
                     <div className="flex flex-col md:flex-row justify-between items-center">
                         <h2 className="text-lg font-semibold text-gray-800 mb-4 md:mb-0">EMI Payment Schedule</h2>
                         <div className="flex flex-wrap gap-4 justify-center md:justify-start">
@@ -304,7 +497,7 @@ const EMICalculator = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {schedule.slice(currentIndex, currentIndex + 10).map((row, index) => (
+                                {schedule.map((row, index) => (
                                     <tr key={index}>
                                         <td className="border p-2">{row.paymentNo}</td>
                                         <td className="border p-2">{row.paymentDate}</td>
@@ -321,22 +514,6 @@ const EMICalculator = () => {
                                 ))}
                             </tbody>
                         </table>
-                        <div className="flex justify-between mt-4 p-4">
-                            <button
-                                onClick={handlePrevious}
-                                disabled={currentIndex === 0}
-                                className="bg-blue-500 text-white font-bold py-2 px-4 rounded-lg shadow-lg hover:bg-blue-600 transition duration-200"
-                            >
-                                Previous
-                            </button>
-                            <button
-                                onClick={handleNext}
-                                disabled={currentIndex + 10 >= schedule.length}
-                                className="bg-blue-500 text-white font-bold py-2 px-4 rounded-lg shadow-lg hover:bg-blue-600 transition duration-200"
-                            >
-                                Next
-                            </button>
-                        </div>
                     </div>
                 </div>
                 <div className="mt-8 p-4 border border-gray-300 rounded-lg flex flex-col md:flex-row justify-between items-center">
@@ -378,4 +555,7 @@ const EMICalculator = () => {
         </div>
     );
 };
-export default EMICalculator;
+
+export default MortgageCalculator;
+
+
