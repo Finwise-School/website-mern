@@ -1,140 +1,65 @@
 import React from "react";
-import logo from "../assets/images/logo2.png";
-import { Link } from "react-router-dom";
-import { IonIcon } from "@ionic/react";
-import { logoInstagram, logoFacebook, logoTwitter } from "ionicons/icons";
+import FooterColumn from "./Homepage/Footer Files/FooterColumn";
+import SocialIcon from "./Homepage/Footer Files/SocialIcon";
+import EmailSubscription from "./Homepage/Footer Files/EmailSubscription";
+import { FaFacebookF, FaLinkedinIn, FaTwitter, FaYoutube } from 'react-icons/fa';
 
-const Footer = () => {
+
+function Footer() {
+  const footerColumns = [
+    {
+      title: "Home",
+      items: ["Hero Section", "Features", "Financial Tools", "Testimonials", "FAQ's"]
+    },
+    {
+      title: "About Us",
+      items: ["Our Story", "Our Values", "How It Works", "Our Supporters", "Our Partner Dashboard"]
+    },
+    {
+      title: "Tools",
+      items: ["Budget Boss", "Goal SIP", "SIP Calculator", "F.I.R.E", "Many more"]
+    },
+    {
+      title: "Blogs",
+      items: ["UK Tax System", "Debt Management", "Negotiation Wizardry", "How to Budget", "Investing Yes or No ?"]
+    },
+    {
+      title: "Contact Us",
+      items: ["Contact Form", "Our Offices"]
+    }
+  ];
+
+  const socialIcons = [
+    { icon: <FaFacebookF />, alt: "Facebook icon" },
+    { icon: <FaLinkedinIn />, alt: "LinkedIn icon" },
+    { icon: <FaTwitter />, alt: "Twitter icon" },
+    { icon: <FaYoutube />, alt: "YouTube icon" }
+];
+
+
   return (
-    <footer className="bg-white py-12 border-t border-gray-200">
-      <div className="container mx-auto grid grid-cols-1 md:grid-cols-5 gap-12 px-6">
-        <div className="space-y-4">
-          <a href="#" className="block">
-            <img className="h-16 ml-4 mt-2" src={logo} alt="Finwise" />
-          </a>
-          <ul className="flex space-x-4">
-            <li>
-              <a href="#">
-                <IonIcon
-                  className="w-6 h-6 text-gray-700 hover:text-blue-500"
-                  icon={logoInstagram}
-                />
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <IonIcon
-                  className="w-6 h-6 text-gray-700 hover:text-blue-500"
-                  icon={logoFacebook}
-                />
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <IonIcon
-                  className="w-6 h-6 text-gray-700 hover:text-blue-500"
-                  icon={logoTwitter}
-                />
-              </a>
-            </li>
-          </ul>
-          <p className="text-sm finwise-blue">
-            &copy; <span className="year">2024</span> by Finwise School. All
-            rights reserved.
-          </p>
+    <footer className="flex flex-col w-full bg-black max-md:max-w-full">
+      <div className="flex flex-wrap gap-5 items-start px-20 py-24 w-full max-md:px-2 max-md:max-w-full">
+        <EmailSubscription />
+        <div className="flex flex-wrap flex-1 shrink gap-10 justify-between items-start font-medium basis-0 min-w-[240px] max-md:max-w-full">
+          {footerColumns.map((column, index) => (
+            <FooterColumn key={index} title={column.title} items={column.items} />
+          ))}
         </div>
-        <div className="space-y-4">
-          <p className="font-semibold">Address</p>
-          <address className="text-sm not-italic">
-            Glasgow, United Kingdom
-            <br />
-            <a
-              href="tel:+44 7741819337"
-              className="text-blue-500 hover:underline"
-            >
-              +44 7741819337
-            </a>
-            <br />
-            <a
-              href="mailto:contact@finwiseschool.com"
-              className="text-blue-500 hover:underline"
-            >
-              contact@finwiseschool.com
-            </a>
-          </address>
+      </div>
+      <div className="flex flex-wrap gap-10 justify-between items-center px-20 py-4 w-full bg-zinc-900 max-md:px-5 max-md:max-w-full">
+        <div className="flex flex-wrap gap-10 items-start self-stretch py-2.5 my-auto text-lg font-medium tracking-normal leading-none text-white min-w-[240px] max-md:max-w-full">
+          <p>@2024 Finwise School All Rights Reserved.</p>
+          <a href="#terms">Terms & Conditions</a>
         </div>
-        <div className="space-y-4">
-          <p className="font-semibold">Account</p>
-          <ul className="space-y-2">
-            <li>
-              <a href="#" className="text-blue-500 hover:underline">
-                Create account
-              </a>
-            </li>
-            <li>
-              <a href="#" className="text-blue-500 hover:underline">
-                Sign in
-              </a>
-            </li>
-            <li>
-              <a href="#" className="text-blue-500 hover:underline">
-                Android app
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div className="space-y-4">
-          <p className="font-semibold">Company</p>
-          <ul className="space-y-2">
-            <li>
-              <a href="#" className="text-blue-500 hover:underline">
-                About Finwise
-              </a>
-            </li>
-            <li>
-              <a href="#" className="text-blue-500 hover:underline">
-                For Business
-              </a>
-            </li>
-            <li>
-              <a href="#" className="text-blue-500 hover:underline">
-                Our Supporters
-              </a>
-            </li>
-            <li>
-              <a href="#" className="text-blue-500 hover:underline">
-                Careers
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div className="space-y-4">
-          <p className="font-semibold">Resources</p>
-          <ul className="space-y-2">
-            <li>
-              <a className="text-blue-500 hover:underline">
-              <Link to="/calculator">
-            Utilities Calculators
-          </Link>
-              </a>
-            </li>
-            <li>
-              <a className="text-blue-500 hover:underline">
-              <Link to="/contact">
-                Help center
-          </Link>
-              </a>
-            </li>
-            <li>
-              <a href="#" className="text-blue-500 hover:underline">
-                Privacy & terms
-              </a>
-            </li>
-          </ul>
+        <div className="flex gap-2.5 items-center self-stretch py-2.5 my-auto">
+          {socialIcons.map((icon, index) => (
+            <SocialIcon key={index} src={icon.src} alt={icon.alt} />
+          ))}
         </div>
       </div>
     </footer>
   );
-};
+}
 
 export default Footer;
