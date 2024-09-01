@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import Chatbotimg from '../assets/images/chatbot/chatbot.png';
-import Closeimg from '../assets/images/chatbot/close.png';
+// import Chatbotimg from '../assets/images/chatbot/chatbot.png';
+// import Closeimg from '../assets/images/chatbot/close.png';
 import responses from './Chatbot/responses';
 import subOptions from './Chatbot/subOptions';
 import './Chatbot/chatbot.css';
+import { IoIosCloseCircleOutline } from "react-icons/io";
+
 
 const Chatbot = () => {
   const [messages, setMessages] = useState([
@@ -87,17 +89,18 @@ const Chatbot = () => {
 
   return (
     <div>
-      <div className={`fixed bottom-4 right-4 z-50 border border-gray-300 rounded-lg overflow-hidden bg-gray-100 flex flex-col transition-all duration-500 ease-in-out backdrop-blur ${
-          !isOpen ? "w-[90vw] max-w-[350px] h-[60px]" : "w-[90vw] max-w-[400px] h-[80vh]"
+      <div className={`fixed bottom-4 right-4 z-50 border border-[#262626] rounded-lg overflow-hidden bg-[#1A1A1A] flex flex-col transition-all duration-500 ease-in-out ${
+          !isOpen ? "w-32 h-10 rounded-lg" : "w-[90vw] max-w-[400px] h-[80vh]"
       }`}>
         {isOpen ? (
           <>
-            <img
+            {/* <img
               src={Closeimg}
               alt="Close"
               className='w-6 h-6 absolute top-2 right-2 cursor-pointer'
               onClick={openButton}
-            />
+            /> */}
+            <IoIosCloseCircleOutline className='w-6 h-6 absolute top-2 right-2 cursor-pointer' onClick={openButton}/>
             <div className="flex-1 p-3 overflow-y-auto flex flex-col">
               {messages.map((msg, index) => (
                 <div
@@ -171,8 +174,7 @@ const Chatbot = () => {
             className='flex flex-row items-center justify-center text-center my-auto'
             onClick={openButton}
           >
-            <p className='text-sm'>Ask Me!</p>
-            <img src={Chatbotimg} alt="Chatbot" className="w-6 h-6 ml-2" />
+            <p className='text-sm text-[#FFFFFF]'>Ask Me!</p>
           </button>
         )}
       </div>

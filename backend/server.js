@@ -8,6 +8,7 @@ const contactRoutes = require('./routes/contactRoutes');
 const earlyAccessRoutes = require('./routes/earlyAccessRoutes'); // Import the book routes
 const loginRoutes= require('./routes/loginRoutes');// login routes
 const signupRoutes= require('./routes/signupRoutes'); //signup routes
+const blogRoutes = require('./routes/blogRoutes');
 
 
 const app = express();
@@ -31,6 +32,7 @@ app.use('/api', contactRoutes);
 app.use('/api', earlyAccessRoutes); // Use the book routes
 app.use('/api',loginRoutes); // using the signup routes
 app.use('/api',signupRoutes); // using the login routes
+app.use('/api',blogRoutes);
 
 
 // Root Route

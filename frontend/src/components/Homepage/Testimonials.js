@@ -1,0 +1,77 @@
+import React from 'react';
+
+const TestimonialCard = ({ rating, title, content, author, location, imageSrc }) => (
+  <div className="flex flex-col flex-1 shrink p-12 bg-green-500 rounded-xl border border-solid basis-0 border-neutral-800 min-w-[240px] max-md:px-5 max-md:max-w-full">
+    <div className="flex gap-2.5 items-start self-start">
+      {[...Array(5)].map((_, i) => (
+        <div key={i} className="flex gap-2.5 items-center p-2.5 w-11 h-11 border border-solid bg-zinc-900 border-neutral-800 rounded-[100px]">
+          <img loading="lazy" src="frontend/src/components/Homepage/Testimonials/star.png" alt="Star rating" className="object-contain w-6 rounded-sm aspect-square" />
+        </div>
+      ))}
+    </div>
+    <div className="flex flex-col mt-10 w-full">
+      <h3 className="text-2xl font-semibold text-black">{title}</h3>
+      <p className="mt-3.5 text-lg font-medium leading-7 text-white">{content}</p>
+    </div>
+    <div className="flex gap-3 items-center mt-10 w-full font-medium">
+      <img loading="lazy" src={imageSrc} alt={author} className="object-contain shrink-0 self-stretch my-auto rounded-full aspect-square w-[60px]" />
+      <div className="flex flex-col flex-1 shrink self-stretch my-auto basis-0 min-w-[240px]">
+        <div className="text-xl text-white">{author}</div>
+        <div className="text-lg text-black">{location}</div>
+      </div>
+    </div>
+  </div>
+);
+
+const Testimonials = () => {
+  const testimonials = [
+    {
+      rating: 5,
+      title: "Exceptional Service!",
+      content: "Finwise transformed my approach to financial planning. Their finance tools made it so easy to set clear goals and track my progress. I finally feel in control of my financial future",
+      author: "Sai",
+      location: "UK, Edinburgh",
+      imageSrc: "frontend/src/components/Homepage/Testimonials/sai.png"
+    },
+    {
+      rating: 5,
+      title: "Efficient and Reliable",
+      content: "I wish I had found Finwise years ago. Their easy-to-use tools and comprehensive planning strategies have helped me optimize my retirement savings and enjoy my retirement with peace of mind",
+      author: "Kate",
+      location: "UK, Glasgow",
+      imageSrc: "frontend/src/components/Homepage/Testimonials/kate.png"
+    },
+    {
+      rating: 5,
+      title: "Fun and insightful",
+      content: "The way they teach about the financial concepts is kinda fun and insightfull. 100% recommended if someone is struggling with money or to understand basic or even advance financial concepts.",
+      author: "Matthew",
+      location: "UK, London",
+      imageSrc: "frontend/src/components/Homepage/Testimonials/matthew.png"
+    }
+  ];
+
+  return (
+    <section className="flex flex-col self-center mt-24 w-full max-w-[1596px] max-md:mt-10 max-md:max-w-full">
+      <div className="flex gap-10 items-end w-full max-md:max-w-full">
+        <div className="flex flex-col flex-1 shrink w-full basis-0 min-w-[240px] max-md:max-w-full">
+          <h2 className="text-5xl font-semibold text-blue-900 max-md:max-w-full max-md:text-4xl">
+            Word from Our People
+          </h2>
+          <p className="mt-3.5 text-lg font-medium text-neutral-400 max-md:max-w-full">
+            Read the success stories and heartfelt testimonials from our valued members.
+          </p>
+        </div>
+      </div>
+      <div className="flex flex-col mt-20 w-full max-md:mt-10 max-md:max-w-full">
+        <div className="flex flex-wrap gap-8 items-start w-full max-md:max-w-full">
+          {testimonials.map((testimonial, index) => (
+            <TestimonialCard key={index} {...testimonial} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default Testimonials;

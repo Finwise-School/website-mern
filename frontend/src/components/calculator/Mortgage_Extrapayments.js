@@ -12,7 +12,10 @@ export default function ExtraPayments({
     setExtraPayment,
     setExtraPaymentInterval,
     setExtraAnnualPayment,
-    setExtraPaymentMonth
+    setExtraPaymentMonth,
+    setTotalExtraPayment,
+    totalExtraPayment,
+    finalInterestSavings
 }) {
     return (
         <div>
@@ -88,13 +91,13 @@ export default function ExtraPayments({
                     {/* Output: Total Extra Payments */}
                     <div className="p-4 border border-gray-300 rounded-lg bg-gray-50">
                         <h3 className="text-gray-800 font-semibold mb-2">Total Extra Payments</h3>
-                        <div className="text-2xl font-bold text-green-600">${totalExtraPayments}</div>
+                        <div className="text-2xl font-bold text-green-600">{totalExtraPayment}</div>
                     </div>
 
                     {/* Output: Interest Savings */}
                     <div className="p-4 border border-gray-300 rounded-lg bg-gray-50">
                         <h3 className="text-gray-800 font-semibold mb-2">Interest Savings</h3>
-                        <div className="text-2xl font-bold text-green-600">${interestSavings}</div>
+                        <div className="text-2xl font-bold text-green-600">{parseFloat(finalInterestSavings).toFixed(2)}</div>
                     </div>
                 </div>
             </div>
