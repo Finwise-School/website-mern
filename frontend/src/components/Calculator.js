@@ -16,8 +16,7 @@ import EarlyAccessTemplate from './EarlyAccessTemplate';
 
 const FinancialPlanningTools = () => {
   return (
-    <div style={{ marginTop: "1px" }} className="w-full max-w-screen-xl mx-auto">
-
+    <div style={{ marginTop: "1px" }} className="w-full mx-auto">
       <div className="flex justify-center">
         <div
           className="w-full px-4 py-10 lg:py-20 finwise-gradient text-center"
@@ -28,9 +27,11 @@ const FinancialPlanningTools = () => {
           </p>
         </div>
       </div>
+
       <hr className="mt-0 h-1 my-8 bg-gray-100 border-0 dark:bg-gray-700" />
 
       {/* Tool Cards Section */}
+      <div className="w-full max-w-screen-xl mx-auto">
       <div className="grid-for-calci grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-4 py-5">
         <ToolCard title="Fixed Deposit Calculator" image={FDImg} path="/tools/fixed-deposit" />
         <ToolCard title="SIP Calculator" image={MutualImg} path="/tools/mutual-funds" />
@@ -44,6 +45,7 @@ const FinancialPlanningTools = () => {
         <ToolCard title="EMI Calculator" image={EMIImg} path="/tools/emi" />
         <ToolCard title="CAGR" image={CAGRImg} path="/tools/cagr" />
         <ToolCard title="Rental Yield" image={RentalImg} path="/tools/rental" />
+      </div>
       </div>
       <hr className="mt-0 h-1 my-8 bg-gray-100 border-0 dark:bg-gray-700" />
 
