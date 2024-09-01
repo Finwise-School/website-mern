@@ -4,38 +4,63 @@ import SocialIcon from "./Homepage/Footer Files/SocialIcon";
 import EmailSubscription from "./Homepage/Footer Files/EmailSubscription";
 import { FaFacebookF, FaLinkedinIn, FaTwitter, FaYoutube } from 'react-icons/fa';
 
-
 function Footer() {
   const footerColumns = [
     {
       title: "Home",
-      items: ["Hero Section", "Features", "Financial Tools", "Testimonials", "FAQ's"]
+      items: [
+        { name: "Hero Section", path: "/" },
+        { name: "Features", path: "/features" },
+        { name: "Tools", path: "/tools" },
+        { name: "Testimonials", path: "/testimonials" },
+        { name: "FAQ's", path: "/faqs" }
+      ]
     },
     {
       title: "About Us",
-      items: ["Our Story", "Our Values", "How It Works", "Our Supporters", "Our Partner Dashboard"]
+      items: [
+        { name: "Our Story", path: "/about#our-story" },
+        { name: "Our Values", path: "/about#our-values" },
+        { name: "How It Works", path: "/about#how-it-works" },
+        { name: "Our Supporters", path: "/about#our-supporters" },
+        { name: "Our Partner Dashboard", path: "/about#partner-dashboard" }
+      ]
     },
     {
       title: "Tools",
-      items: ["Budget Boss", "Goal SIP", "SIP Calculator", "F.I.R.E", "Many more"]
+      items: [
+        { name: "Budget Boss", path: "/tools/budget-boss" },
+        { name: "Goal SIP", path: "/tools/goal-sip" },
+        { name: "SIP Calculator", path: "/tools/sip-calculator" },
+        { name: "F.I.R.E", path: "/tools/fire" },
+        { name: "Many more", path: "/tools" }
+      ]
     },
     {
       title: "Blogs",
-      items: ["UK Tax System", "Debt Management", "Negotiation Wizardry", "How to Budget", "Investing Yes or No ?"]
+      items: [
+        { name: "UK Tax System", path: "/blogs/uk-tax-system" },
+        { name: "Debt Management", path: "/blogs/debt-management" },
+        { name: "Negotiation Wizardry", path: "/blogs/negotiation-wizardry" },
+        { name: "How to Budget", path: "/blogs/how-to-budget" },
+        { name: "Investing Yes or No ?", path: "/blogs/investing-yes-or-no" }
+      ]
     },
     {
       title: "Contact Us",
-      items: ["Contact Form", "Our Offices"]
+      items: [
+        { name: "Contact", path: "/contact" },
+        { name: "Our Offices", path: "/contact/offices" }
+      ]
     }
   ];
 
   const socialIcons = [
-    { icon: <FaFacebookF />, alt: "Facebook icon" },
-    { icon: <FaLinkedinIn />, alt: "LinkedIn icon" },
-    { icon: <FaTwitter />, alt: "Twitter icon" },
-    { icon: <FaYoutube />, alt: "YouTube icon" }
-];
-
+    { icon: <FaFacebookF />, alt: "Facebook" },
+    { icon: <FaLinkedinIn />, alt: "LinkedIn" },
+    { icon: <FaTwitter />, alt: "Twitter" },
+    { icon: <FaYoutube />, alt: "YouTube" }
+  ];
 
   return (
     <footer className="flex flex-col w-full bg-black max-md:max-w-full">
@@ -54,7 +79,7 @@ function Footer() {
         </div>
         <div className="flex gap-2.5 items-center self-stretch py-2.5 my-auto">
           {socialIcons.map((icon, index) => (
-            <SocialIcon key={index} src={icon.src} alt={icon.alt} />
+            <SocialIcon key={index} icon={icon.icon} alt={icon.alt} />
           ))}
         </div>
       </div>

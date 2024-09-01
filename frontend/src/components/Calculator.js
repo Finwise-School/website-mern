@@ -32,18 +32,18 @@ const FinancialPlanningTools = () => {
 
       {/* Tool Cards Section */}
       <div className="grid-for-calci grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-4 py-5">
-        <ToolCard title="Fixed Deposit Calculator" image={FDImg} path="/calculator/fixed-deposit" />
-        <ToolCard title="SIP Calculator" image={MutualImg} path="/calculator/mutual-funds" />
-        <ToolCard title="Goal SIP Calculator" image={GoalImg} path="/calculator/goal-sip" />
-        <ToolCard title="F.I.R.E." image={FireImg} path="/calculator/fire" />
-        <ToolCard title="Tax Calculator" image={TaxImg} path="/calculator/tax" />
-        <ToolCard title="Budget Boss Calculator" image={BudgetImg} path="/calculator/budget" />
-        <ToolCard title="Mortgage Calculator" image={MortgageImg} path="/calculator/mortgage" />
-        <ToolCard title="IRR" image={IRRImg} path="/calculator/irr" />
-        <ToolCard title="Ideal Loan Payback Period" image={LoanImg} path="/calculator/loan" />
-        <ToolCard title="EMI Calculator" image={EMIImg} path="/calculator/emi" />
-        <ToolCard title="CAGR" image={CAGRImg} path="/calculator/cagr" />
-        <ToolCard title="Rental Yield" image={RentalImg} path="/calculator/rental" />
+        <ToolCard title="Fixed Deposit Calculator" image={FDImg} path="/tools/fixed-deposit" />
+        <ToolCard title="SIP Calculator" image={MutualImg} path="/tools/mutual-funds" />
+        <ToolCard title="Goal SIP Calculator" image={GoalImg} path="/tools/goal-sip" />
+        <ToolCard title="F.I.R.E." image={FireImg} path="/tools/fire" />
+        <ToolCard title="Tax Calculator" image={TaxImg} path="/tools/tax" />
+        <ToolCard title="Budget Boss Calculator" image={BudgetImg} path="/tools/budget" />
+        <ToolCard title="Mortgage Calculator" image={MortgageImg} path="/tools/mortgage" />
+        <ToolCard title="IRR" image={IRRImg} path="/tools/irr" />
+        <ToolCard title="Ideal Loan Payback Period" image={LoanImg} path="/tools/loan" />
+        <ToolCard title="EMI Calculator" image={EMIImg} path="/tools/emi" />
+        <ToolCard title="CAGR" image={CAGRImg} path="/tools/cagr" />
+        <ToolCard title="Rental Yield" image={RentalImg} path="/tools/rental" />
       </div>
       <hr className="mt-0 h-1 my-8 bg-gray-100 border-0 dark:bg-gray-700" />
 
