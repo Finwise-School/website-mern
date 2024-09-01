@@ -62,7 +62,7 @@ const App = () => {
               path="/profile"
               element={<ProtectedRoute element={<Profile />} />}
             />
-            <Route path="/faq" element={<FAQ />} />
+            <Route path="/faqs" element={<FAQ />} />
           </Routes>
           <Chatbot />
           <Footer />
