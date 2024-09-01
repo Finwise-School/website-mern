@@ -557,5 +557,3 @@ const calculateRegularPaymentSchedule = () => {
 };
 
 export default MortgageCalculator;
-
-
