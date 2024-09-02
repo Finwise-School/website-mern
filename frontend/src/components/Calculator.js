@@ -16,7 +16,7 @@ import EarlyAccessTemplate from './EarlyAccessTemplate';
 
 const FinancialPlanningTools = () => {
   return (
-    <div style={{ marginTop: "1px" }} className="w-full mx-auto">
+    <div style={{ marginTop: "0px" }} className="w-full mx-auto">
       <div className="flex justify-center">
         <div
           className="w-full px-4 py-10 lg:py-20 finwise-gradient text-center"

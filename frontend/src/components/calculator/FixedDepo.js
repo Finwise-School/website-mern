@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInfoCircle, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import '@fortawesome/fontawesome-free/css/all.min.css';
-import CalculatorHome from "../../assets/images/calculator_home.png";
+import Tool_Footer from './Tools_footer';
 import { Link } from 'react-router-dom';
 import { Line } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
+import CalculatorList from './Calulators_List';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
@@ -16,8 +17,32 @@ const FixedDepo = () => {
   const [timePeriod, setTimePeriod] = useState(5);
   const [result, setResult] = useState(null);
   const [chartData, setChartData] = useState({ labels: [], datasets: [] });
+  const [errors, setErrors] = useState({});
+
+  const validateForm = () => {
+    const validationErrors = {};
+
+    if (amountInvested <= 0) {
+      validationErrors.amountInvested = "Amount invested should be greater than 0";
+    }
+
+    if (annualInterestRate <= 0) {
+      validationErrors.annualInterestRate = "Interest rate should be greater than 0";
+    }
+
+    if (timePeriod <= 0) {
+      validationErrors.timePeriod = "Time period should be greater than 0";
+    }
+
+    setErrors(validationErrors);
+    return Object.keys(validationErrors).length === 0;
+  };
 
   const calculateFD = () => {
+    if (!validateForm()) {
+      return;
+    }
+
     const principal = parseFloat(amountInvested);
     const annualRate = parseFloat(annualInterestRate);
     const interestStructure = fdInterestStructure;
@@ -74,18 +99,18 @@ const FixedDepo = () => {
   }, [amountInvested, annualInterestRate, fdInterestStructure, timePeriod]);
 
   return (
-    <div style={{ marginTop: "100px" }} className="bg-gray-50 p-2">
+    <div className="bg-gray-50 p-2">
       <div className="max-w-6xl mx-auto bg-white shadow-lg rounded-lg p-8">
         <div className="mb-6">
           <h1 className="text-2xl font-semibold finwise-green">Fixed Deposit Calculator</h1>
-          <p className="finwise-blue">Fixed Deposit Calculator</p>
+          <p className="finwise-blue">Find out the maturity amount of your fixed deposits and optimize your savings</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Input Fields */}
           <div>
             <h2 className="text-lg font-semibold text-gray-800 mb-4">Input fields:</h2>
             <div className="space-y-4">
-              <div className="flex items-center justify-between p-4 border border-gray-300 rounded-lg">
+              <div className={`flex items-center justify-between p-4 border rounded-lg ${errors.amountInvested ? 'border-red-500' : 'border-gray-300'}`}>
                 <label htmlFor="amount-invested" className="text-gray-700">Amount Invested</label>
                 <div className="flex items-center space-x-2">
                   <span className="text-gray-500">&#163;</span>
@@ -98,7 +123,9 @@ const FixedDepo = () => {
                   />
                 </div>
               </div>
-              <div className="flex items-center justify-between p-4 border border-gray-300 rounded-lg">
+              {errors.amountInvested && <p className="text-red-500 text-sm mt-1">{errors.amountInvested}</p>}
+              
+              <div className={`flex items-center justify-between p-4 border rounded-lg ${errors.annualInterestRate ? 'border-red-500' : 'border-gray-300'}`}>
                 <label htmlFor="annual-interest-rate" className="text-gray-700">Annual Interest Rate (%)</label>
                 <input
                   type="number"
@@ -108,6 +135,8 @@ const FixedDepo = () => {
                   className="bg-green-100 text-gray-800 font-semibold text-right p-2 rounded-lg w-24"
                 />
               </div>
+              {errors.annualInterestRate && <p className="text-red-500 text-sm mt-1">{errors.annualInterestRate}</p>}
+              
               <div className="flex items-center justify-between p-4 border border-gray-300 rounded-lg">
                 <label htmlFor="fd-interest-structure" className="text-gray-700">FD Interest Structure</label>
                 <select
@@ -122,7 +151,8 @@ const FixedDepo = () => {
                   <option value="yearly">Yearly</option>
                 </select>
               </div>
-              <div className="flex items-center justify-between p-4 border border-gray-300 rounded-lg">
+              
+              <div className={`flex items-center justify-between p-4 border rounded-lg ${errors.timePeriod ? 'border-red-500' : 'border-gray-300'}`}>
                 <label htmlFor="time-period" className="text-gray-700">Time Period (Years)</label>
                 <input
                   type="number"
@@ -132,8 +162,10 @@ const FixedDepo = () => {
                   className="bg-green-100 text-gray-800 font-semibold text-right p-2 rounded-lg w-24"
                 />
               </div>
+              {errors.timePeriod && <p className="text-red-500 text-sm mt-1">{errors.timePeriod}</p>}
             </div>
           </div>
+
           {/* Output Fields */}
           <div className="output-fields -mt-28 md:mt-0">
             <h2 className="text-lg font-semibold text-gray-800 mb-4">Results:</h2>
@@ -206,60 +238,27 @@ const FixedDepo = () => {
                       display: true,
                       text: 'Amount (£)',
                     },
-                    // Inside your Line chart configuration
                     ticks: {
                       callback: function (value) {
                         if (value >= 1000000) {
-                          return '£' + (value / 1000000).toFixed(1) + 'M'; // For millions
+                          return '£' + (value / 1000000).toFixed(1) + 'M';
                         } else if (value >= 1000) {
-                          return '£' + (value / 1000).toFixed(1) + 'K'; // For thousands
+                          return '£' + (value / 1000).toFixed(1) + 'K';
                         } else {
-                          return '£' + value; // For values below 1000
+                          return '£' + value;
                         }
                       },
                     },
-
                   },
                 },
               }}
             />
           </div>
         </div>
-        <div className="mt-8 p-4 border border-gray-300 rounded-lg flex flex-col md:flex-row justify-between items-center">
-          <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4">
-            <div className="flex-shrink-0">
-              <img src={CalculatorHome} alt="Image description" className="w-24 h-24 object-cover rounded-full md:w-32 md:h-32" />
-            </div>
-            <p className="finwise-blue text-center md:text-left">
-              Now that you know your FIRE number, Lets achieve it !!
-            </p>
-          </div>
-          <button className="mt-4 md:mt-0 text-white font-semibold px-4 py-2 rounded-lg finwise-green-bg-bg">
-            Get started
-          </button>
-        </div>
 
-        <div className="mt-16">
-          <h2 className="text-lg font-semibold text-gray-800 mb-4">Try our more Popular Calculators</h2>
-          <div className="space-y-2">
-            <Link to="/calculator/fixed-depo" className="flex justify-between items-center p-4 border border-gray-300 rounded-lg hover:bg-gray-100">
-              <p className="finwise-green">FD Calculator</p>
-              <FontAwesomeIcon icon={faChevronRight} className="text-gray-500" />
-            </Link>
-            <Link to="/calculator/goal-sip" className="flex justify-between items-center p-4 border border-gray-300 rounded-lg hover:bg-gray-100">
-              <p className="text-gray-800">Goal SIP Calculator</p>
-              <FontAwesomeIcon icon={faChevronRight} className="text-gray-500" />
-            </Link>
-            <Link to="/calculator/mutual-funds" className="flex justify-between items-center p-4 border border-gray-300 rounded-lg hover:bg-gray-100">
-              <p className="text-gray-800">Mutual Funds Calculator</p>
-              <FontAwesomeIcon icon={faChevronRight} className="text-gray-500" />
-            </Link>
-            <Link to="/calculator/fire" className="flex justify-between items-center p-4 border border-gray-300 rounded-lg hover:bg-gray-100">
-              <p>FIRE Calculator</p>
-              <FontAwesomeIcon icon={faChevronRight} className="text-gray-500" />
-            </Link>
-          </div>
-        </div>
+        <Tool_Footer message="See the returns on your fixed deposits and make informed savings decisions. Let’s maximize your savings!"/>
+
+        <CalculatorList activeCalculator="Fixed Deposit Calculator" />
       </div>
     </div>
   );

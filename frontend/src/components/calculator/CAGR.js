@@ -1,44 +1,67 @@
 import React, { useState, useEffect } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import '@fortawesome/fontawesome-free/css/all.min.css';
-import CalculatorHome from "../../assets/images/calculator_home.png";
-import { Link } from 'react-router-dom';
+import Tool_Footer from './Tools_footer';
+import CalculatorList from './Calulators_List';
+
 
 const CAGRCalculator = () => {
-    const [buyPrice, setBuyPrice] = useState(10000.00);   // Default Buy Price
-    const [sellPrice, setSellPrice] = useState(15000.00); // Default Sell Price
-    const [buyDate, setBuyDate] = useState('2020-01-01'); // Default Buy Date in ISO format
-    const [sellDate, setSellDate] = useState('2024-01-01'); // Default Sell Date in ISO format
+    const [buyPrice, setBuyPrice] = useState(10000.00); 
+    const [sellPrice, setSellPrice] = useState(15000.00);
+    const [buyDate, setBuyDate] = useState('2020-01-01');
+    const [sellDate, setSellDate] = useState('2024-01-01');
     const [result, setResult] = useState({
         absoluteReturn: "0",
         cagrReturn: "0",
         percentageReturn: "0"
     });
+    const [errors, setErrors] = useState({});
+
+    const validateForm = () => {
+        let validationErrors = {};
+        let isValid = true;
+
+        if (isNaN(buyPrice) || buyPrice <= 0) {
+            validationErrors.buyPrice = "Buy Price must be a positive number.";
+            isValid = false;
+        }
+
+        if (isNaN(sellPrice) || sellPrice <= 0) {
+            validationErrors.sellPrice = "Sell Price must be a positive number.";
+            isValid = false;
+        }
+
+        
+        const buyDateObj = new Date(buyDate);
+        const sellDateObj = new Date(sellDate);
+        if (buyDateObj >= sellDateObj) {
+            validationErrors.dates = "Sell Date must be after Buy Date.";
+            isValid = false;
+        }
+
+        setErrors(validationErrors);
+        return isValid;
+    };
 
     const calculateReturns = () => {
+        if (!validateForm()) return;
+
         const P = parseFloat(buyPrice);
         const F = parseFloat(sellPrice);
         const buyDateObj = new Date(buyDate);
         const sellDateObj = new Date(sellDate);
 
-        // Calculate the number of years between the two dates
         const years = (sellDateObj - buyDateObj) / (1000 * 60 * 60 * 24 * 365);
 
         if (isNaN(P) || isNaN(F) || isNaN(years) || years <= 0) {
             return;
         }
 
-        // Absolute Return
         const absoluteReturn = F - P;
 
-        // Percentage Return
         const percentageReturn = (absoluteReturn / P) * 100;
 
-        // CAGR Calculation
         const cagrReturn = (((F / P) ** (1 / years)) - 1) * 100;
 
-        // Update the result, rounding to 2 decimal places
         setResult({
             absoluteReturn: absoluteReturn.toFixed(2),
             cagrReturn: cagrReturn.toFixed(2),
@@ -46,13 +69,12 @@ const CAGRCalculator = () => {
         });
     };
 
-    // Recalculate the returns whenever input values change
     useEffect(() => {
         calculateReturns();
     }, [buyPrice, sellPrice, buyDate, sellDate]);
 
     return (
-        <div style={{ marginTop: "100px" }} className="bg-gray-50 p-2">
+        <div className="bg-gray-50 p-2">
             <div className="max-w-6xl mx-auto bg-white shadow-lg rounded-lg p-8">
                 <div className="mb-6">
                     <h1 className="text-2xl font-semibold finwise-green">CAGR Calculator</h1>
@@ -73,10 +95,13 @@ const CAGRCalculator = () => {
                                         id="buyPrice"
                                         value={buyPrice}
                                         onChange={(e) => setBuyPrice(e.target.value)}
-                                        className="bg-green-100 text-gray-800 font-semibold text-right p-2 rounded-lg w-24"
+                                        className={`bg-green-100 text-gray-800 font-semibold text-right p-2 rounded-lg w-24 ${errors.buyPrice ? 'border-red-500' : ''}`}
                                     />
                                 </div>
                             </div>
+                            {errors.buyPrice && <p className="text-red-500 text-sm">{errors.buyPrice}</p>}
+
+                            {/* Buy Date */}
                             <div className="flex items-center justify-between p-4 border border-gray-300 rounded-lg">
                                 <label htmlFor="buyDate" className="text-gray-700">Buy Date</label>
                                 <input
@@ -84,9 +109,11 @@ const CAGRCalculator = () => {
                                     id="buyDate"
                                     value={buyDate}
                                     onChange={(e) => setBuyDate(e.target.value)}
-                                    className="bg-green-100 text-gray-800 font-semibold text-right p-2 rounded-lg w-40"
+                                    className={`bg-green-100 text-gray-800 font-semibold text-right p-2 rounded-lg w-40 ${errors.dates ? 'border-red-500' : ''}`}
                                 />
                             </div>
+
+                            {/* Sell Price */}
                             <div className="flex items-center justify-between p-4 border border-gray-300 rounded-lg">
                                 <label htmlFor="sellPrice" className="text-gray-700">Sell Price</label>
                                 <div className="flex items-center space-x-2">
@@ -96,10 +123,13 @@ const CAGRCalculator = () => {
                                         id="sellPrice"
                                         value={sellPrice}
                                         onChange={(e) => setSellPrice(e.target.value)}
-                                        className="bg-green-100 text-gray-800 font-semibold text-right p-2 rounded-lg w-24"
+                                        className={`bg-green-100 text-gray-800 font-semibold text-right p-2 rounded-lg w-24 ${errors.sellPrice ? 'border-red-500' : ''}`}
                                     />
                                 </div>
                             </div>
+                            {errors.sellPrice && <p className="text-red-500 text-sm">{errors.sellPrice}</p>}
+
+                            {/* Sell Date */}
                             <div className="flex items-center justify-between p-4 border border-gray-300 rounded-lg">
                                 <label htmlFor="sellDate" className="text-gray-700">Sell Date</label>
                                 <input
@@ -107,9 +137,10 @@ const CAGRCalculator = () => {
                                     id="sellDate"
                                     value={sellDate}
                                     onChange={(e) => setSellDate(e.target.value)}
-                                    className="bg-green-100 text-gray-800 font-semibold text-right p-2 rounded-lg w-40"
+                                    className={`bg-green-100 text-gray-800 font-semibold text-right p-2 rounded-lg w-40 ${errors.dates ? 'border-red-500' : ''}`}
                                 />
                             </div>
+                            {errors.dates && <p className="text-red-500 text-sm">{errors.dates}</p>}
                         </div>
                     </div>
 
@@ -128,41 +159,10 @@ const CAGRCalculator = () => {
                         </div>
                     </div>
                 </div>
-                <div className="mt-8 p-4 border border-gray-300 rounded-lg flex flex-col md:flex-row justify-between items-center">
-                    <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4">
-                        <div className="flex-shrink-0">
-                            <img src={CalculatorHome} alt="Image description" className="w-24 h-24 object-cover rounded-full md:w-32 md:h-32" />
-                        </div>
-                        <p className="finwise-blue text-center md:text-left">
-                            Now that you know your CAGR return, let's invest wisely!
-                        </p>
-                    </div>
-                    <button className="mt-4 md:mt-0 text-white font-semibold px-4 py-2 rounded-lg finwise-green-bg">
-                        Get started
-                    </button>
-                </div>
+                <Tool_Footer message="Understand how your investments are growing. Let’s help you plan your financial future!"/>
+                <CalculatorList activeCalculator="CAGR Calculator" />
 
-                <div className="mt-16">
-                    <h2 className="text-lg font-semibold text-gray-800 mb-4">Try our more Popular Calculators</h2>
-                    <div className="space-y-2">
-                        <Link to="/calculator/fixed-depo" className="flex justify-between items-center p-4 border border-gray-300 rounded-lg hover:bg-gray-100">
-                            <p className="text-gray-800">FD Calculator</p>
-                            <FontAwesomeIcon icon={faChevronRight} className="text-gray-500" />
-                        </Link>
-                        <Link to="/calculator/goal-sip" className="flex justify-between items-center p-4 border border-gray-300 rounded-lg hover:bg-gray-100">
-                            <p className="text-gray-800">Goal SIP Calculator</p>
-                            <FontAwesomeIcon icon={faChevronRight} className="text-gray-500" />
-                        </Link>
-                        <Link to="/calculator/mutual-funds" className="flex justify-between items-center p-4 border border-gray-300 rounded-lg hover:bg-gray-100">
-                            <p className="text-gray-800">Mutual Funds Calculator</p>
-                            <FontAwesomeIcon icon={faChevronRight} className="text-gray-500" />
-                        </Link>
-                        <Link to="/calculator/fire" className="flex justify-between items-center p-4 border border-gray-300 rounded-lg hover:bg-gray-100">
-                            <p className="finwise-green">FIRE Calculator</p>
-                            <FontAwesomeIcon icon={faChevronRight} className="text-gray-500" />
-                        </Link>
-                    </div>
-                </div>
+
             </div>
         </div>
     );

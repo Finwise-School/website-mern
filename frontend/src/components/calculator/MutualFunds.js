@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faInfoCircle, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import '@fortawesome/fontawesome-free/css/all.min.css';
-import CalculatorHome from "../../assets/images/calculator_home.png";
-import { Link } from 'react-router-dom';
+import Tool_Footer from './Tools_footer';
+import CalculatorList from './Calulators_List';
 
 const MutualFunds = () => {
     const [investmentMethod, setInvestmentMethod] = useState('sip');
@@ -12,8 +12,34 @@ const MutualFunds = () => {
     const [annualReturns, setAnnualReturns] = useState(3);
     const [timePeriod, setTimePeriod] = useState(5);
     const [result, setResult] = useState(null);
+    const [errors, setErrors] = useState({});
+
+    const validateForm = () => {
+        const newErrors = {};
+
+        if (investmentMethod === 'sip' && (!monthlyInvestment || isNaN(monthlyInvestment) || monthlyInvestment <= 0)) {
+            newErrors.monthlyInvestment = "Please enter a valid monthly investment amount greater than zero.";
+        }
+
+        if (investmentMethod === 'lumpSum' && (!lumpSumInvestment || isNaN(lumpSumInvestment) || lumpSumInvestment <= 0)) {
+            newErrors.lumpSumInvestment = "Please enter a valid lump sum investment amount greater than zero.";
+        }
+
+        if (!annualReturns || isNaN(annualReturns) || annualReturns <= 0) {
+            newErrors.annualReturns = "Please enter a valid annual return percentage greater than zero.";
+        }
+
+        if (!timePeriod || isNaN(timePeriod) || timePeriod <= 0) {
+            newErrors.timePeriod = "Please enter a valid time period in years greater than zero.";
+        }
+
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
 
     const calculateMutualFund = () => {
+        if (!validateForm()) return; // Stop if the form is invalid
+
         const annualReturnsValue = parseFloat(annualReturns);
         const years = parseInt(timePeriod);
 
@@ -36,7 +62,6 @@ const MutualFunds = () => {
             investedAmount = lumpSumInvestmentValue;
         }
 
-        // Adjust for more accurate results
         totalAmount = parseFloat(totalAmount.toFixed(2));
         investedAmount = parseFloat(investedAmount.toFixed(2));
 
@@ -54,14 +79,13 @@ const MutualFunds = () => {
     }, [investmentMethod, monthlyInvestment, lumpSumInvestment, annualReturns, timePeriod]);
 
     return (
-        <div style={{ marginTop: "100px" }} className="bg-gray-50 p-2">
+        <div style={{ marginTop: "0px" }} className="bg-gray-50 p-2">
             <div className="max-w-6xl mx-auto bg-white shadow-lg rounded-lg p-8">
                 <div className="mb-6">
                     <h1 className="text-2xl font-semibold finwise-green">Mutual Funds Calculator</h1>
                     <p className="finwise-blue">Calculate your mutual funds investment returns</p>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    {/* Input Fields */}
                     <div>
                         <h2 className="text-lg font-semibold text-gray-800 mb-4">Input fields:</h2>
                         <div className="space-y-4">
@@ -92,6 +116,8 @@ const MutualFunds = () => {
                                     </div>
                                 </div>
                             )}
+                            {errors.monthlyInvestment && <p className="text-red-500 text-sm">{errors.monthlyInvestment}</p>}
+                            
                             {investmentMethod === 'lumpSum' && (
                                 <div className="flex items-center justify-between p-4 border border-gray-300 rounded-lg">
                                     <label htmlFor="lump-sum-investment" className="text-gray-700">Lump Sum Investment</label>
@@ -107,6 +133,8 @@ const MutualFunds = () => {
                                     </div>
                                 </div>
                             )}
+                            {errors.lumpSumInvestment && <p className="text-red-500 text-sm">{errors.lumpSumInvestment}</p>}
+
                             <div className="flex items-center justify-between p-4 border border-gray-300 rounded-lg">
                                 <label htmlFor="annual-returns" className="text-gray-700">Expected Annual Returns (%)</label>
                                 <input
@@ -117,6 +145,8 @@ const MutualFunds = () => {
                                     className="bg-green-100 text-gray-800 font-semibold text-right p-2 rounded-lg w-24"
                                 />
                             </div>
+                            {errors.annualReturns && <p className="text-red-500 text-sm">{errors.annualReturns}</p>}
+
                             <div className="flex items-center justify-between p-4 border border-gray-300 rounded-lg">
                                 <label htmlFor="time-period" className="text-gray-700">Time Period (Years)</label>
                                 <input
@@ -127,9 +157,9 @@ const MutualFunds = () => {
                                     className="bg-green-100 text-gray-800 font-semibold text-right p-2 rounded-lg w-24"
                                 />
                             </div>
+                            {errors.timePeriod && <p className="text-red-500 text-sm">{errors.timePeriod}</p>}
                         </div>
                     </div>
-                    {/* Output Fields */}
                     <div className="output-fields -mt-28 md:mt-0">
                         <h2 className="text-lg font-semibold text-gray-800 mb-4">Results:</h2>
                         {result && (
@@ -143,50 +173,18 @@ const MutualFunds = () => {
                                         <p className="finwise-blue">Returns Generated</p>
                                         <p className="finwise-green font-semibold text-xl">&#163;{result.returnsGenerated}</p>
                                     </div>
-                                <div className="p-4 border border-gray-300 rounded-lg">
-                                    <p className="finwise-blue">Total Amount</p>
-                                    <p className="finwise-green font-semibold text-xl">&#163;{result.totalAmount}</p>
-                                </div>
+                                    <div className="p-4 border border-gray-300 rounded-lg">
+                                        <p className="finwise-blue">Total Amount</p>
+                                        <p className="finwise-green font-semibold text-xl">&#163;{result.totalAmount}</p>
+                                    </div>
                                 </div>
                             </div>
                         )}
                     </div>
                 </div>
-                <div className="mt-8 p-4 border border-gray-300 rounded-lg flex flex-col md:flex-row justify-between items-center" style={{"marginTop":"-124px"}}>
-                    <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4">
-                        <div className="flex-shrink-0">
-                            <img src={CalculatorHome} alt="Image description" className="w-24 h-24 object-cover rounded-full md:w-32 md:h-32" />
-                        </div>
-                        <p className="finwise-blue text-center md:text-left">
-                            Now that you know your mutual funds returns, Let’s maximize your investments!
-                        </p>
-                    </div>
-                    <button className="mt-4 md:mt-0 text-white font-semibold px-4 py-2 rounded-lg finwise-green-bg">
-            Get started
-          </button>
-                </div>
-
-                <div className="mt-16">
-            <h2 className="text-lg font-semibold text-gray-800 mb-4">Try our more Popular Calculators</h2>
-            <div className="space-y-2">
-                <Link to="/calculator/fixed-depo" className="flex justify-between items-center p-4 border border-gray-300 rounded-lg hover:bg-gray-100">
-                    <p className="text-gray-800">FD Calculator</p>
-                    <FontAwesomeIcon icon={faChevronRight} className="text-gray-500" />
-                </Link>
-                <Link to="/calculator/goal-sip" className="flex justify-between items-center p-4 border border-gray-300 rounded-lg hover:bg-gray-100">
-                    <p className="text-gray-800">Goal SIP Calculator</p>
-                    <FontAwesomeIcon icon={faChevronRight} className="text-gray-500" />
-                </Link>
-                <Link to="/calculator/mutual-funds" className="flex justify-between items-center p-4 border border-gray-300 rounded-lg hover:bg-gray-100">
-                    <p className="finwise-green">Mutual Funds Calculator</p>
-                    <FontAwesomeIcon icon={faChevronRight} className="text-gray-500" />
-                </Link>
-                <Link to="/calculator/fire" className="flex justify-between items-center p-4 border border-gray-300 rounded-lg hover:bg-gray-100">
-                    <p className="text-gray-800">FIRE Calculator</p>
-                    <FontAwesomeIcon icon={faChevronRight} className="text-gray-500" />
-                </Link>
+                <Tool_Footer message="Analyze your mutual fund investments and their potential returns. Start optimizing your investment strategy today!"/>
+                <CalculatorList activeCalculator="Mutual Funds Calculator" />
             </div>
-        </div>            </div>
         </div>
     );
 };
