@@ -22,12 +22,12 @@ const FAQ = () => {
     },
     {
       question: "How does personalized learning experience work?",
-      answer: "Our platform have been using adaptive learning technology to tailor your educational journey based on your existing knowledge, learning pace, and financial goals."
+      answer: "Our platform have been using adaptive learning technology in order to tailor your educational journey based on your existing knowledge, learning pace, and your financial goals to help you all the way."
     }
   ];
 
   return (
-    <section className="flex flex-col self-center mt-36 w-full max-w-[1596px] max-md:mt-10 max-md:max-w-full">
+    <section className="flex flex-col self-center -mt-4 w-full max-w-[1596px] max-md:mt-10 max-md:max-w-full p-14">
       <div className="flex flex-wrap gap-10 items-end  p-10 max-md:max-w-full">
         <div className="flex flex-col flex-1 shrink basis-12 min-w-[240px] max-md:max-w-full">
           <h2 className="text-5xl font-semibold text-blue-900 max-md:max-w-full max-md:text-4xl">
@@ -41,7 +41,7 @@ const FAQ = () => {
           View All FAQ's
         </button>
       </div>
-      <div className="flex flex-col mt-20 w-full text-lg font-medium text-white max-md:mt-10 max-md:max-w-full p-10">
+      <div className="flex flex-col -mt-8 w-full text-lg font-medium text-white max-md:mt-10 max-md:max-w-full p-10">
         <div className="flex flex-wrap gap-8 items-start w-full max-md:max-w-full">
           {faqs.map((faq, index) => (
             <FAQItem key={index} {...faq} />

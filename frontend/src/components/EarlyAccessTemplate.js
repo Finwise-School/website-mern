@@ -9,9 +9,9 @@ const EarlyAccessTemplate = () => {
   };
 
   return (
-    <div className="flex p-10">
+    <div className="flex p-24 -mt-16 -mb-16">
       <div className="">
-        <h1 className="finwise-blue text-4xl font-bold mb-4 pt-10">
+        <h1 className="finwise-blue text-4xl font-bold mb-4 -pt-16">
           Start Your Financial Journey Today
         </h1>
         <p className="justify-center text-left pr-10 font-thin pb-10">
