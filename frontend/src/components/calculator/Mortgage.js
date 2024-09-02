@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faInfoCircle, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import { jsPDF } from 'jspdf';
 import 'jspdf-autotable';
 import * as XLSX from 'xlsx';
-import CalculatorHome from "../../assets/images/calculator_home.png";
-import { Link } from 'react-router-dom';
+import Tool_Footer from './Tools_footer';
 import ExtraPayments from "./Mortgage_Extrapayments";
 import PITIPayments from "./Mortgage_PITI_Payments";
-import logo from '../../assets/images/logo.png'; // Adjust the path as needed
+import logo from '../../assets/images/logo.png'; 
+import CalculatorList from './Calulators_List';
 
 const MortgageCalculator = () => {
     const [loanAmount, setLoanAmount] = useState(10000.00);
@@ -305,7 +303,7 @@ const calculateRegularPaymentSchedule = () => {
     };
 
     return (
-        <div style={{ marginTop: "100px" }} className="bg-gray-50 p-2">
+        <div className="bg-gray-50 p-2">
             <div className="max-w-6xl mx-auto bg-white shadow-lg rounded-lg p-8">
                 <div className="mb-6">
                     <h1 className="text-2xl font-semibold finwise-green">Home Mortgage Calculator</h1>
@@ -516,41 +514,11 @@ const calculateRegularPaymentSchedule = () => {
                         </table>
                     </div>
                 </div>
-                <div className="mt-8 p-4 border border-gray-300 rounded-lg flex flex-col md:flex-row justify-between items-center">
-                    <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4">
-                        <div className="flex-shrink-0">
-                            <img src={CalculatorHome} alt="Image description" className="w-24 h-24 object-cover rounded-full md:w-32 md:h-32" />
-                        </div>
-                        <p className="finwise-blue text-center md:text-left">
-                            Now that you know your EMI number, Lets start !!
-                        </p>
-                    </div>
-                    <button className="mt-4 md:mt-0 text-white font-semibold px-4 py-2 rounded-lg finwise-green-bg">
-                        Get started
-                    </button>
-                </div>
 
-                <div className="mt-16">
-                    <h2 className="text-lg font-semibold text-gray-800 mb-4">Try our more Popular Calculators</h2>
-                    <div className="space-y-2">
-                        <Link to="/calculator/fixed-depo" className="flex justify-between items-center p-4 border border-gray-300 rounded-lg hover:bg-gray-100">
-                            <p className="text-gray-800">FD Calculator</p>
-                            <FontAwesomeIcon icon={faChevronRight} className="text-gray-500" />
-                        </Link>
-                        <Link to="/calculator/goal-sip" className="flex justify-between items-center p-4 border border-gray-300 rounded-lg hover:bg-gray-100">
-                            <p className="text-gray-800">Goal SIP Calculator</p>
-                            <FontAwesomeIcon icon={faChevronRight} className="text-gray-500" />
-                        </Link>
-                        <Link to="/calculator/mutual-funds" className="flex justify-between items-center p-4 border border-gray-300 rounded-lg hover:bg-gray-100">
-                            <p className="text-gray-800">Mutual Funds Calculator</p>
-                            <FontAwesomeIcon icon={faChevronRight} className="text-gray-500" />
-                        </Link>
-                        <Link to="/calculator/fire" className="flex justify-between items-center p-4 border border-gray-300 rounded-lg hover:bg-gray-100">
-                            <p className="finwise-green">FIRE Calculator</p>
-                            <FontAwesomeIcon icon={faChevronRight} className="text-gray-500" />
-                        </Link>
-                    </div>
-                </div>
+                <Tool_Footer message="Estimate your mortgage payments and understand your home loan better. Let’s simplify your home financing!"/>
+
+                <CalculatorList activeCalculator="Home Mortgage Calculator" />
+
             </div>
         </div>
     );

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Pie } from 'react-chartjs-2';
 import 'chart.js/auto';
+import Tool_Footer from './Tools_footer';
+import CalculatorList from './Calulators_List';
 
 const TaxCalculator = () => {
   const [grossSalary, setGrossSalary] = useState(60000); // Default gross salary
@@ -127,7 +129,7 @@ const TaxCalculator = () => {
   }, [grossSalary, period]);
 
   return (
-    <div style={{ marginTop: "60px" }} className="bg-gray-50 p-2">
+    <div className="bg-gray-50 p-2">
       <div className="max-w-6xl mx-auto bg-white shadow-lg rounded-lg p-8">
         <div className="mb-6">
           <h1 className="text-2xl font-semibold finwise-green">Tax Calculator</h1>
@@ -241,6 +243,10 @@ const TaxCalculator = () => {
           <Pie data={chartData} />
         </div>
       </div>
+
+      <Tool_Footer message="Calculate your tax liabilities and explore ways to save more. Get started on planning your tax strategy now!"/>
+      <CalculatorList activeCalculator="Tax Calculator" />
+
     </div>
   );
 };
