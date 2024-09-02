@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import { Line } from 'react-chartjs-2';
 import 'chart.js/auto';
-import CalculatorHome from "../../assets/images/calculator_home.png";
-import { Link } from 'react-router-dom';
+import Tool_Footer from './Tools_footer';
+import CalculatorList from './Calulators_List';
 
 const GoalSIP = () => {
   const [goalAmount, setGoalAmount] = useState(100000);
@@ -22,14 +20,39 @@ const GoalSIP = () => {
     datasets: [],
   });
 
+  const [errors, setErrors] = useState({
+    goalAmount: "",
+    annualReturn: "",
+    investmentDuration: "",
+  });
+
+  const validateForm = () => {
+    let valid = true;
+    let newErrors = { goalAmount: "", annualReturn: "", investmentDuration: "" };
+
+    if (goalAmount <= 0 || isNaN(goalAmount)) {
+      newErrors.goalAmount = "Please enter a valid goal amount.";
+      valid = false;
+    }
+    if (annualReturn <= 0 || isNaN(annualReturn)) {
+      newErrors.annualReturn = "Please enter a valid annual return percentage.";
+      valid = false;
+    }
+    if (investmentDuration <= 0 || isNaN(investmentDuration)) {
+      newErrors.investmentDuration = "Please enter a valid investment duration.";
+      valid = false;
+    }
+
+    setErrors(newErrors);
+    return valid;
+  };
+
   const calculateSIP = () => {
+    if (!validateForm()) return;
+
     const FV = parseFloat(goalAmount);
     const annualReturnRate = parseFloat(annualReturn);
     const years = parseInt(investmentDuration);
-
-    if (isNaN(FV) || isNaN(annualReturnRate) || isNaN(years)) {
-      return;
-    }
 
     // Convert annual return to monthly return
     const r = annualReturnRate / 100 / 12;
@@ -75,7 +98,7 @@ const GoalSIP = () => {
   }, [goalAmount, annualReturn, investmentDuration]);
 
   return (
-    <div style={{ marginTop: "100px" }} className="bg-gray-50 p-2">
+    <div className="bg-gray-50 p-2">
       <div className="max-w-6xl mx-auto bg-white shadow-lg rounded-lg p-8">
         <div className="mb-6">
           <h1 className="text-2xl font-semibold finwise-green">Goal SIP Calculator</h1>
@@ -86,7 +109,7 @@ const GoalSIP = () => {
           <div>
             <h2 className="text-lg font-semibold text-gray-800 mb-4">Input fields:</h2>
             <div className="space-y-4">
-              <div className="flex items-center justify-between p-4 border border-gray-300 rounded-lg">
+              <div className={`flex items-center justify-between p-4 border rounded-lg ${errors.goalAmount ? 'border-red-500' : 'border-gray-300'}`}>
                 <label htmlFor="goalAmount" className="text-gray-700">Goal Amount</label>
                 <div className="flex items-center space-x-2">
                   <span className="text-gray-500">&#163;</span>
@@ -99,7 +122,9 @@ const GoalSIP = () => {
                   />
                 </div>
               </div>
-              <div className="flex items-center justify-between p-4 border border-gray-300 rounded-lg">
+              {errors.goalAmount && <p className="text-red-500 text-sm">{errors.goalAmount}</p>}
+              
+              <div className={`flex items-center justify-between p-4 border rounded-lg ${errors.annualReturn ? 'border-red-500' : 'border-gray-300'}`}>
                 <label htmlFor="annualReturn" className="text-gray-700">Expected Annual Return (%)</label>
                 <input
                   type="number"
@@ -109,7 +134,9 @@ const GoalSIP = () => {
                   className="bg-green-100 text-gray-800 font-semibold text-right p-2 rounded-lg w-24"
                 />
               </div>
-              <div className="flex items-center justify-between p-4 border border-gray-300 rounded-lg">
+              {errors.annualReturn && <p className="text-red-500 text-sm">{errors.annualReturn}</p>}
+
+              <div className={`flex items-center justify-between p-4 border rounded-lg ${errors.investmentDuration ? 'border-red-500' : 'border-gray-300'}`}>
                 <label htmlFor="investmentDuration" className="text-gray-700">Investment Duration (Years)</label>
                 <input
                   type="number"
@@ -119,6 +146,7 @@ const GoalSIP = () => {
                   className="bg-green-100 text-gray-800 font-semibold text-right p-2 rounded-lg w-24"
                 />
               </div>
+              {errors.investmentDuration && <p className="text-red-500 text-sm">{errors.investmentDuration}</p>}
             </div>
           </div>
           {/* Output Fields */}
@@ -169,14 +197,12 @@ const GoalSIP = () => {
                         }
                       },
                     },
-
                   },
                 },
                 plugins: {
                   tooltip: {
                     callbacks: {
                       label: function (tooltipItem) {
-                        // Format tooltip label
                         if (tooltipItem.raw >= 1000000) {
                           return `${tooltipItem.label} year${tooltipItem.label > 1 ? 's' : ''}: £${(tooltipItem.raw / 1000000).toFixed(1)}M`;
                         } else if (tooltipItem.raw >= 1000) {
@@ -192,40 +218,10 @@ const GoalSIP = () => {
             />
           </div>
         </div>
-        <div className="mt-8 p-4 border border-gray-300 rounded-lg flex flex-col md:flex-row justify-between items-center">
-          <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4">
-            <div className="flex-shrink-0">
-              <img src={CalculatorHome} alt="Calculator Home" className="w-24 h-24 object-cover rounded-full md:w-32 md:h-32" />
-            </div>
-            <p className="finwise-blue text-center md:text-left">
-              Now that you know your SIP amount, let’s achieve your goal!
-            </p>
-          </div>
-          <button className="mt-4 md:mt-0 text-white font-semibold px-4 py-2 rounded-lg finwise-green-bg">
-            Get started
-          </button>
-        </div>
-        <div className="mt-16">
-          <h2 className="text-lg font-semibold text-gray-800 mb-4">Try our more Popular Calculators</h2>
-          <div className="space-y-2">
-            <Link to="/calculator/fixed-depo" className="flex justify-between items-center p-4 border border-gray-300 rounded-lg hover:bg-gray-100">
-              <p>FD Calculator</p>
-              <FontAwesomeIcon icon={faChevronRight} className="text-gray-500" />
-            </Link>
-            <Link to="/calculator/goal-sip" className="flex justify-between items-center p-4 border border-gray-300 rounded-lg hover:bg-gray-100">
-              <p className="finwise-green">Goal SIP Calculator</p>
-              <FontAwesomeIcon icon={faChevronRight} className="text-gray-500" />
-            </Link>
-            <Link to="/calculator/mutual-funds" className="flex justify-between items-center p-4 border border-gray-300 rounded-lg hover:bg-gray-100">
-              <p>Mutual Funds Calculator</p>
-              <FontAwesomeIcon icon={faChevronRight} className="text-gray-500" />
-            </Link>
-            <Link to="/calculator/fire" className="flex justify-between items-center p-4 border border-gray-300 rounded-lg hover:bg-gray-100">
-              <p>FIRE Calculator</p>
-              <FontAwesomeIcon icon={faChevronRight} className="text-gray-500" />
-            </Link>
-          </div>
-        </div>
+        <Tool_Footer message="Plan your investments to reach your financial goals. Start your journey towards achieving them now!"/>
+
+        <CalculatorList activeCalculator="Goal SIP Calculator" />
+
       </div>
     </div>
   );

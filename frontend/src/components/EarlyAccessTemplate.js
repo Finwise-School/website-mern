@@ -1,10 +1,10 @@
 import React from 'react';
+import { Link } from 'react-router-dom'; 
 
 const EarlyAccessTemplate = () => {
   return (
     <div className="bg-white w-full h-3/6 px-6 lg:px-20 py-12 lg:py-16">
       <div className="max-w-screen-lg mx-auto flex flex-col lg:flex-row lg:items-center lg:justify-between">
-        {/* Text Section */}
         <div className="lg:max-w-3xl">
           <h1 className="text-3xl lg:text-4xl font-bold text-[#263871] mb-4 lg:mb-6">
             Start Your Financial Journey Today
@@ -17,11 +17,10 @@ const EarlyAccessTemplate = () => {
           </p>
         </div>
 
-        {/* Button Section */}
         <div className="mt-6 lg:mt-0 lg:ml-10">
-          <a
-            href="#"
-            className="inline-block  text-[#263871] hover:text-green-500 rounded-lg py-3 px-6 lg:px-8 text-base lg:text-lg min-w-[200px] lg:min-w-[250px] text-center transition-all duration-300"
+          <Link
+            to="/early-access" 
+            className="inline-block rounded-lg text-[#263871] hover:text-green-500 rounded-lg py-3 px-6 lg:px-8 text-base lg:text-lg min-w-[200px] lg:min-w-[250px] text-center transition-all duration-300"
             style={{
               border: '5px solid',
               borderRadius: '12px',
@@ -29,9 +28,8 @@ const EarlyAccessTemplate = () => {
             }}
           >
             Request Early Access
-          </a>
+          </Link>
         </div>
-
       </div>
     </div>
   );

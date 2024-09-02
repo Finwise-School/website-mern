@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInfoCircle, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import '@fortawesome/fontawesome-free/css/all.min.css';
-import CalculatorHome from "../../assets/images/calculator_home.png";
-import { Link } from 'react-router-dom';
+import Tool_Footer from './Tools_footer';
+import CalculatorList from './Calulators_List';
+
 
 const Fire = () => {
     const [monthlyExpense, setMonthlyExpense] = useState(50000);
@@ -11,8 +12,40 @@ const Fire = () => {
     const [retirementAge, setRetirementAge] = useState(40);
     const [inflationRate, setInflationRate] = useState(10);
     const [result, setResult] = useState(null);
+    const [errors, setErrors] = useState({});
+
+    const validateForm = () => {
+        let validationErrors = {};
+
+        // Validate monthlyExpense
+        if (isNaN(monthlyExpense) || monthlyExpense <= 0) {
+            validationErrors.monthlyExpense = "Monthly expense must be a positive number.";
+        }
+
+        // Validate currentAge
+        if (isNaN(currentAge) || currentAge <= 0) {
+            validationErrors.currentAge = "Current age must be a positive number.";
+        }
+
+        // Validate retirementAge
+        if (isNaN(retirementAge) || retirementAge <= 0) {
+            validationErrors.retirementAge = "Retirement age must be a positive number.";
+        } else if (parseInt(currentAge) >= parseInt(retirementAge)) {
+            validationErrors.retirementAge = "Retirement age must be greater than current age.";
+        }
+
+        // Validate inflationRate
+        if (isNaN(inflationRate) || inflationRate <= 0) {
+            validationErrors.inflationRate = "Inflation rate must be a positive number.";
+        }
+
+        setErrors(validationErrors);
+        return Object.keys(validationErrors).length === 0; // Return true if no errors
+    };
 
     const calculateFIRE = () => {
+        if (!validateForm()) return; // Only calculate if the form is valid
+
         const monthlyExpenseValue = parseFloat(monthlyExpense);
         const currentAgeValue = parseInt(currentAge);
         const retirementAgeValue = parseInt(retirementAge);
@@ -40,7 +73,7 @@ const Fire = () => {
     }, [monthlyExpense, currentAge, retirementAge, inflationRate]);
 
     return (
-        <div style={{ marginTop: "100px" }} className="bg-gray-50 p-2">
+        <div className="bg-gray-50 p-2">
             <div className="max-w-6xl mx-auto bg-white shadow-lg rounded-lg p-8">
                 <div className="mb-6">
                     <h1 className="text-2xl font-semibold finwise-green">FIRE Calculator</h1>
@@ -64,6 +97,8 @@ const Fire = () => {
                                     />
                                 </div>
                             </div>
+                            {errors.monthlyExpense && <p className="text-red-500 text-sm">{errors.monthlyExpense}</p>}
+
                             <div className="flex items-center justify-between p-4 border border-gray-300 rounded-lg">
                                 <label htmlFor="current-age" className="text-gray-700">Current Age</label>
                                 <input
@@ -74,6 +109,8 @@ const Fire = () => {
                                     className="bg-green-100 finwise-blue font-semibold text-right p-2 rounded-lg w-24"
                                 />
                             </div>
+                            {errors.currentAge && <p className="text-red-500 text-sm">{errors.currentAge}</p>}
+
                             <div className="flex items-center justify-between p-4 border border-gray-300 rounded-lg">
                                 <label htmlFor="retirement-age" className="text-gray-700">Retirement Age</label>
                                 <input
@@ -84,6 +121,8 @@ const Fire = () => {
                                     className="bg-green-100 finwise-blue font-semibold text-right p-2 rounded-lg w-24"
                                 />
                             </div>
+                            {errors.retirementAge && <p className="text-red-500 text-sm">{errors.retirementAge}</p>}
+
                             <div className="flex items-center justify-between p-4 border border-gray-300 rounded-lg">
                                 <label htmlFor="inflation-rate" className="text-gray-700">Assumed Inflation Rate</label>
                                 <input
@@ -94,6 +133,7 @@ const Fire = () => {
                                     className="bg-green-100 finwise-blue font-semibold text-right p-2 rounded-lg w-24"
                                 />
                             </div>
+                            {errors.inflationRate && <p className="text-red-500 text-sm">{errors.inflationRate}</p>}
                         </div>
                     </div>
                     {/* Output Fields */}
@@ -127,41 +167,12 @@ const Fire = () => {
                         )}
                     </div>
                 </div>
-                <div className="mt-8 p-4 border border-gray-300 rounded-lg flex flex-col md:flex-row justify-between items-center" style={{ "marginTop": "-124px" }}>
-                    <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4">
-                        <div className="flex-shrink-0">
-                            <img src={CalculatorHome} alt="Image description" className="w-24 h-24 object-cover rounded-full md:w-32 md:h-32" />
-                        </div>
-                        <p className="finwise-blue text-center md:text-left">
-                            Now that you know your FIRE number, Lets achieve it !!
-                        </p>
-                    </div>
-                    <button className="mt-4 md:mt-0 text-white font-semibold px-4 py-2 rounded-lg finwise-green-bg">
-                        Get started
-                    </button>
-                </div>
 
-                <div className="mt-16">
-                    <h2 className="text-lg font-semibold finwise-blue mb-4">Try our more Popular Calculators</h2>
-                    <div className="space-y-2">
-                        <Link to="/calculator/fixed-depo" className="flex justify-between items-center p-4 border border-gray-300 rounded-lg hover:bg-gray-100">
-                            <p className="finwise-blue">FD Calculator</p>
-                            <FontAwesomeIcon icon={faChevronRight} className="text-gray-500" />
-                        </Link>
-                        <Link to="/calculator/goal-sip" className="flex justify-between items-center p-4 border border-gray-300 rounded-lg hover:bg-gray-100">
-                            <p className="finwise-blue">Goal SIP Calculator</p>
-                            <FontAwesomeIcon icon={faChevronRight} className="text-gray-500" />
-                        </Link>
-                        <Link to="/calculator/mutual-funds" className="flex justify-between items-center p-4 border border-gray-300 rounded-lg hover:bg-gray-100">
-                            <p className="finwise-blue">Mutual Funds Calculator</p>
-                            <FontAwesomeIcon icon={faChevronRight} className="text-gray-500" />
-                        </Link>
-                        <Link to="/calculator/fire" className="flex justify-between items-center p-4 border border-gray-300 rounded-lg hover:bg-gray-100">
-                            <p className="finwise-green">FIRE Calculator</p>
-                            <FontAwesomeIcon icon={faChevronRight} className="text-gray-500" />
-                        </Link>
-                    </div>
-                </div>
+                <Tool_Footer message="Discover how to achieve financial independence and retire early. Begin your journey to a secure future!"/>
+
+
+                <CalculatorList activeCalculator="FIRE Calculator" />
+
             </div>
         </div>
     );

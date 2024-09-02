@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faInfoCircle, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import { jsPDF } from 'jspdf';
 import 'jspdf-autotable';
 import * as XLSX from 'xlsx';
-import CalculatorHome from "../../assets/images/calculator_home.png";
-import { Link } from 'react-router-dom';
+import Tool_Footer from "./Tools_footer";
+import CalculatorList from './Calulators_List';
 import logo from '../../assets/images/logo.png'; // Adjust the path as needed
 
 
@@ -20,6 +18,7 @@ const EMICalculator = () => {
     const [result, setResult] = useState({ payment: "0" });
     const [schedule, setSchedule] = useState([]);
     const [showMore, setShowMore] = useState(false);
+    const [errors, setErrors] = useState({});
 
     const compoundPeriodMapping = {
         'Monthly': 12,
@@ -35,6 +34,25 @@ const EMICalculator = () => {
         'Weekly': 52,
     };
 
+    const validateForm = () => {
+        const validationErrors = {};
+
+        if (loanAmount <= 0) {
+            validationErrors.loanAmount = "Loan amount should be greater than 0";
+        }
+
+        if (interestRate <= 0) {
+            validationErrors.interestRate = "Interest rate should be greater than 0";
+        }
+
+        if (termLength <= 0) {
+            validationErrors.termLength = "Term Length should be greater than 0";
+        }
+
+        setErrors(validationErrors);
+        return Object.keys(validationErrors).length === 0;
+    };
+
     const calculateEMI = (principal, rate, periods, totalPayments) => {
         const EMI = principal * (rate * Math.pow(1 + rate, totalPayments)) /
             (Math.pow(1 + rate, totalPayments) - 1);
@@ -42,6 +60,10 @@ const EMICalculator = () => {
     };
 
     const calculatePayment = () => {
+        if (!validateForm()) {
+            return;
+        }
+
         const P = parseFloat(loanAmount);
         const annualInterestRate = parseFloat(interestRate);
         const years = parseInt(termLength);
@@ -93,54 +115,54 @@ const EMICalculator = () => {
         calculatePayment();
     }, [loanAmount, interestRate, termLength, paymentFrequency, firstPaymentDate, compoundPeriod]);
 
-const exportToPDF = () => {
-    const doc = new jsPDF();
+    const exportToPDF = () => {
+        const doc = new jsPDF();
 
-    const logoWidth = 40;
-    const logoHeight = 40;
-    const margin = 10; 
-    const logoBottomMargin = 0;
-    const footerHeight = 20; 
+        const logoWidth = 40;
+        const logoHeight = 40;
+        const margin = 10;
+        const logoBottomMargin = 0;
+        const footerHeight = 20;
 
-    doc.addImage(logo, 'PNG', doc.internal.pageSize.width - logoWidth - margin, margin, logoWidth, logoHeight);
+        doc.addImage(logo, 'PNG', doc.internal.pageSize.width - logoWidth - margin, margin, logoWidth, logoHeight);
 
-    const titleYPosition = margin + logoHeight + logoBottomMargin;
-    doc.setFontSize(18);
-    doc.text('EMI Payment Schedule', margin, titleYPosition);
+        const titleYPosition = margin + logoHeight + logoBottomMargin;
+        doc.setFontSize(18);
+        doc.text('EMI Payment Schedule', margin, titleYPosition);
 
-    const tableColumn = ["Payment No", "Payment Date", "Interest Rate", "Interest Due", "Payment Due", "Extra Payments", "Additional Payments", "Principal Paid", "Balance", "Tax Returned", "Cumulative Tax Returned"];
-    const tableRows = schedule.map(row => [
-        row.paymentNo,
-        row.paymentDate,
-        row.interestRate,
-        row.interestDue,
-        row.paymentDue,
-        row.extraPayments,
-        row.additionalPayment,
-        row.principalPaid,
-        row.balance,
-        row.taxReturned,
-        row.cumulativeTaxReturned
-    ]);
+        const tableColumn = ["Payment No", "Payment Date", "Interest Rate", "Interest Due", "Payment Due", "Extra Payments", "Additional Payments", "Principal Paid", "Balance", "Tax Returned", "Cumulative Tax Returned"];
+        const tableRows = schedule.map(row => [
+            row.paymentNo,
+            row.paymentDate,
+            row.interestRate,
+            row.interestDue,
+            row.paymentDue,
+            row.extraPayments,
+            row.additionalPayment,
+            row.principalPaid,
+            row.balance,
+            row.taxReturned,
+            row.cumulativeTaxReturned
+        ]);
 
-    const startY = titleYPosition + 10;
-    doc.autoTable(tableColumn, tableRows, { startY: startY });
+        const startY = titleYPosition + 10;
+        doc.autoTable(tableColumn, tableRows, { startY: startY });
 
-    const pageHeight = doc.internal.pageSize.height;
-    const pageWidth = doc.internal.pageSize.width;
-    doc.setFillColor(220, 220, 220);
-    doc.rect(0, pageHeight - footerHeight, pageWidth, footerHeight, 'F');
+        const pageHeight = doc.internal.pageSize.height;
+        const pageWidth = doc.internal.pageSize.width;
+        doc.setFillColor(220, 220, 220);
+        doc.rect(0, pageHeight - footerHeight, pageWidth, footerHeight, 'F');
 
-    doc.setFontSize(10);
-    doc.setTextColor(0, 0, 0); 
-    const footerText = 'Generated by finwiseschool.com';
-    const textWidth = doc.getTextWidth(footerText);
-    doc.text(footerText, pageWidth - margin - textWidth, pageHeight - (footerHeight / 2));
+        doc.setFontSize(10);
+        doc.setTextColor(0, 0, 0);
+        const footerText = 'Generated by finwiseschool.com';
+        const textWidth = doc.getTextWidth(footerText);
+        doc.text(footerText, pageWidth - margin - textWidth, pageHeight - (footerHeight / 2));
 
-    // Save the PDF
-    doc.save('EMI_Schedule.pdf');
-};
-    
+        // Save the PDF
+        doc.save('EMI_Schedule.pdf');
+    };
+
     const exportToExcel = () => {
         const worksheet = XLSX.utils.json_to_sheet(schedule);
         const workbook = XLSX.utils.book_new();
@@ -149,7 +171,7 @@ const exportToPDF = () => {
     };
 
     return (
-        <div style={{ marginTop: "100px" }} className="bg-gray-50 p-2">
+        <div className="bg-gray-50 p-2">
             <div className="max-w-6xl mx-auto bg-white shadow-lg rounded-lg p-8">
                 <div className="mb-6">
                     <h1 className="text-2xl font-semibold finwise-green">EMI Calculator</h1>
@@ -174,6 +196,8 @@ const exportToPDF = () => {
                                     />
                                 </div>
                             </div>
+                              {errors.loanAmount && <p className="text-red-500 text-sm mt-1">{errors.loanAmount}</p>}
+
                             {/* Annual Interest Rate */}
                             <div className="flex items-center justify-between p-4 border border-gray-300 rounded-lg">
                                 <label htmlFor="interestRate" className="text-gray-700">Annual Interest Rate (%)</label>
@@ -185,6 +209,8 @@ const exportToPDF = () => {
                                     className="bg-green-100 text-gray-800 font-semibold text-right p-2 rounded-lg w-24"
                                 />
                             </div>
+                            {errors.interestRate && <p className="text-red-500 text-sm mt-1">{errors.interestRate}</p>}
+
                             {/* Term Length */}
                             <div className="flex items-center justify-between p-4 border border-gray-300 rounded-lg">
                                 <label htmlFor="termLength" className="text-gray-700">Term Length (in Years)</label>
@@ -196,6 +222,8 @@ const exportToPDF = () => {
                                     className="bg-green-100 text-gray-800 font-semibold text-right p-2 rounded-lg w-24"
                                 />
                             </div>
+                            {errors.termLength && <p className="text-red-500 text-sm mt-1">{errors.termLength}</p>}
+
                             {/* First Payment Date */}
                             <div className="flex items-center justify-between p-4 border border-gray-300 rounded-lg">
                                 <label htmlFor="firstPaymentDate" className="text-gray-700">First Payment Date</label>
@@ -240,7 +268,7 @@ const exportToPDF = () => {
                     </div>
                     {/* Results Display */}
 
-                                        <div className="output-fields -mt-28 md:mt-0">
+                    <div className="output-fields -mt-28 md:mt-0">
                         <h2 className="text-lg font-semibold text-gray-800 mb-4">Results:</h2>
                         <div className="space-y-2">
                             <div className="p-4 border border-gray-300 rounded-lg">
@@ -252,26 +280,26 @@ const exportToPDF = () => {
                 </div>
 
                 {/* Table Display */}
-                <div style={{marginTop: "-105px"}}>
-                <div className="flex flex-col md:flex-row justify-between items-center">
-    <h2 className="text-lg font-semibold text-gray-800 mb-4 md:mb-0">EMI Payment Schedule</h2>
-    <div className="flex flex-wrap gap-4 justify-center md:justify-start">
-        <button
-            onClick={exportToPDF}
-            className="bg-red-500 text-white mb-2 font-bold py-2 px-4 rounded-lg shadow-lg hover:bg-red-600 transition duration-200 flex items-center space-x-2"
-        >
-            <i className="fas fa-file-pdf"></i>
-            <span>PDF</span>
-        </button>
-        <button
-            onClick={exportToExcel}
-            className="bg-green-500 text-white mb-2 font-bold py-2 px-4 rounded-lg shadow-lg hover:bg-green-600 transition duration-200 flex items-center space-x-2"
-        >
-            <i className="fas fa-file-excel"></i>
-            <span>Excel</span>
-        </button>
-    </div>
-</div>
+                <div style={{ marginTop: "-105px" }}>
+                    <div className="flex flex-col md:flex-row justify-between items-center">
+                        <h2 className="text-lg font-semibold text-gray-800 mb-4 md:mb-0">EMI Payment Schedule</h2>
+                        <div className="flex flex-wrap gap-4 justify-center md:justify-start">
+                            <button
+                                onClick={exportToPDF}
+                                className="bg-red-500 text-white mb-2 font-bold py-2 px-4 rounded-lg shadow-lg hover:bg-red-600 transition duration-200 flex items-center space-x-2"
+                            >
+                                <i className="fas fa-file-pdf"></i>
+                                <span>PDF</span>
+                            </button>
+                            <button
+                                onClick={exportToExcel}
+                                className="bg-green-500 text-white mb-2 font-bold py-2 px-4 rounded-lg shadow-lg hover:bg-green-600 transition duration-200 flex items-center space-x-2"
+                            >
+                                <i className="fas fa-file-excel"></i>
+                                <span>Excel</span>
+                            </button>
+                        </div>
+                    </div>
 
                     <div className="overflow-x-auto max-h-[500px] border border-gray-300 rounded-lg shadow-lg">
                         <table className="min-w-full bg-white">
@@ -316,41 +344,10 @@ const exportToPDF = () => {
                         </button>
                     </div>
                 </div>
-                            <div className="mt-8 p-4 border border-gray-300 rounded-lg flex flex-col md:flex-row justify-between items-center">
-                    <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4">
-                        <div className="flex-shrink-0">
-                            <img src={CalculatorHome} alt="Image description" className="w-24 h-24 object-cover rounded-full md:w-32 md:h-32" />
-                        </div>
-                        <p className="finwise-blue text-center md:text-left">
-                            Now that you know your EMI number, Lets start !!
-                        </p>
-                    </div>
-                    <button className="mt-4 md:mt-0 text-white font-semibold px-4 py-2 rounded-lg finwise-green-bg">
-                        Get started
-                    </button>
-                </div>
+                <Tool_Footer message="Get a clear view of your monthly EMI payments. Start managing your finances with ease!"/>
 
-                <div className="mt-16">
-                    <h2 className="text-lg font-semibold text-gray-800 mb-4">Try our more Popular Calculators</h2>
-                    <div className="space-y-2">
-                        <Link to="/calculator/fixed-depo" className="flex justify-between items-center p-4 border border-gray-300 rounded-lg hover:bg-gray-100">
-                            <p className="text-gray-800">FD Calculator</p>
-                            <FontAwesomeIcon icon={faChevronRight} className="text-gray-500" />
-                        </Link>
-                        <Link to="/calculator/goal-sip" className="flex justify-between items-center p-4 border border-gray-300 rounded-lg hover:bg-gray-100">
-                            <p className="text-gray-800">Goal SIP Calculator</p>
-                            <FontAwesomeIcon icon={faChevronRight} className="text-gray-500" />
-                        </Link>
-                        <Link to="/calculator/mutual-funds" className="flex justify-between items-center p-4 border border-gray-300 rounded-lg hover:bg-gray-100">
-                            <p className="text-gray-800">Mutual Funds Calculator</p>
-                            <FontAwesomeIcon icon={faChevronRight} className="text-gray-500" />
-                        </Link>
-                        <Link to="/calculator/fire" className="flex justify-between items-center p-4 border border-gray-300 rounded-lg hover:bg-gray-100">
-                            <p className="finwise-green">FIRE Calculator</p>
-                            <FontAwesomeIcon icon={faChevronRight} className="text-gray-500" />
-                        </Link>
-                    </div>
-                </div>
+                <CalculatorList activeCalculator="EMI Calculator" />
+
 
             </div>
         </div>
