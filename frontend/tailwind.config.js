@@ -7,10 +7,23 @@ module.exports = {
     flowbite.content(),
   ],
   theme: {
-    extend: {},
+    extend:{
+      keyframes: {
+        scroll: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-100%)' },
+        },
+        slide: {
+          '0%, 100%': { opacity: 0, transform: 'translateX(100%)' }, 
+          '33.33%': { opacity: 1, transform: 'translateX(0)' }, 
+        }
+      },
+      animation: {
+        'carousel-slide': 'slide 6s infinite', 
+      },
   },
   plugins: [
     flowbite.plugin(),
   ],
 }
-
+}

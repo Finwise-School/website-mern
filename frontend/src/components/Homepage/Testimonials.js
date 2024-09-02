@@ -1,11 +1,12 @@
 import React from 'react';
+import starrs from './../Homepage/Testimonials/star.png'
 
 const TestimonialCard = ({ rating, title, content, author, location, imageSrc }) => (
   <div className="flex flex-col flex-1 shrink p-12 bg-green-500 rounded-xl border border-solid basis-0 border-neutral-800 min-w-[240px] max-md:px-5 max-md:max-w-full">
     <div className="flex gap-2.5 items-start self-start">
       {[...Array(5)].map((_, i) => (
         <div key={i} className="flex gap-2.5 items-center p-2.5 w-11 h-11 border border-solid bg-zinc-900 border-neutral-800 rounded-[100px]">
-          <img loading="lazy" src="frontend/src/components/Homepage/Testimonials/star.png" alt="Star rating" className="object-contain w-6 rounded-sm aspect-square" />
+          <img loading="lazy" src={starrs} alt="Star rating" className="object-contain w-6 rounded-sm aspect-square text-xl" />
         </div>
       ))}
     </div>
@@ -31,7 +32,7 @@ const Testimonials = () => {
       content: "Finwise transformed my approach to financial planning. Their finance tools made it so easy to set clear goals and track my progress. I finally feel in control of my financial future",
       author: "Sai",
       location: "UK, Edinburgh",
-      imageSrc: "frontend/src/components/Homepage/Testimonials/sai.png"
+      imageSrc: require('./../Homepage/Testimonials/sai.png')
     },
     {
       rating: 5,
@@ -39,7 +40,7 @@ const Testimonials = () => {
       content: "I wish I had found Finwise years ago. Their easy-to-use tools and comprehensive planning strategies have helped me optimize my retirement savings and enjoy my retirement with peace of mind",
       author: "Kate",
       location: "UK, Glasgow",
-      imageSrc: "frontend/src/components/Homepage/Testimonials/kate.png"
+      imageSrc: require('./../Homepage/Testimonials/kate.png')
     },
     {
       rating: 5,
@@ -47,7 +48,7 @@ const Testimonials = () => {
       content: "The way they teach about the financial concepts is kinda fun and insightfull. 100% recommended if someone is struggling with money or to understand basic or even advance financial concepts.",
       author: "Matthew",
       location: "UK, London",
-      imageSrc: "frontend/src/components/Homepage/Testimonials/matthew.png"
+      imageSrc: require('./../Homepage/Testimonials/matthew.png')
     }
   ];
 

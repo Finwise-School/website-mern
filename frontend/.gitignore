@@ -6,6 +6,7 @@ yarn-debug.log*
 yarn-error.log*
 .env
 
+
 # Logs
 logs/
 *.log
@@ -18,6 +19,9 @@ pids/
 jspm_packages/
 client/node_modules/
 dist/
+react-icons
+react-responsive
+node-irr   
 
 # Bower
 bower_components/

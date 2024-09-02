@@ -39,7 +39,7 @@ const App = () => {
       <Router>
       <ScrollToTop />
         <div className="app">
-          <Header/>
+          <Header/> 
           <Routes>
             <Route path="/early-access" element={<EarlyAccess />} />
             <Route path="/" element={<HomePage />} />
