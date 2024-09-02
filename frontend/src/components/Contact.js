@@ -3,7 +3,7 @@ import ContactImg from "../assets/images/contact/contact-finwise.png";
 import MailImg from "../assets/images/contact/mail.png";
 import CallImg from "../assets/images/contact/call.png";
 import LocationImg from "../assets/images/contact/location.png";
-import SocialImg from "../assets/images/contact/social.png";
+import youtubeImg from "../assets/images/contact/youtube.png";
 import EarlyAccessTemplate from './EarlyAccessTemplate';
 
 const ContactUs = () => {
@@ -200,57 +200,44 @@ const ContactUs = () => {
           </form>
         </div>
       </div>
-
-      {/* Footer Section */}
-      <footer className="bg-gray-900 text-white py-8">
-        <div className="max-w-7xl mx-auto grid-for-calci grid-cols-1 sm:grid-cols-6 gap-5 text-center">
-          <div className="flex flex-col items-center">
-            <img src={MailImg} alt="Email Icon" className="w-10 h-10" />
-            <p className="mt-2"><a href="mailto:contact@finwiseschool.com" className="hover:underline">contact@finwiseschool.com</a></p>
-          </div>
-          <div className="flex flex-col items-center">
-            <img src={CallImg} alt="Phone Icon" className="w-10 h-10" />
-            <p className="mt-2"><a href="tel:+447741819337" className="hover:underline">+44 7741-819-337</a></p>
-          </div>
-          <div className="flex flex-col items-center">
-            <img src={LocationImg} alt="Location Icon" className="w-10 h-10" />
-            <p className="mt-2">Glasgow, UK</p>
-          </div>
-          <div className="flex flex-col items-center">
-            <a href="https://linkedin.com/company/finwiseschool" target="_blank" rel="noopener noreferrer">
-              <i style={{ color: "#3cb572" }} className="fab fa-linkedin w-10 h-10"></i>
-            </a>
-            <p className="mt-2">
-              <a href="https://linkedin.com/company/finwiseschool" target="_blank" rel="noopener noreferrer">
-                LinkedIn
-              </a>
-            </p>
-          </div>
-
-          <div className="flex flex-col items-center">
-            <a href="https://instagram.com/finwiseschool" target="_blank" rel="noopener noreferrer">
-              <i style={{ color: "#3cb572" }} className="fab fa-instagram w-10 h-10"></i>
-            </a>
-            <p className="mt-2">
-              <a href="https://instagram.com/finwiseschool" target="_blank" rel="noopener noreferrer">
-                Instagram
-              </a>
-            </p>
-          </div>
-
-          <div className="flex flex-col items-center">
-            <a href="https://facebook.com/#" target="_blank" rel="noopener noreferrer">
-              <i style={{ color: "#3cb572" }} className="fab fa-facebook w-10 h-10"></i>
-            </a>
-            <p className="mt-2">
-              <a href="https://facebook.com/#" target="_blank" rel="noopener noreferrer">
-                Facebook
-              </a>
-            </p>
-          </div>
-
+      <footer style={{ backgroundColor: "#000000" }} className="text-white py-8">
+  <div className="max-w-7xl mx-auto px-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-center">
+      <div className="flex flex-col items-center relative group">
+        <img src={MailImg} alt="Email Icon" className="w-10 h-10 mb-2 relative z-10 transition-transform duration-300 ease-in-out transform group-hover:scale-110" />
+        <p>
+          <a href="mailto:contact@finwiseschool.com" className="hover:underline">contact@finwiseschool.com</a>
+        </p>
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="shine absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
         </div>
-      </footer>
+      </div>
+      <div className="flex flex-col items-center relative group">
+        <img src={CallImg} alt="Phone Icon" className="w-10 h-10 mb-2 relative z-10 transition-transform duration-300 ease-in-out transform group-hover:scale-110" />
+        <p>
+          <a href="tel:+447741819337" className="hover:underline">+44 7741-819-337</a>
+        </p>
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="shine absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        </div>
+      </div>
+      <div className="flex flex-col items-center relative group">
+        <img src={LocationImg} alt="Location Icon" className="w-10 h-10 mb-2 relative z-10 transition-transform duration-300 ease-in-out transform group-hover:scale-110" />
+        <p>Glasgow, UK</p>
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="shine absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        </div>
+      </div>
+      <div className="flex flex-col items-center relative group">
+        <img src={youtubeImg} alt="YouTube Icon" className="w-10 h-10 mb-2 relative z-10 transition-transform duration-300 ease-in-out transform group-hover:scale-110" />
+        <p>YouTube</p>
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="shine absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
       <EarlyAccessTemplate />
     </div>
   );
