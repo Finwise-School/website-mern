@@ -8,7 +8,16 @@ import right from "../../assets/images/aboutUS/right.png";
 import { FaStar } from "react-icons/fa6";
 import { FaGraduationCap } from "react-icons/fa6";
 import { IoIosPeople } from "react-icons/io";
+import { useNavigate } from 'react-router-dom';
+import RequestEarlyAccess from "../EarlyAccessTemplate";
+
 const AboutUs = () => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate('/early-access');
+  };
+
   return (
     <div>
       <div className="flex items-center justify-between p-10">
@@ -26,8 +35,8 @@ const AboutUs = () => {
           </p>
 
           <div className="mt-6 lg:mt-0 lg:ml-10">
-            <a
-              href="#"
+            <button
+              onClick={handleClick}
               className="inline-block text-[#263871] hover:text-green-500 rounded-lg py-2 text-sm lg:text-base min-w-[150px] lg:min-w-[200px] text-center transition-all duration-300 mt-10"
               style={{
                 border: "5px solid",
@@ -37,7 +46,7 @@ const AboutUs = () => {
               }}
             >
               Request Early Access
-            </a>
+            </button>
           </div>
         </div>
         <img
@@ -285,7 +294,7 @@ const AboutUs = () => {
         <div className="border-t border-gray-300"></div>
       </div>
 
-      <div className=" flex p-10">
+      {/* <div className=" flex p-10">
         <div className="">
           <h1 className="finwise-blue text-4xl font-bold mb-4 pt-10 ">
             Start Your Financial Journey Today
@@ -312,7 +321,8 @@ const AboutUs = () => {
             Request Early Access
           </a>
         </div>
-      </div>
+      </div> */}
+      <RequestEarlyAccess />
     </div>
   );
 };

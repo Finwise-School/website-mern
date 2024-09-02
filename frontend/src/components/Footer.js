@@ -56,10 +56,10 @@ function Footer() {
   ];
 
   const socialIcons = [
-    { icon: <FaFacebookF />, alt: "Facebook" },
-    { icon: <FaLinkedinIn />, alt: "LinkedIn" },
-    { icon: <FaTwitter />, alt: "Twitter" },
-    { icon: <FaYoutube />, alt: "YouTube" }
+    { icon: <FaFacebookF />, alt: "Facebook", url: "https://facebook.com" },
+    { icon: <FaLinkedinIn />, alt: "LinkedIn", url: "https://linkedin.com" },
+    { icon: <FaTwitter />, alt: "Twitter", url: "https://twitter.com" },
+    { icon: <FaYoutube />, alt: "YouTube", url: "https://youtube.com" }
   ];
 
   return (
@@ -78,8 +78,17 @@ function Footer() {
           <a href="#terms">Terms & Conditions</a>
         </div>
         <div className="flex gap-2.5 items-center self-stretch py-2.5 my-auto">
-          {socialIcons.map((icon, index) => (
-            <SocialIcon key={index} icon={icon.icon} alt={icon.alt} />
+          {socialIcons.map((social, index) => (
+            <a 
+              key={index} 
+              href={social.url} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              aria-label={social.alt}
+              className="flex items-center justify-center p-3.5 bg-neutral-900 h-[52px] w-[52px] rounded-full text-white cursor-pointer hover:bg-neutral-700 transition-colors"
+            >
+              {social.icon}
+            </a>
           ))}
         </div>
       </div>
