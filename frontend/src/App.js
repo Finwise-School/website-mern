@@ -26,6 +26,7 @@ import Chatbot from "./components/Chatbot";
 import MortgageCalculator from "./components/calculator/Mortgage";
 import IRRCalculator from "./components/calculator/IRR";
 import ScrollToTop from "./components/ScrolltoTop";
+import Blogs from "./components/Blogs";
 
 
 const ProtectedRoute = ({ element, ...rest }) => {
@@ -58,6 +59,8 @@ const App = () => {
             <Route path="/tools/cagr" element={<CAGRCalculator />} />
             <Route path="/tools/mortgage" element={<MortgageCalculator />} />
             <Route path="/tools/irr" element={<IRRCalculator />} />
+            <Route path="/blogs" element={<Blogs />} />
+            <Route path="/blogs/uk-tax-system" element={<Blogs />} />
             <Route
               path="/profile"
               element={<ProtectedRoute element={<Profile />} />}

@@ -2,7 +2,7 @@ import React from 'react';
 import fire from '../Homepage/Tools/fire.png'
 
 const ToolCard = ({ title, description, imageSrc }) => (
-  <div className="flex overflow-hidden flex-col flex-1 shrink pt-10 pr-4 pb-4 pl-10 bg-green-500 rounded-xl border border-solid basis-[25px] border-neutral-800 min-h-[913px] min-w-[240px] max-md:pl-5 max-md:max-w-full">
+  <div className="flex overflow-hidden flex-col flex-1 shrink pt-10 pr-4 pb-4 pl-10 bg-green-500 rounded-xl border border-solid basis-[25px] border-neutral-800 min-h-[700px] min-w-[240px] max-md:pl-5 max-md:max-w-full">
     <div className="flex flex-col w-full max-md:max-w-full">
       <div className="flex flex-col w-full max-md:max-w-full">
         <h3 className="text-2xl font-semibold text-white max-md:max-w-full">{title}</h3>

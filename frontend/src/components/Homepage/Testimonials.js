@@ -1,12 +1,12 @@
 import React from 'react';
-import starrs from './../Homepage/Testimonials/star.png'
+import starrs from './../Homepage/Testimonials/star.png';
 
 const TestimonialCard = ({ rating, title, content, author, location, imageSrc }) => (
   <div className="flex flex-col flex-1 shrink p-12 bg-green-500 rounded-xl border border-solid basis-0 border-neutral-800 min-w-[240px] max-md:px-5 max-md:max-w-full">
     <div className="flex gap-2.5 items-start self-start">
       {[...Array(5)].map((_, i) => (
-        <div key={i} className="flex gap-2.5 items-center p-2.5 w-11 h-11 border border-solid bg-zinc-900 border-neutral-800 rounded-[100px]">
-          <img loading="lazy" src={starrs} alt="Star rating" className="object-contain w-6 rounded-sm aspect-square text-xl" />
+        <div key={i} className="flex gap-2.5 items-center p-2.5 w-11 h-11 border border-solid bg-zinc-900 border-neutral-800 rounded-full">
+          <img loading="lazy" src={starrs} alt="Star rating" className="object-contain w-6 h-6" />
         </div>
       ))}
     </div>
@@ -15,8 +15,8 @@ const TestimonialCard = ({ rating, title, content, author, location, imageSrc })
       <p className="mt-3.5 text-lg font-medium leading-7 text-white">{content}</p>
     </div>
     <div className="flex gap-3 items-center mt-10 w-full font-medium">
-      <img loading="lazy" src={imageSrc} alt={author} className="object-contain shrink-0 self-stretch my-auto rounded-full aspect-square w-[60px]" />
-      <div className="flex flex-col flex-1 shrink self-stretch my-auto basis-0 min-w-[240px]">
+      <img loading="lazy" src={imageSrc} alt={author} className="object-contain rounded-full aspect-square w-[60px]" />
+      <div className="flex flex-col flex-1 shrink self-stretch my-auto">
         <div className="text-xl text-white">{author}</div>
         <div className="text-lg text-black">{location}</div>
       </div>
@@ -45,7 +45,7 @@ const Testimonials = () => {
     {
       rating: 5,
       title: "Fun and insightful",
-      content: "The way they teach about the financial concepts is kinda fun and insightfull. 100% recommended if someone is struggling with money or to understand basic or even advance financial concepts.",
+      content: "The way they teach about the financial concepts is kinda fun and insightful. 100% recommended if someone is struggling with money or to understand basic or even advanced financial concepts.",
       author: "Matthew",
       location: "UK, London",
       imageSrc: require('./../Homepage/Testimonials/matthew.png')
@@ -53,7 +53,7 @@ const Testimonials = () => {
   ];
 
   return (
-    <section className="flex flex-col self-center mt-24 w-full max-w-[1596px] max-md:mt-10 max-md:max-w-full">
+    <section className="flex flex-col self-center mt-8 w-full max-w-[1596px] px-8 md:px-16 lg:px-24 max-md:mt-10 max-md:px-4">
       <div className="flex gap-10 items-end w-full max-md:max-w-full">
         <div className="flex flex-col flex-1 shrink w-full basis-0 min-w-[240px] max-md:max-w-full">
           <h2 className="text-5xl font-semibold text-blue-900 max-md:max-w-full max-md:text-4xl">
@@ -64,8 +64,8 @@ const Testimonials = () => {
           </p>
         </div>
       </div>
-      <div className="flex flex-col mt-20 w-full max-md:mt-10 max-md:max-w-full">
-        <div className="flex flex-wrap gap-8 items-start w-full max-md:max-w-full">
+      <div className="flex flex-col mt-20 w-full max-md:mt-10 max-md:max-w-full mx-4 lg:mx-8">
+      <div className="flex flex-wrap gap-8 items-start w-full max-md:max-w-full">
           {testimonials.map((testimonial, index) => (
             <TestimonialCard key={index} {...testimonial} />
           ))}
