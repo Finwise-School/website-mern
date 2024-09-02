@@ -21,6 +21,7 @@ const Chatbot = () => {
   const [previousSubOptions, setPreviousSubOptions] = useState([]);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [query, setQuery] = useState(''); // New state for query
   const [showForm, setShowForm] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -62,11 +63,12 @@ const Chatbot = () => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    setMessages([...messages, { text: `Name: ${name}, Email: ${email}`, isBot: false }]);
+    setMessages([...messages, { text: `Name: ${name}, Email: ${email}, Query: ${query}`, isBot: false }]);
     // Here you would normally handle form submission, e.g., send to a server
     setMessages([...messages, { text: "Thank you! We will get back to you soon.", isBot: true }]);
     setName('');
     setEmail('');
+    setQuery(''); // Clear query after submission
     setShowForm(false);
     setOptions([
       "I have some General Questions",
@@ -118,6 +120,14 @@ const Chatbot = () => {
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="Your Email"
                       className="w-full p-2 border border-gray-300 rounded"
+                      required
+                    />
+                    <textarea
+                      value={query}
+                      onChange={(e) => setQuery(e.target.value)}
+                      placeholder="Your Query"
+                      className="w-full p-2 border border-gray-300 rounded"
+                      rows="4"
                       required
                     />
                     <button
