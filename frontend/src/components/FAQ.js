@@ -99,8 +99,8 @@ const FAQ = () => {
             <img className='m-1' src={Buttonnext} alt='' />
           </button>
         </div>
-        <EATemplate />
       </div>
+      <EATemplate />
     </>
   );
 };
