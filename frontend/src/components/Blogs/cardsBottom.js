@@ -47,9 +47,9 @@ const responsive = {
 };
 return (
   <>
-<Carousel ref={carouselRef} responsive={responsive}>
+<Carousel ref={carouselRef} responsive={responsive} infinite={true} autoPlaySpeed={1000}>
 {Array.from({ length: 5 }, (_, index) => (
-    <div key={index} className='cursor-pointer m-4  bg-slate-100 rounded-xl'>
+    <div key={index} className='cursor-pointer m-3  bg-slate-100 rounded-xl'>
       <div className="rounded-t flex justify-center flex-wrap overflow-hidden">
         <img src={Thumbnail} alt="" />
       </div>
@@ -62,14 +62,14 @@ return (
     </div>
 ))}
 </Carousel>
-      <div className='msFooter flex flex-row justify-center items-center my-3'>
+      {/* <div className='msFooter flex flex-row justify-center items-center my-3'>
                 <button className='custom-arrow custom-arrow-prev' onClick={() => carouselRef.current && carouselRef.current.previous()}>
               <img className='m-1' src={Buttonprev} alt='' />
                 </button>
                 <button className='custom-arrow custom-arrow-next' onClick={() => carouselRef.current && carouselRef.current.next()}>
               <img className='m-1' src={Buttonnext} alt='' />
                 </button>
-            </div>
+            </div> */}
 <hr className='border-t-1 border-black my-4 md:my-28' />
 </>
   )
