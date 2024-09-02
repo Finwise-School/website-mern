@@ -6,7 +6,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Cards from "./components/carouselCards";
 import Profile from "./components/Profile";
 import FAQ from "./components/FAQ";
-import MainContent from "./components/MainContent";
+import HomePage from "./components/HomePage";
 import EarlyAccess from "./components/requestEarlyAccess";
 import Contact from "./components/Contact";
 import Header from "./components/Header";
@@ -42,7 +42,7 @@ const App = () => {
           <Header/>
           <Routes>
             <Route path="/early-access" element={<EarlyAccess />} />
-            <Route path="/" element={<MainContent />} />
+            <Route path="/" element={<HomePage />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/tools" element={<Calculator />} />
             <Route path="/about" element={<AboutUs />} />
@@ -62,7 +62,7 @@ const App = () => {
               path="/profile"
               element={<ProtectedRoute element={<Profile />} />}
             />
-            <Route path="/faq" element={<FAQ />} />
+            <Route path="/faqs" element={<FAQ />} />
           </Routes>
           <Chatbot />
           <Footer />
