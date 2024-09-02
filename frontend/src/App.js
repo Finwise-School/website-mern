@@ -6,7 +6,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Cards from "./components/carouselCards";
 import Profile from "./components/Profile";
 import FAQ from "./components/FAQ";
-import MainContent from "./components/MainContent";
+import HomePage from "./components/HomePage";
 import EarlyAccess from "./components/requestEarlyAccess";
 import Contact from "./components/Contact";
 import Header from "./components/Header";
@@ -42,27 +42,27 @@ const App = () => {
           <Header/> 
           <Routes>
             <Route path="/early-access" element={<EarlyAccess />} />
-            <Route path="/" element={<MainContent />} />
+            <Route path="/" element={<HomePage />} />
             <Route path="/contact" element={<Contact />} />
-            <Route path="/calculator" element={<Calculator />} />
-            <Route path="/aboutUs" element={<AboutUs />} />
+            <Route path="/tools" element={<Calculator />} />
+            <Route path="/about" element={<AboutUs />} />
             <Route path="/signup" element={<SignupPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/clients" element={<Cards />} />
-            <Route path="/calculator/fire" element={<Fire />} />
-            <Route path="/calculator/goal-sip" element={<GoalSIP />} />
-            <Route path="/calculator/mutual-funds" element={<MutualFunds />} />
-            <Route path="/calculator/fixed-deposit" element={<FixedDepo />} />
-            <Route path="/calculator/tax" element={<Tax />} />
-            <Route path="/calculator/emi" element={<EMICalculator />} />
-            <Route path="/calculator/cagr" element={<CAGRCalculator />} />
-            <Route path="/calculator/mortgage" element={<MortgageCalculator />} />
-            <Route path="/calculator/irr" element={<IRRCalculator />} />
+            <Route path="/tools/fire" element={<Fire />} />
+            <Route path="/tools/goal-sip" element={<GoalSIP />} />
+            <Route path="/tools/mutual-funds" element={<MutualFunds />} />
+            <Route path="/tools/fixed-deposit" element={<FixedDepo />} />
+            <Route path="/tools/tax" element={<Tax />} />
+            <Route path="/tools/emi" element={<EMICalculator />} />
+            <Route path="/tools/cagr" element={<CAGRCalculator />} />
+            <Route path="/tools/mortgage" element={<MortgageCalculator />} />
+            <Route path="/tools/irr" element={<IRRCalculator />} />
             <Route
               path="/profile"
               element={<ProtectedRoute element={<Profile />} />}
             />
-            <Route path="/faq" element={<FAQ />} />
+            <Route path="/faqs" element={<FAQ />} />
           </Routes>
           <Chatbot />
           <Footer />

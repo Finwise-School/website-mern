@@ -71,7 +71,7 @@ const AboutUs = () => {
       </div>
       <h1 className="finwise-blue text-lg font-bold">Trust</h1>
     </div>
-    <p>
+    <p className="text-lg">
       We build lasting relationships through integrity, transparency, and trust.
     </p>
   </div>
@@ -83,7 +83,7 @@ const AboutUs = () => {
       </div>
       <h1 className="finwise-blue text-lg font-bold">Excellence</h1>
     </div>
-    <p>
+    <p className="text-lg">
       We strive for excellence in everything we do, ensuring high standards and quality.
     </p>
   </div>
