@@ -151,7 +151,7 @@ const AboutUs = () => {
 
     <div className="flex flex-wrap justify-between p-5  ">
       
-    <div className="w-full md:w-[30%] border-l-[1px] border-blue-300 p-5 relative mb-8 hover:border-blue-700 ">
+    <div className="w-full md:w-[30%] border-l-[1px] border-blue-700 p-5  mb-8 ">
         <h2 className="text-xl font-semibold mb-4">Step 01</h2>
         <div className="text-center">
           <h2 className="text-lg font-bold mb-2">Sign Up and Create your Account</h2>
@@ -162,7 +162,8 @@ const AboutUs = () => {
         <div className="absolute top-0 left-0 h-full w-1 bg-blue-300 shadow-lg"></div>
       </div>
 
-      <div className="w-full md:w-[30%] border-l-[1px] border-blue-300 p-5 relative mb-8 hover:border-blue-700 ">
+      <div className="w-full md:w-[30%] border-l-[1px] border-blue-700 p-5  mb-8 ">
+
         <h2 className="text-xl font-semibold mb-4">Step 02</h2>
         <div className="text-center">
           <h2 className="text-lg font-bold mb-2">Complete a Financial Assessment</h2>
@@ -173,7 +174,8 @@ const AboutUs = () => {
         <div className="absolute top-0 left-0 h-full w-1 bg-blue-300 shadow-lg"></div>
       </div>
 
-      <div className="w-full md:w-[30%] border-l-[1px] border-blue-300 p-5 relative mb-8 hover:border-blue-700 ">
+      <div className="w-full md:w-[30%] border-l-[1px] border-blue-700 p-5  mb-8 ">
+
         <h2 className="text-xl font-semibold mb-4">Step 03</h2>
         <div className="text-center">
           <h2 className="text-lg font-bold mb-2">Start Learning with Financial Modules</h2>
@@ -184,8 +186,9 @@ const AboutUs = () => {
         <div className="absolute top-0 left-0 h-full w-1 bg-blue-300 shadow-lg"></div>
       </div>
 
-      {/* Second Row */}
-      <div className="w-full md:w-[30%] border-l-[1px] border-blue-300 p-5 relative mb-8 hover:border-blue-700 ">
+
+      <div className="w-full md:w-[30%] border-l-[1px] border-blue-700 p-5  mb-8 ">
+
         <h2 className="text-xl font-semibold mb-4">Step 04</h2>
         <div className="text-center">
           <h2 className="text-lg font-bold mb-2">Utilize Financial Tools and Resources</h2>
@@ -193,10 +196,11 @@ const AboutUs = () => {
             Access Financial Tools: Use tools to create and manage a budget, helping you track and control your spending.
           </p>
         </div>
-        <div className="absolute top-0 left-0 h-full w-1 bg-blue-300 shadow-lg"></div>
+        <div className="absolute top-0 left-0 h-full w-1 shadow-lg"></div>
       </div>
 
-      <div className="w-full md:w-[30%] border-l-[1px] border-blue-300 p-5 relative mb-8 hover:border-blue-700 ">
+      <div className="w-full md:w-[30%] border-l-[1px] border-blue-700 p-5  mb-8 ">
+
         <h2 className="text-xl font-semibold mb-4">Step 05</h2>
         <div className="text-center">
           <h2 className="text-lg font-bold mb-2">Monitor Progress and Get Expert Advice</h2>
@@ -207,7 +211,8 @@ const AboutUs = () => {
         <div className="absolute top-0 left-0 h-full w-1 bg-blue-300 shadow-lg"></div>
       </div>
 
-      <div className="w-full md:w-[30%] border-l-[1px] border-blue-300 p-5 relative mb-8 hover:border-blue-700 ">
+      <div className="w-full md:w-[30%] border-l-[1px] border-blue-700 p-5  mb-8 ">
+
         <h2 className="text-xl font-semibold mb-4">Step 06</h2>
         <div className="text-center">
           <h2 className="text-lg font-bold mb-2">Achieve Goals and Earn Rewards</h2>
