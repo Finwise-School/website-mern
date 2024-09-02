@@ -66,7 +66,7 @@ const ContactUs = () => {
           <img src={ContactImg} alt="Contact Finwise Img" className="w-full md:w-1/2 max-w-xs rounded-lg md:ml-6" />
         </div>
       </div>
-      <hr className="mt-0 w-full h-0.5 bg-gray-100 border-0 dark:bg-gray-800 mb-4" />
+      <hr className="mt-0 w-full h-0.5 bg-gray-900 border-0 dark:bg-gray-900 mb-4" />
       <div className="max-w-7xl mx-auto p-6">
         <h2 className="text-3xl font-bold text-blue-900 mb-6">
           Fill out the below form and we will get back to you.
@@ -201,36 +201,46 @@ const ContactUs = () => {
         </div>
       </div>
       <footer style={{ backgroundColor: "#000000" }} className="text-white py-8">
-  <div className="max-w-7xl mx-auto px-4">
+  <div className="max-w-7xl mx-auto">
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-center">
-      <div className="flex flex-col items-center relative group">
-        <img src={MailImg} alt="Email Icon" className="w-10 h-10 mb-2 relative z-10 transition-transform duration-300 ease-in-out transform group-hover:scale-110" />
-        <p>
-          <a href="mailto:contact@finwiseschool.com" className="hover:underline">contact@finwiseschool.com</a>
-        </p>
+      <div className="flex items-center justify-center relative group">
+        {/* <div className="relative z-10 flex flex-col items-center justify-center bg-[#1A1A1A] p-5 rounded-md shadow-md" style={{ width: '250px', height: '150px', margin: '2px' }}> */}
+        <div className="relative z-10 flex flex-col items-center justify-center bg-[#1A1A1A] p-4 rounded-md shadow-md" style={{ width: '280px', height: '120px', margin: '0px' }}>
+
+          <img src={MailImg} alt="Email Icon" className="w-12 h-12 mb-2 transition-transform duration-300 ease-in-out transform group-hover:scale-110" />
+          <p className="text-white text-sm">
+            <a href="mailto:contact@finwiseschool.com" className="hover:underline">contact@finwiseschool.com</a>
+          </p>
+        </div>
         <div className="absolute inset-0 overflow-hidden">
           <div className="shine absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
         </div>
       </div>
-      <div className="flex flex-col items-center relative group">
-        <img src={CallImg} alt="Phone Icon" className="w-10 h-10 mb-2 relative z-10 transition-transform duration-300 ease-in-out transform group-hover:scale-110" />
-        <p>
-          <a href="tel:+447741819337" className="hover:underline">+44 7741-819-337</a>
-        </p>
+      <div className="flex items-center justify-center relative group">
+        <div className="relative z-10 flex flex-col items-center justify-center bg-[#1A1A1A] p-4 rounded-md shadow-md" style={{ width: '280px', height: '120px', margin: '0px' }}>
+          <img src={CallImg} alt="Phone Icon" className="w-12 h-12 mb-2 transition-transform duration-300 ease-in-out transform group-hover:scale-110" />
+          <p className="text-white text-sm">
+            <a href="tel:+447741819337" className="hover:underline">+44 7741-819-337</a>
+          </p>
+        </div>
         <div className="absolute inset-0 overflow-hidden">
           <div className="shine absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
         </div>
       </div>
-      <div className="flex flex-col items-center relative group">
-        <img src={LocationImg} alt="Location Icon" className="w-10 h-10 mb-2 relative z-10 transition-transform duration-300 ease-in-out transform group-hover:scale-110" />
-        <p>Glasgow, UK</p>
+      <div className="flex items-center justify-center relative group">
+        <div className="relative z-10 flex flex-col items-center justify-center bg-[#1A1A1A] p-4 rounded-md shadow-md" style={{ width: '280px', height: '120px', margin: '0px' }}>
+          <img src={LocationImg} alt="Location Icon" className="w-12 h-12 mb-2 transition-transform duration-300 ease-in-out transform group-hover:scale-110" />
+          <p className="text-white text-sm">Glasgow, UK</p>
+        </div>
         <div className="absolute inset-0 overflow-hidden">
           <div className="shine absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
         </div>
       </div>
-      <div className="flex flex-col items-center relative group">
-        <img src={youtubeImg} alt="YouTube Icon" className="w-10 h-10 mb-2 relative z-10 transition-transform duration-300 ease-in-out transform group-hover:scale-110" />
-        <p>YouTube</p>
+      <div className="flex items-center justify-center relative group">
+        <div className="relative z-10 flex flex-col items-center justify-center bg-[#1A1A1A] p-4 rounded-md shadow-md" style={{ width: '280px', height: '120px', margin: '0px' }}>
+          <img src={youtubeImg} alt="YouTube Icon" className="w-12 h-12 mb-2 transition-transform duration-300 ease-in-out transform group-hover:scale-110" />
+          <p className="text-white text-sm">YouTube</p>
+        </div>
         <div className="absolute inset-0 overflow-hidden">
           <div className="shine absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
         </div>
@@ -238,6 +248,8 @@ const ContactUs = () => {
     </div>
   </div>
 </footer>
+
+
       <EarlyAccessTemplate />
     </div>
   );

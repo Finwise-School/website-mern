@@ -148,7 +148,7 @@ const SIP = () => {
                                     id="investment-method"
                                     value={investmentMethod}
                                     onChange={(e) => setInvestmentMethod(e.target.value)}
-                                    className="bg-green-100 text-gray-800 font-semibold text-right p-2 rounded-lg w-24"
+                                    className="bg-green-100 text-gray-800 font-semibold text-right p-2 rounded-lg w-30"
                                 >
                                     <option value="sip">SIP</option>
                                     <option value="lumpSum">Lump Sum</option>
@@ -158,7 +158,7 @@ const SIP = () => {
                                 <div className="flex items-center justify-between p-4 border border-gray-300 rounded-lg">
                                     <label htmlFor="monthly-investment" className="text-gray-700">Monthly Investment</label>
                                     <div className="flex items-center space-x-2">
-                                        <span className="text-gray-500">&#163;</span>
+                                        <span className="text-gray-500">£</span>
                                         <input
                                             type="number"
                                             id="monthly-investment"
@@ -175,7 +175,7 @@ const SIP = () => {
                                 <div className="flex items-center justify-between p-4 border border-gray-300 rounded-lg">
                                     <label htmlFor="lump-sum-investment" className="text-gray-700">Lump Sum Investment</label>
                                     <div className="flex items-center space-x-2">
-                                        <span className="text-gray-500">&#163;</span>
+                                        <span className="text-gray-500">£</span>
                                         <input
                                             type="number"
                                             id="lump-sum-investment"
@@ -222,15 +222,15 @@ const SIP = () => {
                                 <div className="grid grid-cols-1 gap-2" style={{ "row-gap": "0.6rem" }}>
                                     <div className="p-4 border border-gray-300 rounded-lg">
                                         <p className="finwise-blue">Invested Amount</p>
-                                        <p className="finwise-green font-semibold text-xl">&#163;{result.investedAmount}</p>
+                                        <p className="finwise-green font-semibold text-xl">£{result.investedAmount}</p>
                                     </div>
                                     <div className="p-4 border border-gray-300 rounded-lg">
                                         <p className="finwise-blue">Returns Generated</p>
-                                        <p className="finwise-green font-semibold text-xl">&#163;{result.returnsGenerated}</p>
+                                        <p className="finwise-green font-semibold text-xl">£{result.returnsGenerated}</p>
                                     </div>
                                     <div className="p-4 border border-gray-300 rounded-lg">
                                         <p className="finwise-blue">Total Amount</p>
-                                        <p className="finwise-green font-semibold text-xl">&#163;{result.totalAmount}</p>
+                                        <p className="finwise-green font-semibold text-xl">£{result.totalAmount}</p>
                                     </div>
                                 </div>
                             </div>
@@ -242,7 +242,7 @@ const SIP = () => {
                     <div className="mt-8 p-4 bg-white border border-gray-300 rounded-lg">
                         <h2 className="text-lg font-semibold text-gray-800 mb-4">Investment Growth Over Time</h2>
                         <div className="flex flex-col md:flex-row">
-                            <div className="flex-1 pr-2 mb-4 md:mb-0">
+                            <div className="flex-1 pr-2 mb-4 md:mb-0" style={{ maxWidth: '600px', maxHeight: '600px' }}>
                                 <Line
                                     data={getLineChartData()}
                                     options={{
@@ -254,7 +254,7 @@ const SIP = () => {
                                             tooltip: {
                                                 callbacks: {
                                                     label: (tooltipItem) => {
-                                                        return `${tooltipItem.label}: &#163;${tooltipItem.raw.toFixed(0)}`;
+                                                        return `${tooltipItem.label} £${tooltipItem.raw.toFixed(0)}`;
                                                     }
                                                 }
                                             }
@@ -277,7 +277,7 @@ const SIP = () => {
                                     }}
                                 />
                             </div>
-                            <div className="flex-1 pl-2">
+                            <div className="flex-1 pl-2" style={{ maxWidth: '300px', maxHeight: '300px', marginLeft: '138px' }}>
                                 <Doughnut
                                     data={getChartData()}
                                     options={{
@@ -289,7 +289,7 @@ const SIP = () => {
                                             tooltip: {
                                                 callbacks: {
                                                     label: (tooltipItem) => {
-                                                        return `${tooltipItem.label}: &#163;${tooltipItem.raw.toFixed(0)}`;
+                                                        return `${tooltipItem.label}: £${tooltipItem.raw.toFixed(0)}`;
                                                     }
                                                 }
                                             }
