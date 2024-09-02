@@ -66,7 +66,7 @@ function Footer() {
     <footer className="flex flex-col w-full bg-black max-md:max-w-full">
       <div className="flex flex-wrap gap-5 items-start px-20 py-24 w-full max-md:px-2 max-md:max-w-full">
         <EmailSubscription />
-        <div className="flex flex-wrap flex-1 shrink gap-10 justify-between items-start font-medium basis-0 min-w-[240px] max-md:max-w-full">
+        <div className="flex flex-wrap flex-1 shrink gap-8 justify-between items-start font-medium basis-0 min-w-[240px] max-md:max-w-full">
           {footerColumns.map((column, index) => (
             <FooterColumn key={index} title={column.title} items={column.items} />
           ))}
