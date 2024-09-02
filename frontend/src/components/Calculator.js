@@ -44,7 +44,6 @@ const FinancialPlanningTools = () => {
           <ToolCard title="Rental Yield" image={RentalImg} path="/tools/rental" />
         </div>
       </div>
-      <hr className="mt-12 h-0.5 my-8 bg-gray-900 border-0 dark:bg-slate-800" />
 
       <EarlyAccessTemplate />
     </div>
