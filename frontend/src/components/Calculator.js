@@ -28,13 +28,12 @@ const FinancialPlanningTools = () => {
         </div>
       </div>
 
-      <hr className="mt-0 h-1 my-8 bg-gray-100 border-0 dark:bg-gray-700" />
+      <hr className="mt-0 h-0.5 my-8 bg-gray-100 border-0 dark:bg-gray-400" />
 
-      {/* Tool Cards Section */}
       <div className="w-full max-w-screen-xl mx-auto">
       <div className="grid-for-calci grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-4 py-5">
         <ToolCard title="Fixed Deposit Calculator" image={FDImg} path="/tools/fixed-deposit" />
-        <ToolCard title="SIP Calculator" image={MutualImg} path="/tools/mutual-funds" />
+        <ToolCard title="SIP Calculator" image={MutualImg} path="/tools/sip" />
         <ToolCard title="Goal SIP Calculator" image={GoalImg} path="/tools/goal-sip" />
         <ToolCard title="F.I.R.E." image={FireImg} path="/tools/fire" />
         <ToolCard title="Tax Calculator" image={TaxImg} path="/tools/tax" />
@@ -47,7 +46,7 @@ const FinancialPlanningTools = () => {
         <ToolCard title="Rental Yield" image={RentalImg} path="/tools/rental" />
       </div>
       </div>
-      <hr className="mt-0 h-1 my-8 bg-gray-100 border-0 dark:bg-gray-700" />
+      <hr className="mt-12 h-0.5 my-8 bg-gray-900 border-0 dark:bg-slate-800" />
 
       <EarlyAccessTemplate />
     </div>
