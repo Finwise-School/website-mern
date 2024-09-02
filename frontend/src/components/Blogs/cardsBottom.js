@@ -1,16 +1,54 @@
 import { useEffect, useState, useRef } from 'react';
-import Carousel from 'react-multi-carousel';
+// import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-import axios from 'axios';
-import Wallimg from '../../assets/images/Blogs/img2.png';
+// import axios from 'axios';
+// import Wallimg from '../../assets/images/Blogs/img2.png';
 import Thumbnail from '../../assets/images/Blogs/b-2.png'
-import Buttonnext from "../../assets/images/Blogs/Buttonnext.png";
-import Buttonprev from "../../assets/images/Blogs/Buttonprev.png";
+// import Buttonnext from "../../assets/images/Blogs/Buttonnext.png";
+// import Buttonprev from "../../assets/images/Blogs/Buttonprev.png";
+import Slider from "react-slick";
 
 const CardsBottom = ({ onToggle }) => {
 
+  const settings = {
+    dots: true,
+    infinite: true,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    autoplay: true,
+    speed: 2000,
+    autoplaySpeed: 2000,
+    cssEase: "linear",
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          autoplay: true,
+          speed: 2000,
+          autoplaySpeed: 2000,
+          cssEase: "linear",
+          infinite: true,
+          dots: true
+        }
+      },
+      {
+        breakpoint: 750,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          autoplay: true,
+          speed: 2000,
+          autoplaySpeed: 2000,
+          cssEase: "linear",
+        }
+      },
+    ]
+  };
+
   // const [data, setData] = useState([]); DONT DELETE
-  const carouselRef = useRef(null);
+  // const carouselRef = useRef(null);
 
   // DONT DELETE
   // useEffect(() => {
@@ -23,33 +61,33 @@ const CardsBottom = ({ onToggle }) => {
   //   .catch(error => console.error('Error fetching data:', error));
   // }, []);
 
-const responsive = {
-  superLargeDesktop: {
-    // the naming can be any, depends on you.
-    breakpoint: { max: 4000, min: 3000 },
-    items: 5
-  },
-  desktop: {
-    breakpoint: { max: 3000, min: 1024 },
-    items: 4,
-    partialVisibilityGutter: 40 
-  },
-  tablet: {
-    breakpoint: { max: 1024, min: 464 },
-    items: 2,
-    partialVisibilityGutter: 30 
-  },
-  mobile: {
-    breakpoint: { max: 464, min: 0 },
-    items: 1,
-    partialVisibilityGutter: 30 
-  }
-};
+// const responsive = {
+//   superLargeDesktop: {
+//     // the naming can be any, depends on you.
+//     breakpoint: { max: 4000, min: 3000 },
+//     items: 5
+//   },
+//   desktop: {
+//     breakpoint: { max: 3000, min: 1024 },
+//     items: 4,
+//     partialVisibilityGutter: 40 
+//   },
+//   tablet: {
+//     breakpoint: { max: 1024, min: 464 },
+//     items: 2,
+//     partialVisibilityGutter: 30 
+//   },
+//   mobile: {
+//     breakpoint: { max: 464, min: 0 },
+//     items: 1,
+//     partialVisibilityGutter: 30 
+//   }
+// };
 return (
   <>
-<Carousel ref={carouselRef} responsive={responsive} infinite={true} autoPlaySpeed={1000}>
+<Slider {...settings}>
 {Array.from({ length: 5 }, (_, index) => (
-    <div key={index} className='cursor-pointer m-3  bg-slate-100 rounded-xl'>
+    <div key={index} className='cursor-pointer p-6 rounded-xl w-4'>
       <div className="rounded-t flex justify-center flex-wrap overflow-hidden">
         <img src={Thumbnail} alt="" />
       </div>
@@ -61,7 +99,7 @@ return (
       </div>
     </div>
 ))}
-</Carousel>
+</Slider>
       {/* <div className='msFooter flex flex-row justify-center items-center my-3'>
                 <button className='custom-arrow custom-arrow-prev' onClick={() => carouselRef.current && carouselRef.current.previous()}>
               <img className='m-1' src={Buttonprev} alt='' />
