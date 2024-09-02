@@ -1,7 +1,8 @@
 import React from "react";
-import FooterColumn from "./Homepage/Footer Files/FooterColumn";
-import SocialIcon from "./Homepage/Footer Files/SocialIcon";
-import EmailSubscription from "./Homepage/Footer Files/EmailSubscription";
+
+// import FooterColumn from "./Homepage/Footer Files/FooterColumn";
+// import SocialIcon from "./Homepage/Footer Files/SocialIcon";
+// import EmailSubscription from "./Homepage/Footer Files/EmailSubscription";
 import { FaFacebookF, FaLinkedinIn, FaTwitter, FaYoutube } from 'react-icons/fa';
 
 function Footer() {
@@ -66,11 +67,11 @@ function Footer() {
     <footer className="flex flex-col w-full bg-black max-md:max-w-full">
       <div className="flex flex-wrap gap-5 items-start px-20 py-24 w-full max-md:px-2 max-md:max-w-full">
         <EmailSubscription />
-        <div className="flex flex-wrap flex-1 shrink gap-10 justify-between items-start font-medium basis-0 min-w-[240px] max-md:max-w-full">
+        {/* <div className="flex flex-wrap flex-1 shrink gap-10 justify-between items-start font-medium basis-0 min-w-[240px] max-md:max-w-full">
           {footerColumns.map((column, index) => (
             <FooterColumn key={index} title={column.title} items={column.items} />
           ))}
-        </div>
+        </div> */}
       </div>
       <div className="flex flex-wrap gap-10 justify-between items-center px-20 py-4 w-full bg-zinc-900 max-md:px-5 max-md:max-w-full">
         <div className="flex flex-wrap gap-10 items-start self-stretch py-2.5 my-auto text-lg font-medium tracking-normal leading-none text-white min-w-[240px] max-md:max-w-full">
