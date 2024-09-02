@@ -4,9 +4,10 @@ import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import Tool_Footer from './Tools_footer';
 import CalculatorList from './Calulators_List';
-import { Doughnut } from 'react-chartjs-2';
-import { Chart as ChartJS, Title, Tooltip, Legend, ArcElement } from 'chart.js';
-ChartJS.register(Title, Tooltip, Legend, ArcElement);
+import { Doughnut, Line } from 'react-chartjs-2';
+import { Chart as ChartJS, Title, Tooltip, Legend, ArcElement, LineElement, PointElement, CategoryScale, LinearScale } from 'chart.js';
+
+ChartJS.register(Title, Tooltip, Legend, ArcElement, LineElement, PointElement, CategoryScale, LinearScale);
 
 const SIP = () => {
     const [investmentMethod, setInvestmentMethod] = useState('sip');
@@ -39,6 +40,7 @@ const SIP = () => {
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
     };
+
     const getChartData = () => {
         if (!result) return {};
 
@@ -55,6 +57,37 @@ const SIP = () => {
         return data;
     };
 
+    const getLineChartData = () => {
+        if (!result) return {};
+
+        const years = Array.from({ length: timePeriod }, (_, i) => i + 1);
+        const investedAmounts = years.map(year => {
+            if (investmentMethod === 'sip') {
+                const r = annualReturns / 100 / 12;
+                const n = year * 12;
+                return (monthlyInvestment * ((Math.pow(1 + r, n) - 1) / r) * (1 + r)).toFixed(2);
+            } else if (investmentMethod === 'lumpSum') {
+                const r = annualReturns / 100;
+                return (lumpSumInvestment * Math.pow(1 + r, year)).toFixed(2);
+            }
+            return 0;
+        });
+
+        const data = {
+            labels: years,
+            datasets: [
+                {
+                    label: 'Investment Value',
+                    data: investedAmounts,
+                    borderColor: '#4CAF50',
+                    backgroundColor: 'rgba(76, 175, 80, 0.2)',
+                    fill: true,
+                },
+            ],
+        };
+
+        return data;
+    };
 
     const calculateMutualFund = () => {
         if (!validateForm()) return; // Stop if the form is invalid
@@ -105,7 +138,8 @@ const SIP = () => {
                     <p className="finwise-blue">Calculate your mutual funds investment returns</p>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div>
+                    {/* Input Fields Box */}
+                    <div className="p-4 border border-gray-300 rounded-lg">
                         <h2 className="text-lg font-semibold text-gray-800 mb-4">Input fields:</h2>
                         <div className="space-y-4">
                             <div className="flex items-center justify-between p-4 border border-gray-300 rounded-lg">
@@ -179,7 +213,9 @@ const SIP = () => {
                             {errors.timePeriod && <p className="text-red-500 text-sm">{errors.timePeriod}</p>}
                         </div>
                     </div>
-                    <div className="output-fields -mt-28 md:mt-0">
+                    
+                    {/* Results Box */}
+                    <div className="p-4 border border-gray-300 rounded-lg">
                         <h2 className="text-lg font-semibold text-gray-800 mb-4">Results:</h2>
                         {result && (
                             <div className="space-y-4">
@@ -197,36 +233,76 @@ const SIP = () => {
                                         <p className="finwise-green font-semibold text-xl">&#163;{result.totalAmount}</p>
                                     </div>
                                 </div>
-                                <div className="mt-8">
-                                    <h2 className="text-lg font-semibold text-gray-800 mb-4">Investment Over Time</h2>
-                                    <div className="bg-white p-4 border border-gray-300 rounded-lg">
-                                        <Doughnut
-                                            data={getChartData()}
-                                            options={{
-                                                responsive: true,
-                                                plugins: {
-                                                    legend: {
-                                                        position: 'top',
-                                                    },
-                                                    tooltip: {
-                                                        callbacks: {
-                                                            label: (tooltipItem) => {
-                                                                return `${tooltipItem.label}: &#163;${tooltipItem.raw.toFixed(0)}`;
-                                                            }
-                                                        }
-                                                    }
-                                                },
-                                                cutout: '60%',
-                                            }}
-                                        />
-                                    </div>
-                                </div>
                             </div>
                         )}
                     </div>
                 </div>
-                <Tool_Footer message="Analyze your mutual fund investments and their potential returns. " />
-                <CalculatorList activeCalculator="SIP Calculator" />
+       
+                {result && (
+                    <div className="mt-8 p-4 bg-white border border-gray-300 rounded-lg">
+                        <h2 className="text-lg font-semibold text-gray-800 mb-4">Investment Growth Over Time</h2>
+                        <div className="flex flex-col md:flex-row">
+                            <div className="flex-1 pr-2 mb-4 md:mb-0">
+                                <Line
+                                    data={getLineChartData()}
+                                    options={{
+                                        responsive: true,
+                                        plugins: {
+                                            legend: {
+                                                position: 'top',
+                                            },
+                                            tooltip: {
+                                                callbacks: {
+                                                    label: (tooltipItem) => {
+                                                        return `${tooltipItem.label}: &#163;${tooltipItem.raw.toFixed(0)}`;
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        scales: {
+                                            x: {
+                                                title: {
+                                                    display: true,
+                                                    text: 'Years'
+                                                }
+                                            },
+                                            y: {
+                                                title: {
+                                                    display: true,
+                                                    text: 'Amount'
+                                                },
+                                                beginAtZero: true
+                                            }
+                                        }
+                                    }}
+                                />
+                            </div>
+                            <div className="flex-1 pl-2">
+                                <Doughnut
+                                    data={getChartData()}
+                                    options={{
+                                        responsive: true,
+                                        plugins: {
+                                            legend: {
+                                                position: 'top',
+                                            },
+                                            tooltip: {
+                                                callbacks: {
+                                                    label: (tooltipItem) => {
+                                                        return `${tooltipItem.label}: &#163;${tooltipItem.raw.toFixed(0)}`;
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        cutout: '60%',
+                                    }}
+                                />
+                            </div>
+                        </div>
+                    </div>
+                )}
+                         <Tool_Footer message="Analyze your mutual fund investments and their potential returns." />
+                         <CalculatorList activeCalculator="SIP Calculator" />
             </div>
         </div>
     );
