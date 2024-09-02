@@ -277,7 +277,7 @@ const SIP = () => {
                                     }}
                                 />
                             </div>
-                            <div className="flex-1 pl-2" style={{ maxWidth: '300px', maxHeight: '300px' }}>
+                            <div className="flex-1 pl-2" style={{ maxWidth: '300px', maxHeight: '300px', marginLeft: '138px' }}>
                                 <Doughnut
                                     data={getChartData()}
                                     options={{
