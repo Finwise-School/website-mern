@@ -18,11 +18,11 @@ const FAQ = () => {
     },
     {
       question: "Who can benefit from FinWise School?",
-      answer: "FinWise School is designed for anyone looking to improve their financial literacy, from beginners to advanced learners. Whether you're a student, young professional, or someone planning for retirement, our platform has something for you."
+      answer: "FinWise School is designed for anyone to improve their financial literacy, from beginners to advanced learners. Whether you're a student, professional, or planning for retirement, there is something for you."
     },
     {
       question: "How does personalized learning experience work?",
-      answer: "Our platform uses adaptive learning technology to tailor your educational journey based on your existing knowledge, learning pace, and financial goals."
+      answer: "Our platform have been using adaptive learning technology to tailor your educational journey based on your existing knowledge, learning pace, and financial goals."
     }
   ];
 

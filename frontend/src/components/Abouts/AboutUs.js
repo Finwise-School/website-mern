@@ -314,7 +314,7 @@ const AboutUs = () => {
         </div>
       </div>
 
-<<<<<<< HEAD
+{/* <<<<<<< HEAD
   {/* <div className=" flex p-10">
         <div className="">
           <h1 className="finwise-blue text-4xl font-bold mb-4 pt-10 ">
@@ -344,8 +344,8 @@ const AboutUs = () => {
         </div>
       </div> */}
   <RequestEarlyAccess />
-=======
->>>>>>> c0d2ca626d9cc5bb3430341aa05dc481a0146367
+{/* ======= */}
+{/* >>>>>>> c0d2ca626d9cc5bb3430341aa05dc481a0146367 */} */
     </div >
   );
 };
