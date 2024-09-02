@@ -10,7 +10,6 @@ const EarlyAccessTemplate = () => {
 
   return (
     <>
-      {/* Full-width HR covering entire viewport width */}
       <hr className="w-screen h-0.5 my-8 bg-gray-800 border-0 dark:bg-gray-800" />
 
       <div className="flex p-24 -mt-16 -mb-16">
