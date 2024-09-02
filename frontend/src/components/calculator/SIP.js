@@ -197,9 +197,9 @@ const SIP = () => {
                                         <p className="finwise-green font-semibold text-xl">&#163;{result.totalAmount}</p>
                                     </div>
                                 </div>
-                                <div className="p-4 border border-gray-300 rounded-lg flex flex-col items-center justify-center">
-                                    <h3 className="text-lg font-semibold text-gray-800 mb-4">Investment Breakdown</h3>
-                                    <div className="flex justify-center items-center w-full max-w-md"> 
+                                <div className="mt-8">
+                                    <h2 className="text-lg font-semibold text-gray-800 mb-4">Investment Over Time</h2>
+                                    <div className="bg-white p-4 border border-gray-300 rounded-lg">
                                         <Doughnut
                                             data={getChartData()}
                                             options={{
@@ -223,13 +223,13 @@ const SIP = () => {
                                 </div>
                             </div>
                         )}
-                            </div>
+                    </div>
                 </div>
-                    <Tool_Footer message="Analyze your mutual fund investments and their potential returns. " />
-                    <CalculatorList activeCalculator="SIP Calculator" />
-                </div>
+                <Tool_Footer message="Analyze your mutual fund investments and their potential returns. " />
+                <CalculatorList activeCalculator="SIP Calculator" />
             </div>
-            );
+        </div>
+    );
 };
 
-            export default SIP;
+export default SIP;
