@@ -13,7 +13,7 @@ const AboutUs = () => {
     <div>
       <div className="flex items-center justify-between p-10">
         <div className="w-full md:w-1/2">
-        <h1 className="finwise-blue text-4xl font-bold mb-4  ">About US</h1>
+          <h1 className="finwise-blue text-4xl font-bold mb-4  ">About US</h1>
           <p className="text-lg">
             At FinwiseSchool, we understand that everyone learns differently, so
             we offer personalized learning paths tailored to each user's unique
@@ -49,74 +49,84 @@ const AboutUs = () => {
         />
       </div>
 
-      <div className="p-8 b">
-        <div className="flex flex-col md:flex-row">
-          <div className="w-full md:w-1/2 mb-8 md:mb-0">
-            <div className=" flex">
-            <h1 className="finwise-blue text-4xl font-bold mb-4  ">Our Values</h1>
+      <div className="p-8">
+  <div className="flex flex-col md:flex-row mb-20">
+    {/* Left section with heading and description */}
+    <div className="w-full md:w-1/2 mb-8 md:mb-0">
+      <div className="flex">
+        <h1 className="finwise-blue text-4xl font-bold mb-4">Our Values</h1>
+      </div>
+      <p className="text-lg pr-10 text-left">
+        Our journey is one of relentless progress and transformation. We began as a passionate group with a vision, dedicated to building an educational platform that redefines the boundaries of traditional financial learning.
+      </p>
+    </div>
+
+    {/* Right section with value items */}
+    <div className="md:w-1/2">
+      {/* First row of value items */}
+      <div className="flex mb-10">
+        {/* Trust section */}
+        <div className="flex-1">
+          <div className="flex items-center mb-5">
+            <div className="flex items-center justify-center w-10 h-10 rounded-full border-2 border-green-500 mr-4">
+              <FaStar className="finwise-blue text-xl" />
             </div>
-            <p className="text-lg pr-20">
-              Our journey is one of relentless progress and transformation. We
-              began as a passionate group with a vision, dedicated to building
-              an educational platform that redefines the boundaries of
-              traditional financial learning.
-            </p>
+            <h1 className="finwise-blue text-lg font-bold">Trust</h1>
           </div>
+          <p>We build lasting relationships through integrity, transparency, and trust.</p>
+        </div>
 
-          <div className="grid grid-cols-2 gap-0 w-full md:w-1/2">
-  <div className="p-4 bg-white shadow-md border-t border-l border-gray-200">
-    <div className="flex items-center mb-5">
-      <div className="flex items-center justify-center w-10 h-10 rounded-full border-2 border-green-500 mr-4">
-        <FaStar className="finwise-blue text-xl" />
-      </div>
-      <h1 className="finwise-blue text-lg font-bold">Trust</h1>
-    </div>
-    <p className="text-lg">
-      We build lasting relationships through integrity, transparency, and trust.
-    </p>
-  </div>
+        {/* Vertical divider */}
+        <div className="border-l-2 border-gray-500 mx-5 h-auto"></div>
 
-  <div className="p-4 bg-white shadow-md border-t border-l border-gray-200">
-    <div className="flex items-center mb-5">
-      <div className="flex items-center justify-center w-10 h-10 rounded-full border-2 border-green-500 mr-4">
-        <FaGraduationCap className="finwise-blue text-xl" />
-      </div>
-      <h1 className="finwise-blue text-lg font-bold">Excellence</h1>
-    </div>
-    <p className="text-lg">
-      We strive for excellence in everything we do, ensuring high standards and quality.
-    </p>
-  </div>
-
-  <div className="p-4 bg-white shadow-md border-t border-l border-gray-200">
-    <div className="flex items-center mb-5">
-      <div className="flex items-center justify-center w-10 h-10 rounded-full border-2 border-green-500 mr-4">
-        <IoIosPeople className="finwise-blue text-xl" />
-      </div>
-      <h1 className="finwise-blue text-lg font-bold">Community Focus</h1>
-    </div>
-    <p>
-      We are committed to fostering a sense of community and support among our users.
-    </p>
-  </div>
-
-  <div className="p-4 bg-white shadow-md border-t border-l border-gray-200">
-    <div className="flex items-center mb-5">
-      <div className="flex items-center justify-center w-10 h-10 rounded-full border-2 border-green-500 mr-4">
-        <FaStar className="finwise-blue text-xl" />
-      </div>
-      <h1 className="finwise-blue text-lg font-bold">Our Commitment</h1>
-    </div>
-    <p>
-      We are dedicated to our mission and to helping our users achieve their financial goals.
-    </p>
-  </div>
-</div>
-
+        {/* Excellence section */}
+        <div className="flex-1">
+          <div className="flex items-center mb-5">
+            <div className="flex items-center justify-center w-10 h-10 rounded-full border-2 border-green-500 mr-4">
+              <FaGraduationCap className="finwise-blue text-xl" />
+            </div>
+            <h1 className="finwise-blue text-lg font-bold">Excellence</h1>
+          </div>
+          <p>We strive for excellence in everything we do, ensuring high standards and quality.</p>
         </div>
       </div>
 
-      <div className="bg-black text-white p-20">
+      {/* Horizontal divider */}
+      <div className="border-t-2 border-gray-500 w-full mb-5"></div>
+
+      {/* Second row of value items */}
+      <div className="flex">
+        {/* Community Focus section */}
+        <div className="flex-1">
+          <div className="flex items-center mb-5">
+            <div className="flex items-center justify-center w-10 h-10 rounded-full border-2 border-green-500 mr-4">
+              <IoIosPeople className="finwise-blue text-xl" />
+            </div>
+            <h1 className="finwise-blue text-lg font-bold">Community Focus</h1>
+          </div>
+          <p>We are committed to fostering a sense of community and support among our users.</p>
+        </div>
+
+        {/* Vertical divider */}
+        <div className="border-l-2 border-gray-500 mx-5 h-auto"></div>
+
+        {/* Our Commitment section */}
+        <div className="flex-1">
+          <div className="flex items-center mb-5">
+            <div className="flex items-center justify-center w-10 h-10 rounded-full border-2 border-green-500 mr-4">
+              <FaStar className="finwise-blue text-xl" />
+            </div>
+            <h1 className="finwise-blue text-lg font-bold">Our Commitment</h1>
+          </div>
+          <p>We are dedicated to our mission and to helping our users achieve their financial goals.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+      <div className="bg-black text-white p-10">
         <div className="container mx-auto px-8  ">
           <div className="pb-12">
             <h1 className="text-4xl font-bold mb-4">
@@ -220,8 +230,10 @@ const AboutUs = () => {
       </div>
       <div>
         <div className=" text-center justify-center p-20">
-        <h1 className="finwise-blue text-4xl font-bold mb-4  ">Meet our Supporters</h1>
-          <p>
+          <h1 className="finwise-blue text-4xl font-bold mb-4  ">
+            Meet our Supporters
+          </h1>
+          <p className=" font-thin">
             At Finwise School, our success is fueled by the support and
             expertise of our valued partners.
           </p>
@@ -242,9 +254,11 @@ const AboutUs = () => {
         </div>
       </div>
 
-      <div className=" justify-center text-center p-20">
-      <h1 className="finwise-blue text-4xl font-bold mb-4  ">Partner Portal</h1>
-        <p>
+      <div className=" justify-center text-center ">
+        <h1 className="finwise-blue text-4xl font-bold pr-20 pl-20 pt-20">
+          Partner Portal
+        </h1>
+        <p className=" justify-center  text-left pr-10 pl-10 font-thin pt-7">
           Our Partner Portal offers customized financial planning solutions
           tailored specifically for corporate clients. Collaborate with Finwise
           School to provide your employees with seamless access to exclusive
@@ -273,10 +287,10 @@ const AboutUs = () => {
 
       <div className=" flex p-10">
         <div className="">
-        <h1 className="finwise-blue text-4xl font-bold mb-4  ">
+          <h1 className="finwise-blue text-4xl font-bold mb-4 pt-10 ">
             Start Your Financial Journey Today
           </h1>
-          <p className=" justify-center  text-left pr-10">
+          <p className=" justify-center  text-left pr-10 font-thin pb-10">
             Your path to financial freedom is just a click away. Whether you’re
             aiming to optimize your investments, create a solid savings plan, or
             receive expert financial advice, FinWise is here to guide you every
