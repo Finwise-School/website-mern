@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaEnvelope, FaPhone, FaUser } from 'react-icons/fa';
+import { FaEnvelope, FaPhone, FaUser, FaHome } from 'react-icons/fa';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import successImg from "../assets/images/book/success.gif";
@@ -37,9 +37,6 @@ const EarlyAccessForm = () => {
       newErrors.email = 'Valid email is required';
     if (formStep === 3 && (!formData.phone || formData.phone.length < 10))
       newErrors.phone = 'Valid phone number is required';
-    if (formStep === 4 && Object.keys(newErrors).length === 0) {
-      // No specific validation for the final step
-    }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -57,7 +54,7 @@ const EarlyAccessForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateStep()) {
-      setSubmitted(true); // Show success page
+      setSubmitted(true); 
     }
   };
 
@@ -73,6 +70,12 @@ const EarlyAccessForm = () => {
           <h1 className="text-2xl md:text-4xl font-semibold mb-4">Success!</h1>
           <p className="text-lg md:text-xl">Thank you for submitting the form.</p>
           <p className="text-lg md:text-xl mt-4">Check your email for further details.</p>
+          <div className="mt-6">
+            <a href="/" className="inline-flex items-center bg-[#3CB371] text-white text-lg md:text-xl font-semibold py-2 px-6 rounded-full">
+              <FaHome className="mr-2" />
+              Home
+            </a>
+          </div>
         </div>
       </div>
     );
@@ -130,7 +133,7 @@ const EarlyAccessForm = () => {
                     onClick={handleNextStep}
                     className="bg-[#3CB371] text-white font-semibold py-2 px-6 rounded-full"
                   >
-                     Next <i className="fas fa-chevron-right"></i>
+                    Next <i className="fas fa-chevron-right"></i>
                   </button>
                 </div>
               </div>
@@ -167,7 +170,7 @@ const EarlyAccessForm = () => {
                     onClick={handleNextStep}
                     className="bg-[#3CB371] text-white font-semibold py-2 px-6 rounded-full"
                   >
-                     Next <i className="fas fa-chevron-right"></i>
+                    Next <i className="fas fa-chevron-right"></i>
                   </button>
                 </div>
               </div>
@@ -175,7 +178,7 @@ const EarlyAccessForm = () => {
 
             {formStep === 3 && (
               <div className="flex flex-col items-start pb-2 mb-8 w-full">
-                 <label htmlFor="phone" className="flex items-center space-x-2 text-lg md:text-xl font-normal">
+                <label htmlFor="phone" className="flex items-center space-x-2 text-lg md:text-xl font-normal">
                   <span className="text-[#3CB371] text-xl md:text-2xl" style={{ transform: 'rotateY(180deg)' }}>
                     <FaPhone />
                   </span>
@@ -217,7 +220,7 @@ const EarlyAccessForm = () => {
                     onClick={handleNextStep}
                     className="bg-[#3CB371] text-white font-semibold py-2 px-6 rounded-full"
                   >
-                     Next <i className="fas fa-chevron-right"></i>
+                    Next <i className="fas fa-chevron-right"></i>
                   </button>
                 </div>
               </div>
