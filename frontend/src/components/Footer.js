@@ -9,7 +9,7 @@ function Footer() {
     {
       title: "Home",
       items: [
-        { name: "Hero Section", path: "/" },
+        { name: "Welcome", path: "/" },
         { name: "Features", path: "/features" },
         { name: "Tools", path: "/tools" },
         { name: "Testimonials", path: "/testimonials" },

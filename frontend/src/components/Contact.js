@@ -4,7 +4,7 @@ import MailImg from "../assets/images/contact/mail.png";
 import CallImg from "../assets/images/contact/call.png";
 import LocationImg from "../assets/images/contact/location.png";
 import SocialImg from "../assets/images/contact/social.png";
-import EarlyAccessTemplate from './EarlyAccessTemplate'; 
+import EarlyAccessTemplate from './EarlyAccessTemplate';
 
 const ContactUs = () => {
   const [formData, setFormData] = useState({
@@ -45,17 +45,15 @@ const ContactUs = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateForm()) {
-      // Handle form submission
       console.log('Form submitted:', formData);
     }
   };
 
   return (
-    <div style={{ marginTop: "100px" }} className="font-nunito bg-gray-50">
+    <div className="font-nunito bg-gray-50">
       <div className="max-w-7xl mx-auto p-6">
-        {/* Header Section */}
-        <div className="flex flex-col md:flex-row items-center justify-between py-12">
-          {/* Text Content */}
+
+        <div className="flex flex-col md:flex-row items-center justify-between">
           <div className="w-full md:w-1/2 mb-6 md:mb-0">
             <h1 className="text-3xl font-bold text-blue-900">Get in Touch with Us</h1>
             <p className="mt-4 text-gray-600 leading-relaxed">
@@ -65,15 +63,15 @@ const ContactUs = () => {
               us, and let's start building your financial future together.
             </p>
           </div>
-          {/* Image */}
           <img src={ContactImg} alt="Contact Finwise Img" className="w-full md:w-1/2 max-w-xs rounded-lg md:ml-6" />
         </div>
-
-        {/* Form Section */}
+      </div>
+      <hr className="mt-0 w-full h-0.5 bg-gray-100 border-0 dark:bg-gray-800 mb-4" />
+      <div className="max-w-7xl mx-auto p-6">
+        <h2 className="text-3xl font-bold text-blue-900 mb-6">
+          Fill out the below form and we will get back to you.
+        </h2>
         <div className="bg-white shadow-md rounded-lg p-8 mb-12 border-solid border-2 border-gray-400">
-          <h2 className="text-2xl font-bold text-blue-900 text-center mb-6">
-            Fill out the below form and we will get back to you.
-          </h2>
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid-for-calci grid-cols-1 md:grid-cols-3 gap-6">
               <div>
@@ -189,13 +187,13 @@ const ContactUs = () => {
 
               {/* Submit Button */}
               <div className="text-right">
-  <button
-    type="submit"
-    className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 w-full sm:w-auto"
-  >
-    Send Your Message
-  </button>
-</div>
+                <button
+                  type="submit"
+                  className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 w-full sm:w-auto"
+                >
+                  Send Your Message
+                </button>
+              </div>
 
 
             </div>
@@ -205,7 +203,7 @@ const ContactUs = () => {
 
       {/* Footer Section */}
       <footer className="bg-gray-900 text-white py-8">
-        <div className="max-w-7xl mx-auto grid-for-calci grid-cols-1 sm:grid-cols-4 gap-8 text-center">
+        <div className="max-w-7xl mx-auto grid-for-calci grid-cols-1 sm:grid-cols-6 gap-5 text-center">
           <div className="flex flex-col items-center">
             <img src={MailImg} alt="Email Icon" className="w-10 h-10" />
             <p className="mt-2"><a href="mailto:contact@finwiseschool.com" className="hover:underline">contact@finwiseschool.com</a></p>
@@ -219,15 +217,38 @@ const ContactUs = () => {
             <p className="mt-2">Glasgow, UK</p>
           </div>
           <div className="flex flex-col items-center">
-            <img src={SocialImg} alt="Social Icon" className="w-10 h-10" />
+            <a href="https://linkedin.com/company/finwiseschool" target="_blank" rel="noopener noreferrer">
+              <i style={{ color: "#3cb572" }} className="fab fa-linkedin w-10 h-10"></i>
+            </a>
             <p className="mt-2">
-              <a href="https://instagram.com/finwiseschool" className="text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">Instagram</a> 
-              <br />
-              <a href="https://linkedin.com/company/finwiseschool" className="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-              <br />
-              <a href="https://facebook.com/#" className="text-blue-800 hover:underline" target="_blank" rel="noopener noreferrer">Facebook</a>
+              <a href="https://linkedin.com/company/finwiseschool" target="_blank" rel="noopener noreferrer">
+                LinkedIn
+              </a>
             </p>
           </div>
+
+          <div className="flex flex-col items-center">
+            <a href="https://instagram.com/finwiseschool" target="_blank" rel="noopener noreferrer">
+              <i style={{ color: "#3cb572" }} className="fab fa-instagram w-10 h-10"></i>
+            </a>
+            <p className="mt-2">
+              <a href="https://instagram.com/finwiseschool" target="_blank" rel="noopener noreferrer">
+                Instagram
+              </a>
+            </p>
+          </div>
+
+          <div className="flex flex-col items-center">
+            <a href="https://facebook.com/#" target="_blank" rel="noopener noreferrer">
+              <i style={{ color: "#3cb572" }} className="fab fa-facebook w-10 h-10"></i>
+            </a>
+            <p className="mt-2">
+              <a href="https://facebook.com/#" target="_blank" rel="noopener noreferrer">
+                Facebook
+              </a>
+            </p>
+          </div>
+
         </div>
       </footer>
       <EarlyAccessTemplate />

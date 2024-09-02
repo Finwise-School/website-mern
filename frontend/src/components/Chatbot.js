@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
-// import Chatbotimg from '../assets/images/chatbot/chatbot.png';
-// import Closeimg from '../assets/images/chatbot/close.png';
 import responses from './Chatbot/responses';
 import subOptions from './Chatbot/subOptions';
 import './Chatbot/chatbot.css';
 import { IoIosCloseCircleOutline } from "react-icons/io";
-
 
 const Chatbot = () => {
   const [messages, setMessages] = useState([
@@ -19,25 +16,26 @@ const Chatbot = () => {
     "Support and Additional Information",
     "Other"
   ]);
-
   const [currentLevel, setCurrentLevel] = useState('main');
   const [selectedOption, setSelectedOption] = useState(null);
   const [previousSubOptions, setPreviousSubOptions] = useState([]);
-
-  // State for user inputs
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [query, setQuery] = useState(''); // New state for query
   const [showForm, setShowForm] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleMajorOptionClick = (option) => {
     setMessages([...messages, { text: option, isBot: false }]);
     setSelectedOption(option);
     if (option === "Other") {
       setShowForm(true);
+      setOptions([]); // Clear options when showing the form
     } else {
-      setOptions(subOptions[option] || []);
+      const subOptionsList = subOptions[option] || [];
+      setOptions(subOptionsList);
       setCurrentLevel('sub');
-      setPreviousSubOptions(subOptions[option] || []);
+      setPreviousSubOptions(subOptionsList);
       setShowForm(false);
     }
   };
@@ -55,7 +53,8 @@ const Chatbot = () => {
       "About Platform Access and Features",
       "What are Learning Experience and Courses",
       "About Rewards and Incentives",
-      "Support and Additional Information"
+      "Support and Additional Information",
+      "Other"
     ]);
     setCurrentLevel('main');
     setSelectedOption(null);
@@ -64,24 +63,24 @@ const Chatbot = () => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    setMessages([...messages, { text: `Name: ${name}, Email: ${email}`, isBot: false }]);
+    setMessages([...messages, { text: `Name: ${name}, Email: ${email}, Query: ${query}`, isBot: false }]);
     // Here you would normally handle form submission, e.g., send to a server
     setMessages([...messages, { text: "Thank you! We will get back to you soon.", isBot: true }]);
     setName('');
     setEmail('');
+    setQuery(''); // Clear query after submission
     setShowForm(false);
     setOptions([
       "I have some General Questions",
       "About Platform Access and Features",
       "What are Learning Experience and Courses",
       "About Rewards and Incentives",
-      "Support and Additional Information"
+      "Support and Additional Information",
+      "Other"
     ]);
     setCurrentLevel('main');
     setSelectedOption(null);
   };
-
-  const [isOpen, setIsOpen] = useState(false);
 
   const openButton = () => {
     setIsOpen(!isOpen);
@@ -90,16 +89,10 @@ const Chatbot = () => {
   return (
     <div>
       <div className={`fixed bottom-4 right-4 z-50 border border-[#262626] rounded-lg overflow-hidden bg-[#1A1A1A] flex flex-col transition-all duration-500 ease-in-out ${
-          !isOpen ? "w-32 h-10 rounded-lg" : "w-[90vw] max-w-[400px] h-[80vh]"
+        !isOpen ? "w-32 h-10 rounded-lg" : "w-[90vw] max-w-[400px] h-[80vh]"
       }`}>
         {isOpen ? (
           <>
-            {/* <img
-              src={Closeimg}
-              alt="Close"
-              className='w-6 h-6 absolute top-2 right-2 cursor-pointer'
-              onClick={openButton}
-            /> */}
             <IoIosCloseCircleOutline className='w-6 h-6 absolute top-2 right-2 cursor-pointer' onClick={openButton}/>
             <div className="flex-1 p-3 overflow-y-auto flex flex-col">
               {messages.map((msg, index) => (
@@ -111,30 +104,46 @@ const Chatbot = () => {
                 </div>
               ))}
               {showForm && (
-                <form onSubmit={handleFormSubmit} className="mt-4 space-y-2">
-                  <input
-                    type="text"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    placeholder="Your Name"
-                    className="w-full p-2 border border-gray-300 rounded"
-                    required
-                  />
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Your Email"
-                    className="w-full p-2 border border-gray-300 rounded"
-                    required
-                  />
+                <>
+                  <form onSubmit={handleFormSubmit} className="mt-4 space-y-2">
+                    <input
+                      type="text"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      placeholder="Your Name"
+                      className="w-full p-2 border border-gray-300 rounded"
+                      required
+                    />
+                    <input
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="Your Email"
+                      className="w-full p-2 border border-gray-300 rounded"
+                      required
+                    />
+                    <textarea
+                      value={query}
+                      onChange={(e) => setQuery(e.target.value)}
+                      placeholder="Your Query"
+                      className="w-full p-2 border border-gray-300 rounded"
+                      rows="4"
+                      required
+                    />
+                    <button
+                      type="submit"
+                      className="w-full p-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                    >
+                      Submit
+                    </button>
+                  </form>
                   <button
-                    type="submit"
-                    className="w-full p-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                    className="mt-4 w-full p-2 bg-red-500 text-white rounded hover:bg-red-600"
+                    onClick={handleClear}
                   >
-                    Submit
+                    Back to Main Menu
                   </button>
-                </form>
+                </>
               )}
             </div>
             <div className="p-3 space-y-2">

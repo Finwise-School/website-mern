@@ -9,12 +9,12 @@ const EarlyAccessTemplate = () => {
   };
 
   return (
-    <div className="flex p-10">
+    <div className="flex p-24 -mt-16 -mb-16">
       <div className="">
-        <h1 className="finwise-blue text-4xl font-bold mb-4 pt-10">
+        <h1 className="finwise-blue text-4xl font-bold mb-4 -pt-16">
           Start Your Financial Journey Today
         </h1>
-        <p className="justify-center text-left pr-10 font-thin pb-10">
+        <p className="justify-center text-left pr-10 font-thin pb-10 text-black text-bold">
           Your path to financial freedom is just a click away. Whether you’re
           aiming to optimize your investments, create a solid savings plan, or
           receive expert financial advice, FinWise is here to guide you every
@@ -26,7 +26,7 @@ const EarlyAccessTemplate = () => {
       <div className="mt-6 lg:mt-0 lg:ml-10">
         <button
           onClick={handleClick}
-          className="inline-block text-[#263871] hover:text-green-500 rounded-lg py-2 text-sm lg:text-base min-w-[150px] lg:min-w-[200px] text-center transition-all duration-300"
+          className="inline-block text-[#263871] hover:text-green-500 mt-6 rounded-lg py-2 text-sm lg:text-base min-w-[150px] lg:min-w-[200px] text-center transition-all duration-300"
           style={{
             border: "5px solid",
             borderRadius: "12px",

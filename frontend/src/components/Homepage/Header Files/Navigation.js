@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 function Navigation() {
   const navItems = [
-    { name: 'Home', path: '/' },
     { name: 'About Us', path: '/about' },
     { name: 'Tools', path: '/tools' },
     { name: 'Blogs', path: '/blogs' }
