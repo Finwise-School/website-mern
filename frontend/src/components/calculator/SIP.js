@@ -242,7 +242,7 @@ const SIP = () => {
                     <div className="mt-8 p-4 bg-white border border-gray-300 rounded-lg">
                         <h2 className="text-lg font-semibold text-gray-800 mb-4">Investment Growth Over Time</h2>
                         <div className="flex flex-col md:flex-row">
-                            <div className="flex-1 pr-2 mb-4 md:mb-0">
+                            <div className="flex-1 pr-2 mb-4 md:mb-0" style={{ maxWidth: '600px', maxHeight: '600px' }}>
                                 <Line
                                     data={getLineChartData()}
                                     options={{
@@ -277,7 +277,7 @@ const SIP = () => {
                                     }}
                                 />
                             </div>
-                            <div className="flex-1 pl-2">
+                            <div className="flex-1 pl-2" style={{ maxWidth: '300px', maxHeight: '300px' }}>
                                 <Doughnut
                                     data={getChartData()}
                                     options={{
