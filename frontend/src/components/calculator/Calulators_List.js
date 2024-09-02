@@ -6,7 +6,7 @@ import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 const calculators = [
   { path: "/tools/fixed-deposit", name: "Fixed Deposit Calculator" },
   { path: "/tools/goal-sip", name: "Goal SIP Calculator" },
-  { path: "/tools/mutual-funds", name: "Mutual Funds Calculator" },
+  { path: "/tools/sip", name: "SIP Calculator" },
   { path: "/tools/fire", name: "FIRE Calculator" },
   { path: "/tools/cagr", name: "CAGR Calculator" },
   { path: "/tools/emi", name: "EMI Calculator" },
