@@ -90,7 +90,6 @@ const FAQ = () => {
             )}
           </div>
         </div>
-        <hr className='border-t-1 border-black my-4 md:mt-28' />
         <div className='msFooter flex flex-row justify-center items-center md:hidden my-3'>
           <button className='custom-arrow custom-arrow-prev' onClick={() => sliderRef.current.slickPrev()}>
             <img className='m-1' src={Buttonprev} alt='' />
@@ -99,8 +98,8 @@ const FAQ = () => {
             <img className='m-1' src={Buttonnext} alt='' />
           </button>
         </div>
-        <EATemplate />
       </div>
+        <EATemplate />
     </>
   );
 };
