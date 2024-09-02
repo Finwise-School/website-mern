@@ -10,6 +10,7 @@ import { FaGraduationCap } from "react-icons/fa6";
 import { IoIosPeople } from "react-icons/io";
 import { useNavigate } from 'react-router-dom';
 import RequestEarlyAccess from "../EarlyAccessTemplate";
+import CarouselCards from "../carouselCards";
 
 const AboutUs = () => {
   const navigate = useNavigate();
@@ -229,31 +230,10 @@ const AboutUs = () => {
           </div>
         </div>
       </div>
-      <div>
-        <div className=" text-center justify-center p-20">
-          <h1 className="finwise-blue text-4xl font-bold mb-4  ">
-            Meet our Supporters
-          </h1>
-          <p className=" font-thin">
-            At Finwise School, our success is fueled by the support and
-            expertise of our valued partners.
-          </p>
-        </div>
-      </div>
 
-      <div className="flex justify-center items-center">
-        <div className="border-2 p-5 border-black mr-10 animate-spin-slow">
-          <img src={inspire} height={200} width={200} alt="Inspire" />
-        </div>
+      <CarouselCards />
 
-        <div className="border-2 p-5 border-black mr-10 animate-spin-slow">
-          <img src={barclays} height={200} width={200} alt="Barclays" />
-        </div>
 
-        <div className="border-2 p-5 border-black mr-10 animate-spin-slow">
-          <img src={univ} height={200} width={200} alt="University" />
-        </div>
-      </div>
 
       <div className="flex flex-col items-center text-center p-10">
         <h1 className="finwise-blue text-4xl font-bold mb-10">
