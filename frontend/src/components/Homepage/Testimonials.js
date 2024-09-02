@@ -29,7 +29,7 @@ const Testimonials = () => {
     {
       rating: 5,
       title: "Exceptional Service!",
-      content: "Finwise transformed my approach to financial planning. Their finance tools made it so easy to set clear goals and track my progress. I finally feel in control of my financial future",
+      content: "Finwise transformed my approach to financial planning. Their financial tools have made it so easy to set clear goals and track my progress. I finally feel that I am in control of my financial future.",
       author: "Sai",
       location: "UK, Edinburgh",
       imageSrc: require('./../Homepage/Testimonials/sai.png')
