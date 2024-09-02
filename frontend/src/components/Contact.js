@@ -51,7 +51,7 @@ const ContactUs = () => {
   };
 
   return (
-    <div style={{ marginTop: "100px" }} className="font-nunito bg-gray-50">
+    <div style={{ marginTop: "0px" }} className="font-nunito bg-gray-50">
       <div className="max-w-7xl mx-auto p-6">
         {/* Header Section */}
         <div className="flex flex-col md:flex-row items-center justify-between py-12">
