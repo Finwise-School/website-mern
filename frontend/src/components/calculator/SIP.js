@@ -148,7 +148,7 @@ const SIP = () => {
                                     id="investment-method"
                                     value={investmentMethod}
                                     onChange={(e) => setInvestmentMethod(e.target.value)}
-                                    className="bg-green-100 text-gray-800 font-semibold text-right p-2 rounded-lg w-24"
+                                    className="bg-green-100 text-gray-800 font-semibold text-right p-2 rounded-lg w-30"
                                 >
                                     <option value="sip">SIP</option>
                                     <option value="lumpSum">Lump Sum</option>
@@ -277,7 +277,7 @@ const SIP = () => {
                                     }}
                                 />
                             </div>
-                            <div className="flex-1 pl-2" style={{ maxWidth: '300px', maxHeight: '300px' }}>
+                            <div className="flex-1 pl-2" style={{ maxWidth: '300px', maxHeight: '300px', marginLeft: '138px' }}>
                                 <Doughnut
                                     data={getChartData()}
                                     options={{
