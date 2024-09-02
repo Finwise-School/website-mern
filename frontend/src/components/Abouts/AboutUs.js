@@ -40,13 +40,15 @@ const AboutUs = () => {
             </a>
           </div>
         </div>
-        <img
-          src={phone}
-          height={500}
-          width={500}
-          alt="about-us"
-          className="hidden md:block md:ml-10"
-        />
+       <img
+  src={phone}
+  height={500}
+  width={500}
+  alt="about-us"
+  className="hidden md:block md:ml-10 animate-float"
+/>
+
+
       </div>
 
       <div className="p-8">
@@ -148,95 +150,94 @@ const AboutUs = () => {
             </p>
           </div>
 
-          <div className="flex flex-wrap justify-between p-5">
-            {/* First Row */}
-            <div className="w-full md:w-[30%] border-l-[1px] border-blue-300 p-5 relative mb-8">
-              <h2 className="text-xl font-semibold mb-4">Step 01</h2>
-              <div className="text-center">
-                <h2 className="text-lg font-bold mb-2">
-                  Sign Up and Create your Account
-                </h2>
-                <p className="font-thin">
-                  Fill Out Registration Information: Provide your basic details
-                  like name, email, and password to create your account.
-                </p>
-              </div>
-              <div className="absolute top-0 left-0 h-full w-1 bg-blue-300 shadow-lg"></div>
-            </div>
+          <div className="flex flex-wrap justify-between p-5 border border-transparent hover:border-blue-700 transition duration-300">
+  {/* First Row */}
+  <div className="w-full md:w-[30%] border-l-[1px] border-blue-300 p-5 relative mb-8">
+    <h2 className="text-xl font-semibold mb-4">Step 01</h2>
+    <div className="text-center">
+      <h2 className="text-lg font-bold mb-2">
+        Sign Up and Create your Account
+      </h2>
+      <p className="font-thin">
+        Fill Out Registration Information: Provide your basic details like name,
+        email, and password to create your account.
+      </p>
+    </div>
+    <div className="absolute top-0 left-0 h-full w-1 bg-blue-300 shadow-lg"></div>
+  </div>
 
-            <div className="w-full md:w-[30%] border-l-[1px] border-blue-300 p-5 relative mb-8">
-              <h2 className="text-xl font-semibold mb-4">Step 02</h2>
-              <div className="text-center">
-                <h2 className="text-lg font-bold mb-2">
-                  Complete a Financial Assessment
-                </h2>
-                <p className="font-thin">
-                  Answer Questions About Your Financial Goals: Share your
-                  short-term and long-term financial objectives to help tailor
-                  your plan.
-                </p>
-              </div>
-              <div className="absolute top-0 left-0 h-full w-1 bg-blue-300 shadow-lg"></div>
-            </div>
+  <div className="w-full md:w-[30%] border-l-[1px] border-blue-300 p-5 relative mb-8">
+    <h2 className="text-xl font-semibold mb-4">Step 02</h2>
+    <div className="text-center">
+      <h2 className="text-lg font-bold mb-2">Complete a Financial Assessment</h2>
+      <p className="font-thin">
+        Answer Questions About Your Financial Goals: Share your short-term and
+        long-term financial objectives to help tailor your plan.
+      </p>
+    </div>
+    <div className="absolute top-0 left-0 h-full w-1 bg-blue-300 shadow-lg"></div>
+  </div>
 
-            <div className="w-full md:w-[30%] border-l-[1px] border-blue-300 p-5 relative mb-8">
-              <h2 className="text-xl font-semibold mb-4">Step 03</h2>
-              <div className="text-center">
-                <h2 className="text-lg font-bold mb-2">
-                  Start Learning with Financial Modules
-                </h2>
-                <p className="font-thin">
-                  Complete Educational Modules: Work through interactive modules
-                  designed to build your financial knowledge and skills.
-                </p>
-              </div>
-              <div className="absolute top-0 left-0 h-full w-1 bg-blue-300 shadow-lg"></div>
-            </div>
+  <div className="w-full md:w-[30%] border-l-[1px] border-blue-300 p-5 relative mb-8">
+    <h2 className="text-xl font-semibold mb-4">Step 03</h2>
+    <div className="text-center">
+      <h2 className="text-lg font-bold mb-2">
+        Start Learning with Financial Modules
+      </h2>
+      <p className="font-thin">
+        Complete Educational Modules: Work through interactive modules designed
+        to build your financial knowledge and skills.
+      </p>
+    </div>
+    <div className="absolute top-0 left-0 h-full w-1 bg-blue-300 shadow-lg"></div>
+  </div>
 
-            {/* Second Row */}
-            <div className="w-full md:w-[30%] border-l-[1px] border-blue-300 p-5 relative mb-8">
-              <h2 className="text-xl font-semibold mb-4">Step 04</h2>
-              <div className="text-center">
-                <h2 className="text-lg font-bold mb-2">
-                  Utilize Financial Tools and Resources
-                </h2>
-                <p className="font-thin">
-                  Access Financial Tools: Use tools to create and manage a
-                  budget, helping you track and control your spending.
-                </p>
-              </div>
-              <div className="absolute top-0 left-0 h-full w-1 bg-blue-300 shadow-lg"></div>
-            </div>
+  {/* Second Row */}
+  <div className="w-full md:w-[30%] border-l-[1px] border-blue-300 p-5 relative mb-8">
+    <h2 className="text-xl font-semibold mb-4">Step 04</h2>
+    <div className="text-center">
+      <h2 className="text-lg font-bold mb-2">
+        Utilize Financial Tools and Resources
+      </h2>
+      <p className="font-thin">
+        Access Financial Tools: Use tools to create and manage a budget, helping
+        you track and control your spending.
+      </p>
+    </div>
+    <div className="absolute top-0 left-0 h-full w-1 bg-blue-300 shadow-lg"></div>
+  </div>
 
-            <div className="w-full md:w-[30%] border-l-[1px] border-blue-300 p-5 relative mb-8">
-              <h2 className="text-xl font-semibold mb-4">Step 05</h2>
-              <div className="text-center">
-                <h2 className="text-lg font-bold mb-2">
-                  Monitor Progress and Get Expert Advice
-                </h2>
-                <p className="font-thin">
-                  Check the Leaderboard: See how you rank against other users by
-                  tracking your progress on the leaderboard.
-                </p>
-              </div>
-              <div className="absolute top-0 left-0 h-full w-1 bg-blue-300 shadow-lg"></div>
-            </div>
+  <div className="w-full md:w-[30%] border-l-[1px] border-blue-300 p-5 relative mb-8">
+    <h2 className="text-xl font-semibold mb-4">Step 05</h2>
+    <div className="text-center">
+      <h2 className="text-lg font-bold mb-2">
+        Monitor Progress and Get Expert Advice
+      </h2>
+      <p className="font-thin">
+        Check the Leaderboard: See how you rank against other users by tracking
+        your progress on the leaderboard.
+      </p>
+    </div>
+    <div className="absolute top-0 left-0 h-full w-1 bg-blue-300 shadow-lg"></div>
+  </div>
 
-            <div className="w-full md:w-[30%] border-l-[1px] border-blue-300 p-5 relative mb-8">
-              <h2 className="text-xl font-semibold mb-4">Step 06</h2>
-              <div className="text-center">
-                <h2 className="text-lg font-bold mb-2">
-                  Achieve Goals and Earn Rewards
-                </h2>
-                <p className="font-thin">
-                  Earn Rewards for Completing Modules: Receive rewards for
-                  completing modules and achieving milestones, motivating you to
-                  stay on track.
-                </p>
-              </div>
-              <div className="absolute top-0 left-0 h-full w-1 bg-blue-300 shadow-lg"></div>
-            </div>
-          </div>
+  <div className="w-full md:w-[30%] border-l-[1px] border-blue-300 p-5 relative mb-8">
+    <h2 className="text-xl font-semibold mb-4">Step 06</h2>
+    <div className="text-center">
+      <h2 className="text-lg font-bold mb-2">
+        Achieve Goals and Earn Rewards
+      </h2>
+      <p className="font-thin">
+        Earn Rewards for Completing Modules: Receive rewards for completing
+        modules and achieving milestones, motivating you to stay on track.
+      </p>
+    </div>
+    <div className="absolute top-0 left-0 h-full w-1 bg-blue-300 shadow-lg"></div>
+  </div>
+</div>
+
+
+
         </div>
       </div>
       <div>
