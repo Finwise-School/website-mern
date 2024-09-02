@@ -135,7 +135,7 @@ const TaxCalculator = () => {
           <h1 className="text-2xl font-semibold finwise-green">Tax Calculator</h1>
           <p className="finwise-blue">Estimate your tax and take-home pay</p>
         </div>
-        
+
         {/* Input Fields */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div>
@@ -237,15 +237,22 @@ const TaxCalculator = () => {
           </div>
         </div>
 
-        {/* Pie Chart */}
-        <div className="mt-8">
-          <h2 className="text-lg font-semibold text-gray-800 mb-4">Income Breakdown</h2>
-          <Pie data={chartData} />
-        </div>
-      </div>
 
-      <Tool_Footer message="Calculate your tax liabilities and explore ways to save more. Get started on planning your tax strategy now!"/>
+        <div className="mt-8 justify-center items-center">
+          <h2 className="text-lg font-semibold text-gray-800 mb-4">Income Breakdown</h2>
+          <div className="w-full h-[400px] max-w-md">
+            <Pie
+              data={chartData}
+              options={{
+                maintainAspectRatio: false
+              }}
+            />
+          </div>
+        </div>
+
+      <Tool_Footer message="Calculate your tax liabilities and explore ways to save more. Get started on planning your tax strategy now!" />
       <CalculatorList activeCalculator="Tax Calculator" />
+      </div>
 
     </div>
   );

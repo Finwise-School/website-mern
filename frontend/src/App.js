@@ -17,7 +17,7 @@ import LoginPage from "./components/Login/login";
 import SignupPage from "./components/Login/SignupPage";
 import Fire from "./components/calculator/Fire";
 import GoalSIP from "./components/calculator/GoalSIP";
-import MutualFunds from "./components/calculator/MutualFunds";
+import MutualFunds from "./components/calculator/SIP";
 import FixedDepo from "./components/calculator/FixedDepo";
 import Tax from "./components/calculator/Tax";
 import EMICalculator from "./components/calculator/EMI";
@@ -52,7 +52,7 @@ const App = () => {
             <Route path="/clients" element={<Cards />} />
             <Route path="/tools/fire" element={<Fire />} />
             <Route path="/tools/goal-sip" element={<GoalSIP />} />
-            <Route path="/tools/mutual-funds" element={<MutualFunds />} />
+            <Route path="/tools/sip" element={<MutualFunds />} />
             <Route path="/tools/fixed-deposit" element={<FixedDepo />} />
             <Route path="/tools/tax" element={<Tax />} />
             <Route path="/tools/emi" element={<EMICalculator />} />

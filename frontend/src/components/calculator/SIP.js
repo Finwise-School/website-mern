@@ -4,8 +4,11 @@ import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import Tool_Footer from './Tools_footer';
 import CalculatorList from './Calulators_List';
+import { Doughnut } from 'react-chartjs-2';
+import { Chart as ChartJS, Title, Tooltip, Legend, ArcElement } from 'chart.js';
+ChartJS.register(Title, Tooltip, Legend, ArcElement);
 
-const MutualFunds = () => {
+const SIP = () => {
     const [investmentMethod, setInvestmentMethod] = useState('sip');
     const [monthlyInvestment, setMonthlyInvestment] = useState(5000);
     const [lumpSumInvestment, setLumpSumInvestment] = useState(0);
@@ -36,6 +39,22 @@ const MutualFunds = () => {
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
     };
+    const getChartData = () => {
+        if (!result) return {};
+
+        const data = {
+            labels: ['Invested Amount', 'Returns Generated'],
+            datasets: [{
+                data: [parseFloat(result.investedAmount), parseFloat(result.returnsGenerated)],
+                backgroundColor: ['#4CAF50', '#FFC107'],
+                borderColor: ['#ffffff', '#ffffff'],
+                borderWidth: 1,
+            }]
+        };
+
+        return data;
+    };
+
 
     const calculateMutualFund = () => {
         if (!validateForm()) return; // Stop if the form is invalid
@@ -82,7 +101,7 @@ const MutualFunds = () => {
         <div style={{ marginTop: "0px" }} className="bg-gray-50 p-2">
             <div className="max-w-6xl mx-auto bg-white shadow-lg rounded-lg p-8">
                 <div className="mb-6">
-                    <h1 className="text-2xl font-semibold finwise-green">Mutual Funds Calculator</h1>
+                    <h1 className="text-2xl font-semibold finwise-green">SIP Calculator</h1>
                     <p className="finwise-blue">Calculate your mutual funds investment returns</p>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -117,7 +136,7 @@ const MutualFunds = () => {
                                 </div>
                             )}
                             {errors.monthlyInvestment && <p className="text-red-500 text-sm">{errors.monthlyInvestment}</p>}
-                            
+
                             {investmentMethod === 'lumpSum' && (
                                 <div className="flex items-center justify-between p-4 border border-gray-300 rounded-lg">
                                     <label htmlFor="lump-sum-investment" className="text-gray-700">Lump Sum Investment</label>
@@ -164,7 +183,7 @@ const MutualFunds = () => {
                         <h2 className="text-lg font-semibold text-gray-800 mb-4">Results:</h2>
                         {result && (
                             <div className="space-y-4">
-                                <div  className="grid grid-cols-1 gap-2" style={{ "row-gap": "0.6rem" }}>
+                                <div className="grid grid-cols-1 gap-2" style={{ "row-gap": "0.6rem" }}>
                                     <div className="p-4 border border-gray-300 rounded-lg">
                                         <p className="finwise-blue">Invested Amount</p>
                                         <p className="finwise-green font-semibold text-xl">&#163;{result.investedAmount}</p>
@@ -178,15 +197,39 @@ const MutualFunds = () => {
                                         <p className="finwise-green font-semibold text-xl">&#163;{result.totalAmount}</p>
                                     </div>
                                 </div>
+                                <div className="p-4 border border-gray-300 rounded-lg flex flex-col items-center justify-center">
+                                    <h3 className="text-lg font-semibold text-gray-800 mb-4">Investment Breakdown</h3>
+                                    <div className="flex justify-center items-center w-full max-w-md"> 
+                                        <Doughnut
+                                            data={getChartData()}
+                                            options={{
+                                                responsive: true,
+                                                plugins: {
+                                                    legend: {
+                                                        position: 'top',
+                                                    },
+                                                    tooltip: {
+                                                        callbacks: {
+                                                            label: (tooltipItem) => {
+                                                                return `${tooltipItem.label}: &#163;${tooltipItem.raw.toFixed(0)}`;
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                cutout: '60%',
+                                            }}
+                                        />
+                                    </div>
+                                </div>
                             </div>
                         )}
-                    </div>
+                            </div>
                 </div>
-                <Tool_Footer message="Analyze your mutual fund investments and their potential returns. Start optimizing your investment strategy today!"/>
-                <CalculatorList activeCalculator="Mutual Funds Calculator" />
+                    <Tool_Footer message="Analyze your mutual fund investments and their potential returns. " />
+                    <CalculatorList activeCalculator="SIP Calculator" />
+                </div>
             </div>
-        </div>
-    );
+            );
 };
 
-export default MutualFunds;
+            export default SIP;
