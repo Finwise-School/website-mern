@@ -37,7 +37,7 @@ const Testimonials = () => {
     {
       rating: 5,
       title: "Efficient and Reliable",
-      content: "I wish I had found Finwise years ago. Their easy-to-use tools and comprehensive planning strategies have helped me optimize my retirement savings and enjoy my retirement with peace of mind",
+      content: "I wish I had found Finwise years ago. Their easy-to-use tools and comprehensive planning strategies have helped me optimize my savings and enjoy my retirement with peace of mind.",
       author: "Kate",
       location: "UK, Glasgow",
       imageSrc: require('./../Homepage/Testimonials/kate.png')
