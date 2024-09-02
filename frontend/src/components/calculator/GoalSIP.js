@@ -169,8 +169,8 @@ const GoalSIP = () => {
           </div>
         </div>
         <div className="mt-8" style={{ marginTop: "-100px" }}>
-          <h2 className="text-lg font-semibold text-gray-800 mb-4">Investment Growth Over Time</h2>
-          <div className="p-4 border border-gray-300 rounded-lg">
+        <h2 className="text-lg font-semibold text-gray-800 mb-4">Investment Growth Over Time</h2>
+        <div className="bg-white p-4 border border-gray-300 rounded-lg">
             <Line
               data={chartData}
               options={{
