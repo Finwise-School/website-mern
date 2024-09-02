@@ -158,7 +158,7 @@ const SIP = () => {
                                 <div className="flex items-center justify-between p-4 border border-gray-300 rounded-lg">
                                     <label htmlFor="monthly-investment" className="text-gray-700">Monthly Investment</label>
                                     <div className="flex items-center space-x-2">
-                                        <span className="text-gray-500">&#163;</span>
+                                        <span className="text-gray-500">£</span>
                                         <input
                                             type="number"
                                             id="monthly-investment"
@@ -175,7 +175,7 @@ const SIP = () => {
                                 <div className="flex items-center justify-between p-4 border border-gray-300 rounded-lg">
                                     <label htmlFor="lump-sum-investment" className="text-gray-700">Lump Sum Investment</label>
                                     <div className="flex items-center space-x-2">
-                                        <span className="text-gray-500">&#163;</span>
+                                        <span className="text-gray-500">£</span>
                                         <input
                                             type="number"
                                             id="lump-sum-investment"
@@ -222,15 +222,15 @@ const SIP = () => {
                                 <div className="grid grid-cols-1 gap-2" style={{ "row-gap": "0.6rem" }}>
                                     <div className="p-4 border border-gray-300 rounded-lg">
                                         <p className="finwise-blue">Invested Amount</p>
-                                        <p className="finwise-green font-semibold text-xl">&#163;{result.investedAmount}</p>
+                                        <p className="finwise-green font-semibold text-xl">£{result.investedAmount}</p>
                                     </div>
                                     <div className="p-4 border border-gray-300 rounded-lg">
                                         <p className="finwise-blue">Returns Generated</p>
-                                        <p className="finwise-green font-semibold text-xl">&#163;{result.returnsGenerated}</p>
+                                        <p className="finwise-green font-semibold text-xl">£{result.returnsGenerated}</p>
                                     </div>
                                     <div className="p-4 border border-gray-300 rounded-lg">
                                         <p className="finwise-blue">Total Amount</p>
-                                        <p className="finwise-green font-semibold text-xl">&#163;{result.totalAmount}</p>
+                                        <p className="finwise-green font-semibold text-xl">£{result.totalAmount}</p>
                                     </div>
                                 </div>
                             </div>
@@ -254,7 +254,7 @@ const SIP = () => {
                                             tooltip: {
                                                 callbacks: {
                                                     label: (tooltipItem) => {
-                                                        return `${tooltipItem.label}: &#163;${tooltipItem.raw.toFixed(0)}`;
+                                                        return `${tooltipItem.label} £${tooltipItem.raw.toFixed(0)}`;
                                                     }
                                                 }
                                             }
@@ -289,7 +289,7 @@ const SIP = () => {
                                             tooltip: {
                                                 callbacks: {
                                                     label: (tooltipItem) => {
-                                                        return `${tooltipItem.label}: &#163;${tooltipItem.raw.toFixed(0)}`;
+                                                        return `${tooltipItem.label}: £${tooltipItem.raw.toFixed(0)}`;
                                                     }
                                                 }
                                             }
