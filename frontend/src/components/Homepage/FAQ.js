@@ -28,7 +28,7 @@ const FAQ = () => {
 
   return (
     <section className="flex flex-col self-center mt-36 w-full max-w-[1596px] max-md:mt-10 max-md:max-w-full">
-      <div className="flex flex-wrap gap-10 items-end w-full max-md:max-w-full">
+      <div className="flex flex-wrap gap-10 items-end  p-10 max-md:max-w-full">
         <div className="flex flex-col flex-1 shrink basis-12 min-w-[240px] max-md:max-w-full">
           <h2 className="text-5xl font-semibold text-blue-900 max-md:max-w-full max-md:text-4xl">
             Frequently Asked Questions
@@ -37,11 +37,11 @@ const FAQ = () => {
             Find answers to common questions about Finwise School,
           </p>
         </div>
-        <button className="gap-2 self-stretch px-6 py-5 text-lg font-medium text-white bg-green-500 rounded-xl border border-blue-900 border-solid max-md:px-5">
+        <button className="gap-2 self-stretch p-4 text-lg font-medium text-white bg-green-500 rounded-xl border border-blue-900 border-solid max-md:px-5">
           View All FAQ's
         </button>
       </div>
-      <div className="flex flex-col mt-20 w-full text-lg font-medium text-white max-md:mt-10 max-md:max-w-full">
+      <div className="flex flex-col mt-20 w-full text-lg font-medium text-white max-md:mt-10 max-md:max-w-full p-10">
         <div className="flex flex-wrap gap-8 items-start w-full max-md:max-w-full">
           {faqs.map((faq, index) => (
             <FAQItem key={index} {...faq} />

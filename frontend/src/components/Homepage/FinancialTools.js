@@ -18,17 +18,17 @@ const FinancialTools = () => {
     {
       title: "F.I.R.E Tool",
       description: "Calculate your Financial Independence Retire Early (F.I.R.E) Number.",
-      imageSrc: require('../Homepage/Tools/fire.png') // Use require to load the image
+      imageSrc: require('../Homepage/Tools/fire.png')
     },
     {
       title: "Goal SIP Tool",
       description: "Plan and implement your financial goals with our Goal SIP tool",
-      imageSrc: require('../Homepage/Tools/goal_sip.png') // Use require to load the image
+      imageSrc: require('../Homepage/Tools/goal_sip.png') 
     },
     {
       title: "More Financial Tools",
       description: "Use over 10+ calculators and tools that help you with every financial decision.",
-      imageSrc: require('../Homepage/Tools/calc_tools.png') // Use require to load the image
+      imageSrc: require('../Homepage/Tools/calc_tools.png')
     }
   ];
   
@@ -45,7 +45,7 @@ const FinancialTools = () => {
           </p>
         </div>
       </div>
-      <div className="flex flex-col mt-20 w-full h-[759px] max-md:mt-10 max-md:max-w-full">
+      <div className="flex flex-col mt-20 w-full h-auto max-md:mt-10 max-md:max-w-full">
         <div className="flex flex-wrap gap-8 items-start w-full max-md:max-w-full">
           {tools.map((tool, index) => (
             <ToolCard key={index} {...tool} />
