@@ -5,6 +5,7 @@ import inspire from "../../assets/images/aboutUS/inspire.png";
 import univ from "../../assets/images/aboutUS/university.png";
 import left from "../../assets/images/aboutUS/left.png";
 import right from "../../assets/images/aboutUS/right.png";
+import CarouselCards from "../carouselCards";
 import { FaStar } from "react-icons/fa6";
 import { FaGraduationCap } from "react-icons/fa6";
 import { IoIosPeople } from "react-icons/io";
@@ -250,19 +251,22 @@ const AboutUs = () => {
         </div>
       </div>
 
-      <div className="flex justify-center items-center">
-        <div className="border-2 p-5 border-black mr-10 animate-spin-slow">
-          <img src={inspire} height={200} width={200} alt="Inspire" />
-        </div>
 
-        <div className="border-2 p-5 border-black mr-10 animate-spin-slow">
-          <img src={barclays} height={200} width={200} alt="Barclays" />
-        </div>
 
-        <div className="border-2 p-5 border-black mr-10 animate-spin-slow">
-          <img src={univ} height={200} width={200} alt="University" />
-        </div>
-      </div>
+      <div className="flex justify-center items-center space-x-10">
+  <div className="border-2 p-8 border-black animate-spin-slow rounded-lg">
+    <img src={inspire} className="h-40 w-60" alt="Inspire" />
+  </div>
+
+  <div className="border-2 p-8 border-black animate-spin-slow rounded-lg">
+    <img src={barclays} className="h-40 w-60" alt="Barclays" />
+  </div>
+
+  <div className="border-2 p-8 border-black animate-spin-slow rounded-lg">
+    <img src={univ} className="h-40 w-60" alt="University" />
+  </div>
+</div>
+
 
       <div className="flex flex-col items-center text-center p-10">
         <h1 className="finwise-blue text-4xl font-bold  mb-7 pt-16">
