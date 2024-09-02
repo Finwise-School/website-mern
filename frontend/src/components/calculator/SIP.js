@@ -148,7 +148,7 @@ const SIP = () => {
                                     id="investment-method"
                                     value={investmentMethod}
                                     onChange={(e) => setInvestmentMethod(e.target.value)}
-                                    className="bg-green-100 text-gray-800 font-semibold text-right p-2 rounded-lg w-24"
+                                    className="bg-green-100 text-gray-800 font-semibold text-right p-2 rounded-lg w-30"
                                 >
                                     <option value="sip">SIP</option>
                                     <option value="lumpSum">Lump Sum</option>
