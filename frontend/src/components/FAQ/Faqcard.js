@@ -4,7 +4,7 @@ const Faqcard = ({ title, answer, isExpanded, onToggle, isArray }) => {
   return (
     <>
     <div className={`flex flex-col rounded-xl border border-[#262626] p-[30px] md:p-[50px] ${isExpanded ? 'h-auto bg-[#58da92]' : 'md:h-[22rem] finwise-green-bg'}`}>
-      <h1 className={`text-lg md:text-2xl text-[#FFFFFF] leading-7 md:leading-9 ${isExpanded ? 'font-black' : 'font-semibold'}`}>{title}</h1>
+      <h1 className={`text-lg md:text-2xl leading-7 md:leading-9 ${isExpanded ? 'font-black text-[#223876]' : 'font-semibold text-[#FFFFFF]'}`}>{title}</h1>
       <div className={`${isExpanded ? 'h-auto' : 'h-32 overflow-hidden'}`}>
       {Array.isArray(answer) ? (
   answer.map((item, index) => (
