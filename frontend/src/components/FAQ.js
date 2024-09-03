@@ -39,7 +39,7 @@ const FAQ = () => {
 
   return (
     <>
-      <div className='mainFaqContainer flex flex-col md:mx-32 m-[14px] md:mb-16'>
+      <div className='mainFaqContainer flex flex-col md:mx-32 m-[14px] md:mb-16 mt-16'>
         <div className='faqHeader flex flex-row md:justify-between md:items-start justify-center items-center'>
           <div>
             <h1 className='font-semibold text-[28px] leading-10 md:text-5xl md:leading-[72px] finwise-blue'>
