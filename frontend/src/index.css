@@ -167,11 +167,6 @@ body {
   border-bottom: 1px solid transparent;
 }
 
-/* *:focus {
-  outline: none;
-  box-shadow: 0 0 0 0.8rem rgba(41, 34, 230, 0.5);
-} */
-
 .list {
   list-style: none;
   display: flex;
@@ -234,7 +229,7 @@ strong {
 }
 
 .faqButton {
-  background-color: #1A1A1A;
+  background-color:   1A1A1A;
 }
 
 .shine {
