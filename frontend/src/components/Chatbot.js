@@ -3,6 +3,7 @@ import responses from './Chatbot/responses';
 import subOptions from './Chatbot/subOptions';
 import './Chatbot/chatbot.css';
 import { IoIosCloseCircleOutline } from "react-icons/io";
+import axios from 'axios';
 
 const Chatbot = () => {
   const [messages, setMessages] = useState([
@@ -61,26 +62,45 @@ const Chatbot = () => {
     setShowForm(false);
   };
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
-    setMessages([...messages, { text: `Name: ${name}, Email: ${email}, Query: ${query}`, isBot: false }]);
-    // Here you would normally handle form submission, e.g., send to a server
-    setMessages([...messages, { text: "Thank you! We will get back to you soon.", isBot: true }]);
-    setName('');
-    setEmail('');
-    setQuery(''); // Clear query after submission
-    setShowForm(false);
-    setOptions([
-      "I have some General Questions",
-      "About Platform Access and Features",
-      "What are Learning Experience and Courses",
-      "About Rewards and Incentives",
-      "Support and Additional Information",
-      "Other"
-    ]);
-    setCurrentLevel('main');
-    setSelectedOption(null);
+  
+    const formData = {
+      name,
+      email,
+      query
+    };
+  
+    try {
+      await axios.post('http://localhost:5000/api/chatbot', formData);
+  
+      setMessages([...messages, { text: `Name: ${name}, Email: ${email}, Query: ${query}`, isBot: false }]);
+      setMessages([...messages, { text: "Thank you! We will get back to you soon.", isBot: true }]);
+      
+      // Clear the form fields
+      setName('');
+      setEmail('');
+      setQuery('');
+  
+      // Hide the form and reset options
+      setShowForm(false);
+      setOptions([
+        "I have some General Questions",
+        "About Platform Access and Features",
+        "What are Learning Experience and Courses",
+        "About Rewards and Incentives",
+        "Support and Additional Information",
+        "Other"
+      ]);
+      setCurrentLevel('main');
+      setSelectedOption(null);
+    } catch (error) {
+      // Handle any errors that occur during the request
+      console.error('Error submitting the form:', error);
+      setMessages([...messages, { text: "There was an error submitting the form. Please try again.", isBot: true }]);
+    }
   };
+  
 
   const openButton = () => {
     setIsOpen(!isOpen);
