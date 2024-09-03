@@ -1,7 +1,7 @@
 import React from "react";
 import FooterColumn from "./Homepage/Footer Files/FooterColumn";
 import EmailSubscription from "./Homepage/Footer Files/EmailSubscription";
-import { FaFacebookF, FaLinkedinIn, FaTwitter, FaYoutube } from 'react-icons/fa';
+import { FaFacebookF, FaLinkedinIn, FaTwitter, FaYoutube, FaInstagram } from 'react-icons/fa';
 
 function Footer() {
   const footerColumns = [
@@ -55,10 +55,10 @@ function Footer() {
   ];
 
   const socialIcons = [
-    { icon: <FaFacebookF />, alt: "Facebook", url: "https://facebook.com" },
-    { icon: <FaLinkedinIn />, alt: "LinkedIn", url: "https://linkedin.com" },
-    { icon: <FaTwitter />, alt: "Twitter", url: "https://twitter.com" },
-    { icon: <FaYoutube />, alt: "YouTube", url: "https://youtube.com" }
+    { icon: <FaInstagram />, alt: "Instagram", url: "https://www.instagram.com/finwiseschool/" },
+    { icon: <FaLinkedinIn />, alt: "LinkedIn", url: "https://uk.linkedin.com/company/finwiseschool" },
+    // { icon: <FaTwitter />, alt: "Twitter", url: "https://twitter.com" },
+    { icon: <FaYoutube />, alt: "YouTube", url: "https://www.youtube.com/@finwiseschool" }
   ];
 
   return (
