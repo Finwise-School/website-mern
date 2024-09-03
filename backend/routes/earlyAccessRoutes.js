@@ -7,7 +7,6 @@ router.post('/request-early-access', async (req, res) => {
   const { name, email, phone } = req.body;
 
   try {
-    // Create a new form submission
     const newSubmission = new FormSubmission({
       name,
       email,
