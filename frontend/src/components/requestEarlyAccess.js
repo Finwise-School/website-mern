@@ -220,7 +220,7 @@ const EarlyAccessForm = () => {
                 </label>
                 <div className="w-full mt-4">
                   <PhoneInput
-                    country={'us'}
+                    country={'uk'}
                     value={formData.phone}
                     onChange={handlePhoneChange}
                     inputStyle={{
