@@ -9,6 +9,7 @@ const earlyAccessRoutes = require('./routes/earlyAccessRoutes'); // Import the b
 const loginRoutes= require('./routes/loginRoutes');// login routes
 const signupRoutes= require('./routes/signupRoutes'); //signup routes
 const blogRoutes = require('./routes/blogRoutes');
+const chatbotRoutes = require('./routes/chatbotRoutes');
 
 
 const app = express();
@@ -33,6 +34,7 @@ app.use('/api', earlyAccessRoutes); // Use the book routes
 app.use('/api',loginRoutes); // using the signup routes
 app.use('/api',signupRoutes); // using the login routes
 app.use('/api',blogRoutes);
+app.use('/api',chatbotRoutes);
 
 
 // Root Route
