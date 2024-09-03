@@ -5,7 +5,7 @@ const chatbotSchema = require('../models/chatbotSchema');
 router.post('/chatbot', async (req, res) => {
     try {
       const { name, email, query } = req.body;
-      const newChatbotEntry = new Chatbot({ name, email, query });
+      const newChatbotEntry = new chatbotSchema({ name, email, query });
       await newChatbotEntry.save();
       res.status(201).json({ message: 'Form data saved successfully!' });
     } catch (error) {
