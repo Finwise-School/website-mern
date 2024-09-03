@@ -54,7 +54,16 @@ const EarlyAccessForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateStep()) {
-      setSubmitted(true); 
+      setSubmitted(true);
+    }
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      if (formStep !== 4) {
+        handleNextStep();
+      }
     }
   };
 
@@ -90,7 +99,7 @@ const EarlyAccessForm = () => {
               We currently have a waitlist. Please fill this form to apply for the Finwise School early access.
             </p>
             <p className="text-sm md:text-base mb-10">
-              Click on start, Lets get started
+              Click on start, Let's get started
             </p>
             <div className="flex items-center mb-4">
               <button
@@ -108,7 +117,7 @@ const EarlyAccessForm = () => {
         </div>
       ) : (
         <div className="w-full max-w-lg px-4 mx-auto mt-20">
-          <form onSubmit={handleSubmit} className="w-full">
+          <form onSubmit={handleSubmit} className="w-full" onKeyDown={handleKeyDown}>
             {formStep === 1 && (
               <div className="flex flex-col items-start pb-2 mb-8 w-full">
                 <label htmlFor="name" className="flex items-center space-x-2 text-lg md:text-xl font-normal">
