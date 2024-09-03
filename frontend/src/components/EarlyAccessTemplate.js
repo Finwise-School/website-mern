@@ -13,7 +13,7 @@ const EarlyAccessTemplate = () => {
       <hr className="w-screen h-0.5 my-8 bg-gray-800 border-0 dark:bg-gray-800" />
 
       <div className="flex p-24 -mt-16 -mb-16">
-        <div className="">
+        <div>
           <h1 className="finwise-blue text-4xl font-bold mb-4 -pt-16">
             Start Your Financial Journey Today
           </h1>
@@ -32,12 +32,7 @@ const EarlyAccessTemplate = () => {
         <div className="mt-6 lg:mt-0 lg:ml-10">
           <button
             onClick={handleClick}
-            className="inline-block text-[#263871] hover:text-green-500 mt-6 rounded-lg py-2 text-sm lg:text-base min-w-[150px] lg:min-w-[200px] text-center transition-all duration-300"
-            style={{
-              border: "5px solid",
-              borderRadius: "12px",
-              borderImage: "linear-gradient(90deg, #223876 0%, #3CB371 100%) 1",
-            }}
+            className="inline-block text-[#263871] hover:text-green-500 mt-6 rounded-lg py-2 text-sm lg:text-base min-w-[150px] lg:min-w-[200px] text-center transition-all duration-300 revolving-border"
           >
             Request Early Access
           </button>
