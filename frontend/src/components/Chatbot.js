@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import responses from './Chatbot/responses';
 import subOptions from './Chatbot/subOptions';
 import './Chatbot/chatbot.css';
@@ -25,6 +25,24 @@ const Chatbot = () => {
   const [query, setQuery] = useState(''); // New state for query
   const [showForm, setShowForm] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [scrollPosition, setScrollPosition] = useState(0); // State to store scroll position
+
+  // Create a ref for the chat container
+  const chatContainerRef = useRef(null);
+
+  // Scroll to bottom whenever messages change
+  useEffect(() => {
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+    }
+  }, [messages]);
+
+  // Scroll to the stored position when reopening the chat
+  useEffect(() => {
+    if (chatContainerRef.current && isOpen) {
+      chatContainerRef.current.scrollTop = scrollPosition;
+    }
+  }, [isOpen]);
 
   const handleMajorOptionClick = (option) => {
     setMessages([...messages, { text: option, isBot: false }]);
@@ -103,6 +121,12 @@ const Chatbot = () => {
   
 
   const openButton = () => {
+    if (isOpen) {
+      // Save scroll position when closing
+      if (chatContainerRef.current) {
+        setScrollPosition(chatContainerRef.current.scrollTop);
+      }
+    }
     setIsOpen(!isOpen);
   };
 
@@ -114,7 +138,10 @@ const Chatbot = () => {
         {isOpen ? (
           <>
             <IoIosCloseCircleOutline className='w-6 h-6 absolute top-2 right-2 cursor-pointer' onClick={openButton}/>
-            <div className="flex-1 p-3 overflow-y-auto flex flex-col">
+            <div 
+              className="flex-1 p-3 overflow-y-auto flex flex-col" 
+              ref={chatContainerRef}
+            >
               {messages.map((msg, index) => (
                 <div
                   key={index}
