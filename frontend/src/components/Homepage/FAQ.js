@@ -4,9 +4,11 @@ const FAQItem = ({ question, answer }) => (
   <div className="flex flex-col flex-1 shrink p-12 bg-green-500 rounded-xl border border-solid basis-0 border-neutral-800 min-w-[240px] max-md:px-5 max-md:max-w-full">
     <h3 className="text-2xl font-semibold text-white">{question}</h3>
     <p className="mt-8 tracking-normal leading-7 text-neutral-800">{answer}</p>
-    <button className="gap-2.5 self-start px-6 py-5 mt-8 tracking-normal leading-none text-white rounded-xl border border-solid bg-zinc-900 border-neutral-800 max-md:px-5">
-      Read More
-    </button>
+    <a href="/faqs">
+      <button className="gap-2.5 self-start px-6 py-5 mt-8 tracking-normal leading-none text-white rounded-xl border border-solid bg-zinc-900 border-neutral-800 max-md:px-5">
+        Read More
+      </button>
+    </a>
   </div>
 );
 
@@ -37,9 +39,11 @@ const FAQ = () => {
             Find answers to common questions about Finwise School,
           </p>
         </div>
-        <button className="gap-2 self-stretch p-4 text-lg font-medium text-white bg-green-500 rounded-xl border border-blue-900 border-solid max-md:px-5">
-          View All FAQ's
-        </button>
+        <a href="/faqs">
+          <button className="gap-2 self-stretch p-4 text-lg font-medium text-white bg-green-500 rounded-xl border border-blue-900 border-solid max-md:px-5">
+            View All FAQ's
+          </button>
+        </a>
       </div>
       <div className="flex flex-col -mt-8 w-full text-lg font-medium text-white max-md:mt-10 max-md:max-w-full p-10">
         <div className="flex flex-wrap gap-8 items-start w-full max-md:max-w-full">

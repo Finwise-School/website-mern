@@ -5,6 +5,7 @@ import Sidecards from './Blogs/sidecards';
 import axios from 'axios';
 import CardsBottom from './Blogs/cardsBottom';
 import Blogswrite from './Blogs/Blogswrite'
+import EATemplate from './EarlyAccessTemplate';
 
 function Blogs() {
 
@@ -33,7 +34,7 @@ function Blogs() {
 
     return (
       <>
-          <div className='m-4 md:px-12 gap-20'>
+          <div className='m-4 md:px-12 gap-20 md:mb-20'>
       <h1 className='flex justify-center m-4 font-semibold text-5xl leading-[72px] finwise-blue'>Blogs</h1>
       <h2 className='flex sm:justify-start justify-center text-2xl font-bold my-8 finwise-blue'>Top Stories</h2>
         <div>
@@ -66,6 +67,7 @@ function Blogs() {
         </div>
         <CardsBottom onToggle={handleCardClick}/>
         </div>
+        <EATemplate />
         </>
     )
 }

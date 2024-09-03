@@ -108,7 +108,6 @@ return (
               <img className='m-1' src={Buttonnext} alt='' />
                 </button>
             </div> */}
-<hr className='border-t-1 border-black my-4 md:my-28' />
 </>
   )
 }
