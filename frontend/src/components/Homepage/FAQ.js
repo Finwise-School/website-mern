@@ -24,13 +24,13 @@ const FAQ = () => {
     },
     {
       question: "How does personalized learning experience work?",
-      answer: "Our platform have been using adaptive learning technology in order to tailor your educational journey based on your existing knowledge, learning pace, and your financial goals to help you all the way."
+      answer: "Our platform has been using adaptive learning technology in order to tailor your educational journey based on your existing knowledge, learning pace, and your financial goals to help you all the way."
     }
   ];
 
   return (
     <section className="flex flex-col items-center w-full max-w-[1596px] p-14 max-md:mt-10 max-md:max-w-full">
-      <div className="flex flex-wrap gap-10 items-end p-10 max-md:max-w-full">
+      <div className="flex flex-wrap gap-10 items-end p-10 w-full justify-between max-md:flex-col max-md:items-start">
         <div className="flex flex-col flex-1 shrink-0 min-w-[240px] max-md:max-w-full">
           <h2 className="text-5xl font-semibold text-blue-900 max-md:text-4xl">
             Frequently Asked Questions
@@ -40,7 +40,7 @@ const FAQ = () => {
           </p>
         </div>
         <a href="/faqs">
-          <button className="gap-2 self-stretch p-4 text-lg font-medium text-white bg-green-500 rounded-xl border border-blue-900 max-md:px-5">
+          <button className="gap-2 p-4 text-lg font-medium text-white bg-green-500 rounded-xl border border-blue-900 ">
             View All FAQ's
           </button>
         </a>
