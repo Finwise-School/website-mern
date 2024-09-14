@@ -25,9 +25,13 @@ import CAGRCalculator from "./components/calculator/CAGR";
 import Chatbot from "./components/Chatbot";
 import MortgageCalculator from "./components/calculator/Mortgage";
 import IRRCalculator from "./components/calculator/IRR";
+import RentalYeildCalculator from "./components/calculator/RentalYeild";
+import MortgageBorrowerCalculator from "./components/calculator/MortgageBorrower";
 import ScrollToTop from "./components/ScrolltoTop";
 import Blogs from "./components/Blogs";
 import QuotesHeader from "./components/QuotesHeader";
+import UnderConst from "./components/UnderDevelopement";
+import PrivacyNotice from "./components/Homepage/Footer Files/privacyNotice";
 
 const ProtectedRoute = ({ element, ...rest }) => {
   const { isAuthenticated } = useAuth();
@@ -38,15 +42,17 @@ const App = () => {
   return (
     <AuthProvider>
       <Router>
-      <ScrollToTop />
-      <QuotesHeader />
+        <ScrollToTop />
+        <QuotesHeader />
         <div className="app">
-          <Header/> 
+          <Header />
           <Routes>
+            <Route path="/privacy" element={<PrivacyNotice />} />
             <Route path="/early-access" element={<EarlyAccess />} />
             <Route path="/" element={<HomePage />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/tools" element={<Calculator />} />
+            <Route path="/maintainence" element={<UnderConst />} />
             <Route path="/about" element={<AboutUs />} />
             <Route path="/signup" element={<SignupPage />} />
             <Route path="/login" element={<LoginPage />} />
@@ -59,7 +65,9 @@ const App = () => {
             <Route path="/tools/emi" element={<EMICalculator />} />
             <Route path="/tools/cagr" element={<CAGRCalculator />} />
             <Route path="/tools/mortgage" element={<MortgageCalculator />} />
+            <Route path="/tools/mortgage-borrower" element={<MortgageBorrowerCalculator />} />
             <Route path="/tools/irr" element={<IRRCalculator />} />
+            <Route path="/tools/rental-yield" element={<RentalYeildCalculator />} />
             <Route path="/blogs" element={<Blogs />} />
             <Route path="/blogs/uk-tax-system" element={<Blogs />} />
             <Route

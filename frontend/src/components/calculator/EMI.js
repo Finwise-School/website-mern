@@ -6,6 +6,7 @@ import * as XLSX from 'xlsx';
 import Tool_Footer from "./Tools_footer";
 import CalculatorList from './Calulators_List';
 import logo from '../../assets/images/logo-for-excel.png'; 
+import logo1 from '../../assets/images/logo-for-pdf.png'; 
 import ExcelJS from 'exceljs';
 
 const EMICalculator = () => {
@@ -140,19 +141,73 @@ const EMICalculator = () => {
 
     const exportToPDF = () => {
         const doc = new jsPDF();
-
-        const logoWidth = 40;
-        const logoHeight = 40;
-        const margin = 10;
-        const logoBottomMargin = 0;
-        const footerHeight = 20;
-
-        doc.addImage(logo, 'PNG', doc.internal.pageSize.width - logoWidth - margin, margin, logoWidth, logoHeight);
-
-        const titleYPosition = margin + logoHeight + logoBottomMargin;
-        doc.setFontSize(18);
-        doc.text('EMI Payment Schedule', margin, titleYPosition);
-
+    
+        // Logo dimensions and new margin settings
+        const logoWidth = 15;
+        const logoHeight = 23;
+        const marginTop = 10; // New top margin
+        const marginLeft = 5; // New left margin
+        const pageWidth = doc.internal.pageSize.width;
+        const pageHeight = doc.internal.pageSize.height;
+    
+        // Function to add the header on the first page
+        const addHeader = () => {
+            // Add Logo on the left side with the new margin
+            doc.addImage(logo1, 'PNG', marginLeft, marginTop, logoWidth, logoHeight);
+    
+            // Add the issue date in bold, italic, and colored format on the top right corner
+            const issueDate = `Issue Date: ${new Date().toLocaleDateString()}`;
+            doc.setFontSize(10);
+            doc.setFont("helvetica", "bolditalic"); // Bold and italic
+            doc.setTextColor(0, 102, 204); // Blue color
+    
+            // Set the Y position of the issue date to align with the bottom of the logo
+            const issueDateYPosition = marginTop + logoHeight - 2; // Slightly adjust for better alignment
+    
+            // Add the issue date text to the top right of the page
+            doc.text(issueDate, pageWidth - doc.getTextWidth(issueDate) - 10, issueDateYPosition);
+    
+            // Add Title with red background in the center
+            const titleText = 'EMI Statement';
+            const titleWidth = doc.getTextWidth(titleText);
+            const titleX = (pageWidth - titleWidth) / 2;
+    
+            // Draw red background bar for title
+            doc.setFillColor(128, 0, 0); // Dark red
+            doc.rect(0, marginTop + logoHeight, pageWidth, 12, 'F'); // Full width rectangle
+    
+            // Add Title Text in the center of the red background
+            doc.setTextColor(255, 255, 255); // White text
+            doc.setFontSize(12);
+            doc.text(titleText, titleX, marginTop + logoHeight + 9); // Position text inside the red bar
+    
+            // Reset text color and font for the rest of the document
+            doc.setTextColor(0, 0, 0);
+            doc.setFont("helvetica", "normal"); // Reset font style
+        };
+    
+        // Function to add the centered, transparent watermark
+        const addWatermark = () => {
+            const watermarkText = 'finwiseschool.com';
+            
+            // Set font size and transparency
+            doc.setFontSize(50);
+            doc.setTextColor(150, 150, 150); // Light gray for the watermark
+    
+            // Set transparency level for the watermark (1 = fully opaque, 0 = fully transparent)
+            doc.setGState(new doc.GState({ opacity: 0.1 })); // Light transparent
+    
+            // Calculate the center of the page
+            const xPosition = pageWidth / 1.8;
+            const yPosition = pageHeight / 1.6;
+    
+            // Add the watermark text diagonally in the center
+            doc.text(watermarkText, xPosition, yPosition, { angle: 45, align: 'center' });
+    
+            // Reset transparency for other content
+            doc.setGState(new doc.GState({ opacity: 1 }));
+        };
+                // Add the table
         const tableColumn = ["Payment No", "Payment Date", "Interest Rate", "Interest Due", "Payment Due", "Principal Paid", "Balance"];
         const tableRows = schedule.map(row => [
             row.paymentNo,
@@ -160,33 +215,41 @@ const EMICalculator = () => {
             row.interestRate,
             row.interestDue,
             row.paymentDue,
-            // row.extraPayments,
-            // row.additionalPayment,
             row.principalPaid,
             row.balance,
-            // row.taxReturned,
-            // row.cumulativeTaxReturned
         ]);
-
-        const startY = titleYPosition + 10;
-        doc.autoTable(tableColumn, tableRows, { startY: startY });
-
-        const pageHeight = doc.internal.pageSize.height;
-        const pageWidth = doc.internal.pageSize.width;
-        doc.setFillColor(220, 220, 220);
-        doc.rect(0, pageHeight - footerHeight, pageWidth, footerHeight, 'F');
-
-        doc.setFontSize(10);
-        doc.setTextColor(0, 0, 0);
-        const footerText = 'Generated by finwiseschool.com';
-        const textWidth = doc.getTextWidth(footerText);
-        doc.text(footerText, pageWidth - margin - textWidth, pageHeight - (footerHeight / 2));
-
+    
+        const startY = marginTop + logoHeight + 20;
+    
+        // Add header only on the first page
+        addHeader();
+    
+        // Add watermark on every page
+        addWatermark();
+    
+        // Generate table
+        doc.autoTable({
+            head: [tableColumn],
+            body: tableRows,
+            startY: startY,
+            theme: 'striped',
+            didDrawPage: function (data) {
+                const pageNumber = doc.internal.getNumberOfPages();
+    
+                // Add header only on the first page, skip for others
+                if (pageNumber === 1) {
+                    addHeader();
+                }
+    
+                // Add watermark on each page
+                addWatermark();
+            }
+        });
+    
         // Save the PDF
-        doc.save('EMI_Schedule.pdf');
+        doc.save('EMI_Statement.pdf');
     };
-
-
+                
     // const exportToExcel = () => {
     //     const worksheet = XLSX.utils.json_to_sheet(schedule);
     
